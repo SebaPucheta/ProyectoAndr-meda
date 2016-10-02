@@ -1,0 +1,6 @@
+C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\bin\ProyectoAndrómeda.dll.config
+C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\bin\ProyectoAndrómeda.dll
+C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\bin\ProyectoAndrómeda.pdb
+C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\obj\Debug\ProyectoAndrómeda.csprojResolveAssemblyReference.cache
+C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\obj\Debug\ProyectoAndrómeda.dll
+C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\obj\Debug\ProyectoAndrómeda.pdb
