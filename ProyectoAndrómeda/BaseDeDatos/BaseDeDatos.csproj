@@ -39,8 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ApunteDao.cs" />
+    <Compile Include="CarreraDao.cs" />
+    <Compile Include="Conexion.cs" />
+    <Compile Include="FacultadDao.cs" />
+    <Compile Include="MateriaDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ObjetoEntidad\Entidades.csproj">
+      <Project>{ea586425-38f9-4e60-a2b3-d810fc1f2cd3}</Project>
+      <Name>Entidades</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

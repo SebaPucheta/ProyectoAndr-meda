@@ -181,10 +181,10 @@
                         <h4>
                             Categorias</h4>
                         <ul class="categories">
-                            <li><a href="#">Sistemas</a></li>
-                            <li><a href="#">Electronica</a></li>
-                            <li><a href="#">Civil</a></li>
-                            <li><a href="#">Quimica</a></li>
+                            <asp:Button runat="server" id="btn_filtroSistemas" CssClass="liCustom" OnClick="btn_filtroSistemas_onClick" Text="Sistemas" />
+                            <asp:Button runat="server" id="btn_filtroQuimica" CssClass="liCustom" OnClick="btn_filtroQuimica_onClick" Text="Quimica" />
+                            <asp:Button runat="server" id="btn_filtroCivil" CssClass="liCustom" OnClick="btn_filtroCivil_onClick" Text="Civil" />
+                            <asp:Button runat="server" id="btn_filtroMecanica" CssClass="liCustom" OnClick="btn_filtroMecanica_onClick" Text="Mecanica" />
                         </ul>
                     </div>
                     <div class="wowwidget">
@@ -294,6 +294,13 @@
             </div>
             <div class="col-md-9">
                 <!-- Contenido al lado de la categoria -->
+                <!-- 
+
+                 
+                       ACÁ JUANCHI
+
+
+                 -->
             </div>
             <div class="clearfix">
             </div>

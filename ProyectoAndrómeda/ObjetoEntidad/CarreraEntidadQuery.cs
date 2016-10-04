@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BaseDeDatos
+namespace Entidades
 {
-    public class Class1
+    public class CarreraEntidadQuery : CarreraEntidad
     {
+        public string nombreFacultad { get; set; }
     }
 }

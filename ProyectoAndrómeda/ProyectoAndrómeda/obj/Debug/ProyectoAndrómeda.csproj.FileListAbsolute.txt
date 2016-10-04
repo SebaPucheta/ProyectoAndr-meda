@@ -4,3 +4,7 @@ C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\Proyec
 C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\obj\Debug\ProyectoAndrómeda.csprojResolveAssemblyReference.cache
 C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\obj\Debug\ProyectoAndrómeda.dll
 C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\obj\Debug\ProyectoAndrómeda.pdb
+C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\bin\BaseDeDatos.dll
+C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\bin\ObjetoEntidad.dll
+C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\bin\BaseDeDatos.pdb
+C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\bin\ObjetoEntidad.pdb

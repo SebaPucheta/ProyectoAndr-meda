@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProyectoAndrómeda", "Proye
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseDeDatos", "BaseDeDatos\BaseDeDatos.csproj", "{EBFBE636-F9BB-458C-8240-C2697F8E9345}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjetoEntidad", "ObjetoEntidad\ObjetoEntidad.csproj", "{EA586425-38F9-4E60-A2B3-D810FC1F2CD3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "ObjetoEntidad\Entidades.csproj", "{EA586425-38F9-4E60-A2B3-D810FC1F2CD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

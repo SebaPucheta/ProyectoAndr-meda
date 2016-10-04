@@ -1,0 +1,7 @@
+C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\BaseDeDatos\bin\Debug\BaseDeDatos.dll
+C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\BaseDeDatos\bin\Debug\BaseDeDatos.pdb
+C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\BaseDeDatos\bin\Debug\ObjetoEntidad.dll
+C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\BaseDeDatos\bin\Debug\ObjetoEntidad.pdb
+C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\BaseDeDatos\obj\Debug\BaseDeDatos.csprojResolveAssemblyReference.cache
+C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\BaseDeDatos\obj\Debug\BaseDeDatos.dll
+C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\BaseDeDatos\obj\Debug\BaseDeDatos.pdb
