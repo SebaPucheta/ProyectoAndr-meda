@@ -43,6 +43,7 @@
     <Compile Include="CarreraDao.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="FacultadDao.cs" />
+    <Compile Include="LibroDao.cs" />
     <Compile Include="MateriaDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

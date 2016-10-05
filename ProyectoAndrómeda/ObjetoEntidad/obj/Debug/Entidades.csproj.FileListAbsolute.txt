@@ -2,3 +2,7 @@ C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\Objeto
 C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ObjetoEntidad\bin\Debug\ObjetoEntidad.pdb
 C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ObjetoEntidad\obj\Debug\ObjetoEntidad.dll
 C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ObjetoEntidad\obj\Debug\ObjetoEntidad.pdb
+C:\Juan\Facultad\Habilitacion Profesional\GitHub - Andromeda\ProyectoAndromeda\ProyectoAndrómeda\ObjetoEntidad\bin\Debug\ObjetoEntidad.dll
+C:\Juan\Facultad\Habilitacion Profesional\GitHub - Andromeda\ProyectoAndromeda\ProyectoAndrómeda\ObjetoEntidad\bin\Debug\ObjetoEntidad.pdb
+C:\Juan\Facultad\Habilitacion Profesional\GitHub - Andromeda\ProyectoAndromeda\ProyectoAndrómeda\ObjetoEntidad\obj\Debug\ObjetoEntidad.dll
+C:\Juan\Facultad\Habilitacion Profesional\GitHub - Andromeda\ProyectoAndromeda\ProyectoAndrómeda\ObjetoEntidad\obj\Debug\ObjetoEntidad.pdb

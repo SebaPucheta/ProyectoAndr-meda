@@ -10,6 +10,51 @@ namespace BaseDeDatos
 {
     public class ApunteDao: Conexion
     {
+
+        public static List<ApunteEntidadQuery> ConsultarTodosLosApuntes()
+        {
+
+            //ARREGLO DE ALABRE!!!!!
+            List<ApunteEntidadQuery> lista = new List<ApunteEntidadQuery>();
+            string query = @"SELECT DISTINCT a.idApunte, a.stock, a.precioApunte, a.cantHoja, a.nombreApunte, a.descripcionApunte, a.anoApunte, a.codigoBarraApunte, a.idMateria,
+                                    pr.precioHoja, c.nombreCategoria, tp.nombreTipoApunte, e.nombreEditorial, es.nombreEstado, p.nombreProfesor, p.apellidoProfesor 
+                             FROM Apunte a JOIN PrecioXHoja pr ON a.idPrecioHoja = pr.idPrecioHoja
+                                            JOIN Categoria c ON a.idCategoria = c.idCategoria
+                                            JOIN TipoApunte tp ON a.idTipoApunte = tp.idTipoApunte
+                                            JOIN Editorial e ON a.idEditorial = e.idEditorial
+                                            JOIN Estado es ON a.idEstado = es.idEstado
+                                            JOIN Profesor p ON a.idProfesor = p.idProfesor
+                              WHERE a.baja = 0";
+            SqlCommand cmd = new SqlCommand(query, obtenerBD());
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                ApunteEntidadQuery apu = new ApunteEntidadQuery();
+                apu.idApunte = int.Parse(dr["idApunte"].ToString());
+                if (dr["stock"] != DBNull.Value)
+                    apu.stock = int.Parse(dr["stock"].ToString());
+                apu.precioApunte = float.Parse(dr["precioApunte"].ToString());
+                apu.cantHoja = int.Parse(dr["cantHoja"].ToString());
+                apu.nombreApunte = dr["nombreApunte"].ToString();
+                apu.descripcionApunte = dr["descripcionApunte"].ToString();
+                apu.anoApunte = int.Parse(dr["anoApunte"].ToString());
+                apu.codigoBarraApunte = dr["codigoBarraApunte"].ToString();
+                apu.precioHoja = float.Parse(dr["precioHoja"].ToString());
+                apu.nombreCategoria = dr["nombreCategoria"].ToString();
+                apu.nombreTipoApunte = dr["nombreTipoApunte"].ToString();
+                apu.nombreEditorial = dr["nombreEditorial"].ToString();
+                apu.nombreEstado = dr["nombreEstado"].ToString();
+                apu.nombreProfesor = dr["nombreProfesor"].ToString();
+                apu.apellidoProfesor = dr["apellidoProfesor"].ToString();
+                apu.idMateria = (int)dr["idMateria"];
+                lista.Add(apu);
+            }
+            dr.Close();
+            cmd.Connection.Close();
+            return lista;
+        }
+
+
         public static List<ApunteEntidadQuery> ConsultarApunteXFiltroMateria(string idTipoApunte, string nombreApunte,
                                                                             string idUniversidad, string idFacultad, string idMateria)
         {
@@ -107,7 +152,7 @@ namespace BaseDeDatos
                                                                       string idFacultad, string idCarrera)
         {
             List<ApunteEntidadQuery> lista = new List<ApunteEntidadQuery>();
-            string consulta = @"SELECT a.idApunte, a.cantHoja, a.nombreApunte, m.nombreMateria, a.descripcionApunte, a.codigoBarraApunte,
+            string consulta = @"SELECT DISTINCT a.idApunte, a.cantHoja, a.nombreApunte, m.nombreMateria, a.descripcionApunte, a.codigoBarraApunte,
                                        u.nombreUniversidad, f.nombreFacultad, e.nombreEditorial, pr.nombreProfesor, pr.apellidoProfesor,
 		                               a.stock, a.precioApunte, a.anoApunte, m.nombreMateria, ta.nombreTipoApunte
                                 FROM Apunte a INNER JOIN Materia m ON a.idMateria = m.idMateria
