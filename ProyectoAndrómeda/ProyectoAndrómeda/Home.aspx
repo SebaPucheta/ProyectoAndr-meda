@@ -1,55 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="index.aspx.cs" EnableEventValidation="false" Inherits="preview_dotnet_templates_with_out_masterpages_Shop_item_index" %>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>EDUCOM</title>
-    <!-- Bootstrap Core CSS -->
-    
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-    <form id="form1" runat="server">
-        <!-- Navigation -->
-        <nav id="custom-bootstrap-menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top">EDUCOM</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-           <div class="collapse navbar-collapse navbar-menubuilder" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a class="page-scroll" href="#home">Home</a>
-                </li>
-                <li><a class="page-scroll" href="#galeria">Galeria</a>
-                </li>
-                <li><a class="page-scroll" href="#contact">Contacto</a>
-                </li>
-            </ul>
-        </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-        <!-- Slider -->
-        <div id="home">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" EnableEventValidation="true" Inherits="ProyectoAndrómeda.Home" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="Body" runat="server">
+     <div id="home">
             <div id="slidernet">
                 <section class="carousel carousel-fade slide home-slider" id="c-slide" data-ride="carousel"
                     data-interval="4500" data-pause="false">
@@ -172,7 +125,14 @@
                         <div class="wowwidget">
                             <h4>Categorias</h4>
                             <ul class="categories">
-                                <asp:Button runat="server" ID="btn_filtroSistemas" CssClass="liCustom" OnClick="btn_filtroSistemas_onClick" Text="Sistemas" />
+                                <li>
+                                    <div class="form-inline">
+                                        <div class="form-group">
+                                                <asp:CheckBox runat="server" />
+                                                <input  id="btn_filtroSistemas" class="liCustom" text="asd"/>
+                                        </div>
+                                    </div>
+                                </li>
                                 <asp:Button runat="server" ID="btn_filtroQuimica" CssClass="liCustom" OnClick="btn_filtroQuimica_onClick" Text="Quimica" />
                                 <asp:Button runat="server" ID="btn_filtroCivil" CssClass="liCustom" OnClick="btn_filtroCivil_onClick" Text="Civil" />
                                 <asp:Button runat="server" ID="btn_filtroMecanica" CssClass="liCustom" OnClick="btn_filtroMecanica_onClick" Text="Mecanica" />
@@ -283,11 +243,7 @@
                     </div>
                 </div>
                 <div class="col-md-9">
-                    <!-- Contenido al lado de la categoria -->
-                    <!--                 
-                       ACÁ JUANCHI RE: LMAO
-                -->
-
+                    
                     <table style="width: 100%;">
                         <tr>
                             <td style="font-weight: 700; text-align: center">Listado de libros</td>
@@ -321,14 +277,7 @@
                                                     </tr>
 
 
-                                                    <%--<tr>
-                                                        <td><b>Autor</b>:&nbsp;
-                                    <asp:Label ID="lbl_autor" runat="server" Text='<%# Eval("autorLibro") %>'></asp:Label>
-                                                            <br />
-                                                        </td>
-                                                    </tr>--%>
-
-
+                                         
                                                     <tr>
                                                         <td><b>Precio</b>: $&nbsp;
                                     <asp:Label ID="lbl_precio" runat="server" Text='<%# Eval("precioApunte") %>'></asp:Label>
@@ -375,216 +324,7 @@
             </div>
         </div>
 
-        <%-- <div class="page-header">
-                <div class="container">
-                    <div class="row">
-                        <h1>
-                            Product</h1>
-                    </div>
-                </div>
-            </div>--%>
-        <%--  <!-- Plans -->
-            <section id="plans">
-        <div class="container">
-            <div class="row">
-
-                <!-- item -->
-                <div class="col-md-4 text-center">
-                    <div class="panel panel-danger panel-pricing">
-                        <div class="panel-heading">
-                            <i class="fa fa-desktop"></i>
-                            <h3>Plan 1</h3>
-                        </div>
-                        <div class="panel-body text-center">
-                            <p><strong>$100 / Month</strong></p>
-                        </div>
-                        <ul class="list-group text-center">
-                            <li class="list-group-item"><i class="fa fa-check"></i> Personal use</li>
-                            <li class="list-group-item"><i class="fa fa-check"></i> Unlimited projects</li>
-                            <li class="list-group-item"><i class="fa fa-check"></i> 27/7 support</li>
-                        </ul>
-                        <div class="panel-footer">
-                            <a class="btn btn-lg btn-block btn-danger" href="#">BUY NOW!</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- /item -->
-
-                <!-- item -->
-                <div class="col-md-4 text-center">
-                    <div class="panel panel-warning panel-pricing">
-                        <div class="panel-heading">
-                            <i class="fa fa-desktop"></i>
-                            <h3>Plan 2</h3>
-                        </div>
-                        <div class="panel-body text-center">
-                            <p><strong>$200 / Month</strong></p>
-                        </div>
-                        <ul class="list-group text-center">
-                            <li class="list-group-item"><i class="fa fa-check"></i> Personal use</li>
-                            <li class="list-group-item"><i class="fa fa-check"></i> Unlimited projects</li>
-                            <li class="list-group-item"><i class="fa fa-check"></i> 27/7 support</li>
-                        </ul>
-                        <div class="panel-footer">
-                            <a class="btn btn-lg btn-block btn-warning" href="#">BUY NOW!</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- /item -->
-
-                <!-- item -->
-                <div class="col-md-4 text-center">
-                    <div class="panel panel-success panel-pricing">
-                        <div class="panel-heading">
-                            <i class="fa fa-desktop"></i>
-                            <h3>Plan 3</h3>
-                        </div>
-                        <div class="panel-body text-center">
-                            <p><strong>$300 / Month</strong></p>
-                        </div>
-                        <ul class="list-group text-center">
-                            <li class="list-group-item"><i class="fa fa-check"></i> Personal use</li>
-                            <li class="list-group-item"><i class="fa fa-check"></i> Unlimited projects</li>
-                            <li class="list-group-item"><i class="fa fa-check"></i> 27/7 support</li>
-                        </ul>
-                        <div class="panel-footer">
-                            <a class="btn btn-lg btn-block btn-success" href="#">BUY NOW!</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- /item -->
-
-            </div>
-        </div>
-    </section>
-            <!-- /Plans -->--%>
-        <%-- <br />
-            <br />
-            <div id="gallery">
-            </div>
-            <div class="page-header">
-                <div class="container">
-                    <h1>
-                        Gallery</h1>
-                </div>
-            </div>
-            <!-- Projects Row -->
-            <div class="row">
-                <div class="col-md-4 portfolio-item">
-                    <a href="#">
-                        <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                    </a>
-                    <h3>
-                        <a href="#">Project Name</a>
-                    </h3>
-                    <p>
-                        So whether you are shopping for your wife’s birthday gift or looking for a new suit
-                        to wear for that important meeting you know what to do.</p>
-                </div>
-                <div class="col-md-4 portfolio-item">
-                    <a href="#">
-                        <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                    </a>
-                    <h3>
-                        <a href="#">Project Name</a>
-                    </h3>
-                    <p>
-                        So whether you are shopping for your wife’s birthday gift or looking for a new suit
-                        to wear for that important meeting you know what to do.</p>
-                </div>
-                <div class="col-md-4 portfolio-item">
-                    <a href="#">
-                        <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                    </a>
-                    <h3>
-                        <a href="#">Project Name</a>
-                    </h3>
-                    <p>
-                        So whether you are shopping for your wife’s birthday gift or looking for a new suit
-                        to wear for that important meeting you know what to do.</p>
-                </div>
-            </div>
-            <!-- /.row -->
-            <!-- Projects Row -->
-            <div class="row">
-                <div class="col-md-4 portfolio-item">
-                    <a href="#">
-                        <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                    </a>
-                    <h3>
-                        <a href="#">Project Name</a>
-                    </h3>
-                    <p>
-                        So whether you are shopping for your wife’s birthday gift or looking for a new suit
-                        to wear for that important meeting you know what to do.</p>
-                </div>
-                <div class="col-md-4 portfolio-item">
-                    <a href="#">
-                        <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                    </a>
-                    <h3>
-                        <a href="#">Project Name</a>
-                    </h3>
-                    <p>
-                        So whether you are shopping for your wife’s birthday gift or looking for a new suit
-                        to wear for that important meeting you know what to do.</p>
-                </div>
-                <div class="col-md-4 portfolio-item">
-                    <a href="#">
-                        <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                    </a>
-                    <h3>
-                        <a href="#">Project Name</a>
-                    </h3>
-                    <p>
-                        So whether you are shopping for your wife’s birthday gift or looking for a new suit
-                        to wear for that important meeting you know what to do.</p>
-                </div>
-            </div>
-            <br />
-            <br />
-            <div class="well">
-                <div class="text-right">
-                    <a class="btn btn-success">Leave a Review</a>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-12">
-                        <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
-                        </span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
-                        </span><span class="glyphicon glyphicon-star-empty"></span>Anonymous <span class="pull-right">
-                            10 days ago</span>
-                        <p>
-                            This product was great in terms of quality. I would definitely buy another!</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-12">
-                        <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
-                        </span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
-                        </span><span class="glyphicon glyphicon-star-empty"></span>Anonymous <span class="pull-right">
-                            12 days ago</span>
-                        <p>
-                            I've alredy ordered another one!</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-12">
-                        <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
-                        </span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
-                        </span><span class="glyphicon glyphicon-star-empty"></span>Anonymous <span class="pull-right">
-                            15 days ago</span>
-                        <p>
-                            I've seen some better than this, but not at this price. I definitely recommend this
-                            item.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <section>--%>
+        
 
         <div id="contact" class="footer">
             <div class="container animated fadeInUpNow notransition">
@@ -640,10 +380,7 @@
         </div>
 
 
-        </section>
-    <!-- /footer section end-->
-        <!-- jQuery -->
         
-    </form>
-</body>
-</html>
+</asp:Content>
+<asp:Content ContentPlaceHolderID="Footer" runat="server">
+        </asp:Content>
