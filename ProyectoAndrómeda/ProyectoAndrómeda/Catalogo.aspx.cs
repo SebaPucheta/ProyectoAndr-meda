@@ -15,11 +15,11 @@ namespace ProyectoAndrómeda
     {
 
         /////////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////PAGINADO///////////////////////////////////////////////
+        //////////////////////////////PAGINADO APUNTE////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////
         readonly PagedDataSource _pgsource = new PagedDataSource();
         int _firstIndex, _lastIndex;
-        private int _pageSize = 4;
+        private int _pageSize = 6;
         private int CurrentPage
         {
             get
@@ -40,12 +40,15 @@ namespace ProyectoAndrómeda
         {
             if (Page.IsPostBack) return;
             BindDataIntoRepeater();
+            BindDataIntoRepeater2();
+            //Filtro
+            CargarComboUniversidad();
         }
 
         // Bind PagedDataSource into Repeater
         private void BindDataIntoRepeater()
         {
-            _pgsource.DataSource = LibroDao.ConsultarLibros();
+            _pgsource.DataSource = ApunteDao.ConsultarApuntesSinFiltros();
             _pgsource.AllowPaging = true;
             // Number of items to be displayed in the Repeater
             _pgsource.PageSize = _pageSize;
@@ -61,8 +64,8 @@ namespace ProyectoAndrómeda
             lbLast.Enabled = !_pgsource.IsLastPage;
 
             // Bind data into repeater
-            repeater_libros.DataSource = _pgsource;
-            repeater_libros.DataBind();
+            repeater_apuntes.DataSource = _pgsource;
+            repeater_apuntes.DataBind();
 
             // Call the function to do paging
             HandlePaging();
@@ -138,10 +141,149 @@ namespace ProyectoAndrómeda
             lnkPage.Enabled = false;
             lnkPage.BackColor = Color.FromName("#BDBDBD");
         }
+
+        /////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////PAGINADO LIBRO/////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////
+        readonly PagedDataSource _pgsource2 = new PagedDataSource();
+        int _firstIndex2, _lastIndex2;
+        private int _pageSize2 = 6;
+        private int CurrentPage2
+        {
+            get
+            {
+                if (ViewState["CurrentPage2"] == null)
+                {
+                    return 0;
+                }
+                return ((int)ViewState["CurrentPage2"]);
+            }
+            set
+            {
+                ViewState["CurrentPage2"] = value;
+            }
+        }
+
+        // Bind PagedDataSource into Repeater
+        private void BindDataIntoRepeater2()
+        {
+            _pgsource2.DataSource = LibroDao.ConsultarLibros();
+            _pgsource2.AllowPaging = true;
+            // Number of items to be displayed in the Repeater
+            _pgsource2.PageSize = _pageSize2;
+            _pgsource2.CurrentPageIndex = CurrentPage2;
+            // Keep the Total pages in View State
+            ViewState["TotalPages2"] = _pgsource2.PageCount;
+            // Example: "Page 1 of 10"
+            lblpage2.Text = "Page " + (CurrentPage2 + 1) + " of " + _pgsource2.PageCount;
+            // Enable First, Last, Previous, Next buttons
+            lbPrevious2.Enabled = !_pgsource2.IsFirstPage;
+            lbNext2.Enabled = !_pgsource2.IsLastPage;
+            lbFirst2.Enabled = !_pgsource2.IsFirstPage;
+            lbLast2.Enabled = !_pgsource2.IsLastPage;
+
+            // Bind data into repeater
+            repeater_libros.DataSource = _pgsource2;
+            repeater_libros.DataBind();
+
+            // Call the function to do paging
+            HandlePaging2();
+        }
+
+        private void HandlePaging2()
+        {
+            var dt2 = new DataTable();
+            dt2.Columns.Add("PageIndex"); //Start from 0
+            dt2.Columns.Add("PageText"); //Start from 1
+
+            _firstIndex2 = CurrentPage2 - 5;
+            if (CurrentPage2 > 5)
+                _lastIndex2 = CurrentPage2 + 5;
+            else
+                _lastIndex2 = 10;
+
+            // Check last page is greater than total page then reduced it to total no. of page is last index
+            if (_lastIndex2 > Convert.ToInt32(ViewState["TotalPages2"]))
+            {
+                _lastIndex2 = Convert.ToInt32(ViewState["TotalPages2"]);
+                _firstIndex2 = _lastIndex2 - 10;
+            }
+
+            if (_firstIndex2 < 0)
+                _firstIndex2 = 0;
+
+            // Now creating page number based on above first and last page index
+            for (var i = _firstIndex2; i < _lastIndex2; i++)
+            {
+                var dr2 = dt2.NewRow();
+                dr2[0] = i;
+                dr2[1] = i + 1;
+                dt2.Rows.Add(dr2);
+            }
+
+            rptPaging2.DataSource = dt2;
+            rptPaging2.DataBind();
+        }
+
+        protected void lbFirst2_Click(object sender, EventArgs e)
+        {
+            CurrentPage2 = 0;
+            BindDataIntoRepeater2();
+        }
+        protected void lbLast2_Click(object sender, EventArgs e)
+        {
+            CurrentPage2 = (Convert.ToInt32(ViewState["TotalPages2"]) - 1);
+            BindDataIntoRepeater2();
+        }
+        protected void lbPrevious2_Click(object sender, EventArgs e)
+        {
+            CurrentPage2 -= 1;
+            BindDataIntoRepeater2();
+        }
+        protected void lbNext2_Click(object sender, EventArgs e)
+        {
+            CurrentPage2 += 1;
+            BindDataIntoRepeater2();
+        }
+
+        protected void rptPaging2_ItemCommand(object source, DataListCommandEventArgs e)
+        {
+            if (!e.CommandName.Equals("newPage")) return;
+            CurrentPage2 = Convert.ToInt32(e.CommandArgument.ToString());
+            BindDataIntoRepeater2();
+        }
+
+        protected void rptPaging2_ItemDataBound(object sender, DataListItemEventArgs e)
+        {
+            var lnkPage2 = (LinkButton)e.Item.FindControl("lbPaging2");
+            if (lnkPage2.CommandArgument != CurrentPage2.ToString()) return;
+            lnkPage2.Enabled = false;
+            lnkPage2.BackColor = Color.FromName("#BDBDBD");
+        }
+
+
         ///////////////////////////////////////////////////////////////////////////////////// ^
-        ///////////////////////////PAGINADO////////////////////////////////////////////////// |
+        ///////////////////////////CATALOGO APUNTE/////////////////////////////////////////// |
         ///////////////////////////////////////////////////////////////////////////////////// |
 
+        //Eventos de clic en boton "Ver" y el "Carrtio de compras"
+        protected void repeater_apuntes_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            switch (e.CommandName)
+            {
+                case "ver":
+                    Response.Redirect("Home.aspx");
+                    break;
+
+                case "carrito":
+                    Response.Redirect("Home.aspx");
+                    break;
+            }
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////// ^
+        ///////////////////////////CATALOGO LIBRO//////////////////////////////////////////// |
+        ///////////////////////////////////////////////////////////////////////////////////// |
 
         //Eventos de clic en boton "Ver" y el "Carrtio de compras"
         protected void repeater_libros_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -159,7 +301,322 @@ namespace ProyectoAndrómeda
         }
 
 
-       
 
+
+        ///////////////////////////////////////////////////////////////////////////////////// ^
+        ///////////////////////////FILTROS/////////////////////////////////////////////////// |
+        ///////////////////////////////////////////////////////////////////////////////////// |
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Metodos para cargar los combos y grilla
+        //Cargar combo Universidad
+        protected void CargarComboUniversidad()
+        {
+            ddl_universidad.DataSource = UniversidadDao.ConsultarUniversidad();
+            ddl_universidad.DataTextField = "nombreUniversidad";
+            ddl_universidad.DataValueField = "idUniversidad";
+            ddl_universidad.DataBind();
+            ddl_universidad.Items.Insert(0, new ListItem("(Universidad)", "0"));
+            ddl_universidad.SelectedIndex = 0;
+
+        }
+
+        //Cargar combo Facultad apartir de la universidad selecionada
+        protected void CargarComboFacultad(int idUniversidad)
+        {
+            ddl_facultad.DataSource = FacultadDao.ConsultarFacultadXUniversidad(idUniversidad);
+            ddl_facultad.DataTextField = "nombreFacultad";
+            ddl_facultad.DataValueField = "idFacultad";
+            ddl_facultad.DataBind();
+            ddl_facultad.Items.Insert(0, new ListItem("(Facultad)", "0"));
+            ddl_facultad.SelectedIndex = 0;
+        }
+
+        //Cargar combo Materia apartir de la facultad seleccionada
+        protected void CargarComboCarrera(int idFacultad)
+        {
+            ddl_carrera.DataSource = CarreraDao.ConsultarCarreraXFacultad(idFacultad);
+            ddl_carrera.DataTextField = "nombreCarrera";
+            ddl_carrera.DataValueField = "idCarrera";
+            ddl_carrera.DataBind();
+            ddl_carrera.Items.Insert(0, new ListItem("(Carrera)", "0"));
+            ddl_carrera.SelectedIndex = 0;
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Metodos de eventos
+        //Metodo de evento de seleccion de un item de un combo
+        //Seleccion de un item del combo Universidad
+        protected void ddl_universidad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarComboFacultad(Convert.ToInt32(ddl_universidad.SelectedValue));
+        }
+
+        //Seleccion de un item del combo Facultad
+        protected void ddl_facultad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarComboCarrera(Convert.ToInt32(ddl_facultad.SelectedValue));
+        }
+
+        protected void btn_filtroSistemas_onClick(object sender, EventArgs e)
+        {
+            List<ApunteEntidadQuery> listaApuntes = ApunteDao.ConsultarApunteXFiltroCarrera("", "", "", "", CarreraDao.ConsultarCarreraXDescripcion("Sistemas").nombreCarrera);
+            repeater_apuntes.DataSource = listaApuntes;
+            repeater_apuntes.DataBind();
+        }
+        protected void btn_filtroQuimica_onClick(object sender, EventArgs e)
+        {
+            List<ApunteEntidadQuery> listaApuntes = ApunteDao.ConsultarApunteXFiltroCarrera("", "", "", "", CarreraDao.ConsultarCarreraXDescripcion("Quimica").nombreCarrera);
+            repeater_apuntes.DataSource = listaApuntes;
+            repeater_apuntes.DataBind();
+        }
+        protected void btn_filtroCivil_onClick(object sender, EventArgs e)
+        {
+            List<ApunteEntidadQuery> listaApuntes = ApunteDao.ConsultarApunteXFiltroCarrera("", "", "", "", CarreraDao.ConsultarCarreraXDescripcion("Civil").nombreCarrera);
+            repeater_apuntes.DataSource = listaApuntes;
+            repeater_apuntes.DataBind();
+        }
+        protected void btn_filtroMecanica_onClick(object sender, EventArgs e)
+        {
+            List<ApunteEntidadQuery> listaApuntes = ApunteDao.ConsultarApunteXFiltroCarrera("", "", "", "", CarreraDao.ConsultarCarreraXDescripcion("Mecanica").nombreCarrera);
+            repeater_apuntes.DataSource = listaApuntes;
+            repeater_apuntes.DataBind();
+        }
+
+        protected void btn_primero_Click(object sender, EventArgs e)
+        {
+            List<MateriaEntidad> listaMateria = MateriaDao.ConsultarMateriaXCarreraXNivelCursado(int.Parse(ddl_carrera.SelectedValue), 1);
+            DataTable tabla = new DataTable();
+            DataRow fila;
+
+            //Creo las columnas de la tabla
+            tabla.Columns.Add("idMateria", typeof(int));
+            tabla.Columns.Add("nombreMateria", typeof(string));
+
+            foreach (MateriaEntidad materia in listaMateria)
+            {
+                fila = tabla.NewRow();
+
+                fila[0] = materia.idMateria;
+                fila[1] = materia.nombreMateria;
+
+                tabla.Rows.Add(fila);
+            }
+
+            DataView dataView = new DataView(tabla);
+
+            dgv_primero.DataKeyNames = new string[] { "idMateria" };
+            dgv_primero.DataSource = dataView;
+            dgv_primero.DataBind();
+        }
+
+
+        protected void btn_segundo_Click(object sender, EventArgs e)
+        {
+            List<MateriaEntidad> listaMateria = MateriaDao.ConsultarMateriaXCarreraXNivelCursado(int.Parse(ddl_carrera.SelectedValue), 2);
+            DataTable tabla = new DataTable();
+            DataRow fila;
+
+            //Creo las columnas de la tabla
+            tabla.Columns.Add("idMateria", typeof(int));
+            tabla.Columns.Add("nombreMateria", typeof(string));
+
+            foreach (MateriaEntidad materia in listaMateria)
+            {
+                fila = tabla.NewRow();
+
+                fila[0] = materia.idMateria;
+                fila[1] = materia.nombreMateria;
+
+                tabla.Rows.Add(fila);
+            }
+
+            DataView dataView = new DataView(tabla);
+
+            dgv_segundo.DataKeyNames = new string[] { "idMateria" };
+            dgv_segundo.DataSource = dataView;
+            dgv_segundo.DataBind();
+        }
+
+        protected void btn_tercero_Click(object sender, EventArgs e)
+        {
+            List<MateriaEntidad> listaMateria = MateriaDao.ConsultarMateriaXCarreraXNivelCursado(int.Parse(ddl_carrera.SelectedValue), 3);
+            DataTable tabla = new DataTable();
+            DataRow fila;
+
+            //Creo las columnas de la tabla
+            tabla.Columns.Add("idMateria", typeof(int));
+            tabla.Columns.Add("nombreMateria", typeof(string));
+
+            foreach (MateriaEntidad materia in listaMateria)
+            {
+                fila = tabla.NewRow();
+
+                fila[0] = materia.idMateria;
+                fila[1] = materia.nombreMateria;
+
+                tabla.Rows.Add(fila);
+            }
+
+            DataView dataView = new DataView(tabla);
+
+            dgv_tercero.DataKeyNames = new string[] { "idMateria" };
+            dgv_tercero.DataSource = dataView;
+            dgv_tercero.DataBind();
+        }
+
+        protected void btn_cuarto_Click(object sender, EventArgs e)
+        {
+            List<MateriaEntidad> listaMateria = MateriaDao.ConsultarMateriaXCarreraXNivelCursado(int.Parse(ddl_carrera.SelectedValue), 4);
+            DataTable tabla = new DataTable();
+            DataRow fila;
+
+            //Creo las columnas de la tabla
+            tabla.Columns.Add("idMateria", typeof(int));
+            tabla.Columns.Add("nombreMateria", typeof(string));
+
+            foreach (MateriaEntidad materia in listaMateria)
+            {
+                fila = tabla.NewRow();
+
+                fila[0] = materia.idMateria;
+                fila[1] = materia.nombreMateria;
+
+                tabla.Rows.Add(fila);
+            }
+
+            DataView dataView = new DataView(tabla);
+
+            dgv_cuarto.DataKeyNames = new string[] { "idMateria" };
+            dgv_cuarto.DataSource = dataView;
+            dgv_cuarto.DataBind();
+        }
+
+        protected void btn_quinto_Click(object sender, EventArgs e)
+        {
+            List<MateriaEntidad> listaMateria = MateriaDao.ConsultarMateriaXCarreraXNivelCursado(int.Parse(ddl_carrera.SelectedValue), 5);
+            DataTable tabla = new DataTable();
+            DataRow fila;
+
+            //Creo las columnas de la tabla
+            tabla.Columns.Add("idMateria", typeof(int));
+            tabla.Columns.Add("nombreMateria", typeof(string));
+
+            foreach (MateriaEntidad materia in listaMateria)
+            {
+                fila = tabla.NewRow();
+
+                fila[0] = materia.idMateria;
+                fila[1] = materia.nombreMateria;
+
+                tabla.Rows.Add(fila);
+            }
+
+            DataView dataView = new DataView(tabla);
+
+            dgv_quinto.DataKeyNames = new string[] { "idMateria" };
+            dgv_quinto.DataSource = dataView;
+            dgv_quinto.DataBind();
+        }
+
+        protected void btn_sexto_Click(object sender, EventArgs e)
+        {
+            List<MateriaEntidad> listaMateria = MateriaDao.ConsultarMateriaXCarreraXNivelCursado(int.Parse(ddl_carrera.SelectedValue), 6);
+            DataTable tabla = new DataTable();
+            DataRow fila;
+
+            //Creo las columnas de la tabla
+            tabla.Columns.Add("idMateria", typeof(int));
+            tabla.Columns.Add("nombreMateria", typeof(string));
+
+            foreach (MateriaEntidad materia in listaMateria)
+            {
+                fila = tabla.NewRow();
+
+                fila[0] = materia.idMateria;
+                fila[1] = materia.nombreMateria;
+
+                tabla.Rows.Add(fila);
+            }
+
+            DataView dataView = new DataView(tabla);
+
+            dgv_sexto.DataKeyNames = new string[] { "idMateria" };
+            dgv_sexto.DataSource = dataView;
+            dgv_sexto.DataBind();
+        }
+
+        protected void btn_filtrar_Click(object sender, EventArgs e)
+        {
+            List<int> listaIdMateria = new List<int>();
+            listaIdMateria.AddRange(ListarIdMateriaSeleccionada(dgv_primero));
+            listaIdMateria.AddRange(ListarIdMateriaSeleccionada(dgv_segundo));
+            listaIdMateria.AddRange(ListarIdMateriaSeleccionada(dgv_tercero));
+            listaIdMateria.AddRange(ListarIdMateriaSeleccionada(dgv_cuarto));
+            listaIdMateria.AddRange(ListarIdMateriaSeleccionada(dgv_quinto));
+            listaIdMateria.AddRange(ListarIdMateriaSeleccionada(dgv_sexto));
+
+            //Limpio las grillas
+            repeater_apuntes.DataSource = null;
+            repeater_apuntes.DataBind();
+            repeater_libros.DataSource = null;
+            repeater_libros.DataBind();
+
+            if (chk_apunte.Checked)
+            {
+                List<ApunteEntidadQuery> listaApunte = ListarApuntesXMaterias(listaIdMateria);
+                repeater_apuntes.DataSource = listaApunte;
+                repeater_apuntes.DataBind();
+            }
+            if (chk_libro.Checked)
+            {
+                List<LibroEntidadQuery> listaLibro = ListarLibroXMaterias(listaIdMateria);
+                repeater_libros.DataSource = listaLibro;
+                repeater_libros.DataBind();
+            }
+        }
+
+        protected List<int> ListarIdMateriaSeleccionada(GridView grilla)
+        {
+            List<int> listaIdMateria = new List<int>();
+            foreach (GridViewRow fila in grilla.Rows)
+            {
+
+                CheckBox seleccion = ((CheckBox)fila.FindControl("chk_seleccionado"));
+                if (seleccion.Checked)
+                {
+                    listaIdMateria.Add(Convert.ToInt32(fila.Cells[0].Text));
+                }
+            }
+
+            return listaIdMateria;
+        }
+
+        protected List<ApunteEntidadQuery> ListarApuntesXMaterias(List<int> listaMateria)
+        {
+            List<ApunteEntidadQuery> listaApunte = new List<ApunteEntidadQuery>();
+
+            foreach (int idMateria in listaMateria)
+            {
+                listaApunte.Add(ApunteDao.ConsultarApunteXMateria(idMateria));
+            }
+
+            return listaApunte;
+        }
+        protected List<LibroEntidadQuery> ListarLibroXMaterias(List<int> listaMateria)
+        {
+            List<LibroEntidadQuery> listaLibro = new List<LibroEntidadQuery>();
+
+            foreach (int idMateria in listaMateria)
+            {
+                listaLibro.Add(LibroDao.ConsultarLibroXMateria(idMateria));
+            }
+
+            return listaLibro;
+        }
     }
+
+
+
+
 }

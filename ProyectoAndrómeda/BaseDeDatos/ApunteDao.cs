@@ -10,11 +10,36 @@ namespace BaseDeDatos
 {
     public class ApunteDao: Conexion
     {
+        /// <summary>
+        /// Consultar todos los apuntes sin filtros, traerlos pelados desde la base de datos
+        /// </summary>
+        /// <returns></returns>
+        public static List<ApunteEntidad> ConsultarApuntesSinFiltros()
+        {
+            List<ApunteEntidad> lista = new List<ApunteEntidad>();
+            string query = @"SELECT DISTINCT a.idApunte, a.precioApunte, a.nombreApunte, a.stock FROM Apunte a WHERE a.baja = 0";
+            SqlCommand cmd = new SqlCommand(query, obtenerBD());
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                ApunteEntidad apu = new ApunteEntidad();
+                apu.idApunte = int.Parse(dr["idApunte"].ToString());
+                if (dr["stock"] != DBNull.Value)
+                    apu.stock = int.Parse(dr["stock"].ToString());
+                apu.precioApunte = float.Parse(dr["precioApunte"].ToString());
+                apu.nombreApunte = dr["nombreApunte"].ToString();
+                lista.Add(apu);
+            }
+            dr.Close();
+            cmd.Connection.Close();
+            return lista;
+        }
+
 
         public static List<ApunteEntidadQuery> ConsultarTodosLosApuntes()
         {
 
-            //ARREGLO DE ALABRE!!!!!
+            //NO ME TRAJO NADA
             List<ApunteEntidadQuery> lista = new List<ApunteEntidadQuery>();
             string query = @"SELECT DISTINCT a.idApunte, a.stock, a.precioApunte, a.cantHoja, a.nombreApunte, a.descripcionApunte, a.anoApunte, a.codigoBarraApunte, a.idMateria,
                                     pr.precioHoja, c.nombreCategoria, tp.nombreTipoApunte, e.nombreEditorial, es.nombreEstado, p.nombreProfesor, p.apellidoProfesor 
