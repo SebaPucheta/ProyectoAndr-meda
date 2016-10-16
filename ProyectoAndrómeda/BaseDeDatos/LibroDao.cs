@@ -90,21 +90,21 @@ namespace BaseDeDatos
         {
             //ARREGLO DE ALAMBRE VIEJO
             List<LibroEntidad> lista = new List<LibroEntidad>();
-            string consulta = @"SELECT idLibro as 'idApunte', codigoBarraLibro, nombreLibro as 'nombreApunte', autorLibro, descripcionLibro, stock,
-                                cantidadHojasLibro, precioLibro as 'precioApunte', idEditorial, idEstado, idMateria FROM Libro WHERE baja = 0";
+            string consulta = @"SELECT idLibro, codigoBarraLibro, nombreLibro, autorLibro, descripcionLibro, stock,
+                                cantidadHojasLibro, precioLibro, idEditorial, idEstado, idMateria FROM Libro WHERE baja = 0";
             SqlCommand cmd = new SqlCommand(consulta, obtenerBD());
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
                 LibroEntidad libro = new LibroEntidad();
-                libro.idLibro = int.Parse(dr["idApunte"].ToString());
+                libro.idLibro = int.Parse(dr["idLibro"].ToString());
                 libro.codigoBarraLibro = dr["codigoBarraLibro"].ToString();
-                libro.nombreLibro = dr["nombreApunte"].ToString();
+                libro.nombreLibro = dr["nombreLibro"].ToString();
                 libro.autorLibro = dr["autorLibro"].ToString();
                 libro.descripcionLibro = dr["descripcionLibro"].ToString();
                 libro.stock = int.Parse(dr["stock"].ToString());
                 libro.cantidadHojasLibro = int.Parse(dr["cantidadHojasLibro"].ToString());
-                libro.precioLibro = float.Parse(dr["precioApunte"].ToString());
+                libro.precioLibro = float.Parse(dr["precioLibro"].ToString());
                 libro.idEditorial = int.Parse(dr["idEditorial"].ToString());
                 //libro.idEstado = int.Parse(dr["idEstado"].ToString());
                 libro.idMateria = int.Parse(dr["idMateria"].ToString());

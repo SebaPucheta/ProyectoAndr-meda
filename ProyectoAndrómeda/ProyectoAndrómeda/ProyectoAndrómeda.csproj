@@ -58,6 +58,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Catalogo.aspx" />
+    <Content Include="css\app.css" />
     <Content Include="DetalleItem.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="Master.Master" />
@@ -75,6 +77,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Catalogo.aspx.cs">
+      <DependentUpon>Catalogo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Catalogo.aspx.designer.cs">
+      <DependentUpon>Catalogo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DetalleItem.aspx.cs">
       <DependentUpon>DetalleItem.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
