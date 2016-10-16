@@ -57,5 +57,29 @@ namespace BaseDeDatos
             cmd.Connection.Close();
             return lista;
         }
+
+        public static List<MateriaEntidad> ConsultarMateriaXCarreraXNivelCursado(int idCarrera, int nivelCursado)
+        {
+            List<MateriaEntidad> lista = new List<MateriaEntidad>();
+            string consulta = @"SELECT m.idMateria, m.nombreMateria, m.nivelCursado, m.descripcionMateria 
+                                FROM Materia m JOIN CarreraXMateria cxm ON cxm.idMateria = m.idMateria
+                                WHERE cxm.idCarrera = @idCar AND m.nivelCursado = @nivelCursado and  m.baja = 0";
+            SqlCommand cmd = new SqlCommand(consulta, obtenerBD());
+            cmd.Parameters.AddWithValue(@"idCar", idCarrera);
+            cmd.Parameters.AddWithValue(@"nivelCursado", nivelCursado);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                MateriaEntidad mat = new MateriaEntidad();
+                mat.idMateria = int.Parse(dr["idMateria"].ToString());
+                mat.nombreMateria = dr["nombreMateria"].ToString();
+                mat.nivelCursado = int.Parse(dr["nivelCursado"].ToString());
+                mat.descripcionMateria = dr["descripcionMateria"].ToString();
+                lista.Add(mat);
+            }
+            dr.Close();
+            cmd.Connection.Close();
+            return lista;
+        }
     }
 }

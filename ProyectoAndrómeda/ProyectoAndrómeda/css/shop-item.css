@@ -73,24 +73,30 @@ Navbar
 }
 #custom-bootstrap-menu.navbar-default {
     font-size: 14px;
-    background-color: rgba(184, 13, 13, 1);
+    background-color: #cb0014;
     border-width: 0px;
     border-radius: 0px;
+    display: block;;
+  padding:  6px;
 }
 #custom-bootstrap-menu.navbar-default .navbar-nav>li>a {
     color: rgba(254, 254, 254, 1);
-    background-color: rgba(248, 248, 248, 0);
+
+
 }
 #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:hover,
 #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:focus {
     color: rgba(255, 255, 255, 1);
-    background-color: rgba(255, 255, 255, 0);
+
 }
 #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a,
 #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:hover,
 #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:focus {
     color: rgba(0, 0, 0, 1);
-    background-color: rgba(255, 255, 255, 1);
+
+    border: none;
+
+
 }
 #custom-bootstrap-menu.navbar-default .navbar-toggle {
     border-color: #ddd;
@@ -586,7 +592,7 @@ Slider
     -webkit-transition: all 0.3s;
     background-position: 9px 16px;
     background-repeat: no-repeat;
-    border-bottom: 1px solid #EDEDDE;
+
     padding: 10px 0;
     transition: all 0.3s;
 }
@@ -609,9 +615,7 @@ Slider
 }
 .sidebar .categories > li:hover
 {
-    background: #0066CC;
-    padding-left: 15px;
-    color: #FFFFFF;
+
 }
 .sidebar h4 {
 	color:#0066CC;

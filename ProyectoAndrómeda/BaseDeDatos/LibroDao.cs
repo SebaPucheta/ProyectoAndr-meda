@@ -441,5 +441,35 @@ namespace BaseDeDatos
             return lista;
         }
 
+        public static LibroEntidadQuery ConsultarLibroXMateria(int idMateria)
+        {
+            LibroEntidadQuery libro = new LibroEntidadQuery();
+            string consulta = @"SELECT DISTINCT l.idLibro, l.codigoBarraLibro, l.nombreLibro, l.autorLibro, l.descripcionLibro, l.stock,
+                                       l.cantidadHojasLibro, l.precioLibro, e.nombreEditorial,  
+                                        f.nombreFacultad, m.nombreMateria
+                                FROM Libro l INNER JOIN Materia m ON m.idMateria = l.idMateria
+			                                 INNER JOIN Editorial e ON e.idEditorial = l.idEditorial
+								WHERE  l.idMateria = @idMat  AND l.baja = 0";
+            SqlCommand cmd = new SqlCommand(consulta, obtenerBD());
+            cmd.Parameters.AddWithValue(@"idMat", idMateria );
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                libro.idLibro = int.Parse(dr["idLibro"].ToString());
+                libro.codigoBarraLibro = dr["codigoBarraLibro"].ToString();
+                libro.nombreLibro = dr["nombreLibro"].ToString();
+                libro.autorLibro = dr["autorLibro"].ToString();
+                libro.descripcionLibro = dr["descripcionLibro"].ToString();
+                libro.stock = int.Parse(dr["stock"].ToString());
+                libro.cantidadHojasLibro = int.Parse(dr["cantidadHojasLibro"].ToString());
+                libro.precioLibro = float.Parse(dr["precioLibro"].ToString());
+                libro.nombreEditorial = dr["nombreEditorial"].ToString();
+                libro.nombreMateria = (string)dr["nombreMateria"];
+            }
+            dr.Close();
+            cmd.Connection.Close();
+            return libro;
+        }
+
     }
 }

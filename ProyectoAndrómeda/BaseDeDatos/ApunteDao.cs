@@ -59,19 +59,19 @@ namespace BaseDeDatos
                                                                             string idUniversidad, string idFacultad, string idMateria)
         {
             List<ApunteEntidadQuery> lista = new List<ApunteEntidadQuery>();
-            string consulta = @"SELECT DISTINCT a.idApunte, a.nombreApunte, a.precioApunte, m.nombreMateria, a.stock as 'stockApunte', e.nombreEditorial, p.nombreProfesor,
-                                       p.apellidoProfesor, ta.nombreTipoApunte, a.codigoBarraApunte,
-									   a.anoApunte, a.cantHoja, u.nombreUniversidad, f.nombreFacultad, a.descripcionApunte
-                                FROM Apunte a JOIN Editorial e ON a.idEditorial = e.idEditorial
-                                			  JOIN Profesor p ON p.idProfesor = a.idProfesor
-                                			  JOIN TipoApunte ta ON ta.idTipoApunte = a.idTipoApunte
-                                			  JOIN Materia m ON a.idMateria = m.idMateria
-                                			  JOIN CarreraXMateria cxr ON cxr.idMateria = m.idMateria
-			                                  JOIN Carrera c ON cxr.idCarrera = c.idCarrera
-			                                   JOIN Facultad f ON c.idFacultad = f.idFacultad
-			                                   JOIN Universidad u ON f.idUniversidad = u.idUniversidad
-                                WHERE ta.idTipoApunte like @idTipoApu AND a.nombreApunte like @nomApu AND u.idUniversidad like @idUni
-                                      AND f.idFacultad like @idFacu AND m.idMateria like @idMat AND a.baja = 0";
+                string consulta = @"SELECT DISTINCT a.idApunte, a.nombreApunte, a.precioApunte, m.nombreMateria, a.stock as 'stockApunte', e.nombreEditorial, p.nombreProfesor,
+                                           p.apellidoProfesor, ta.nombreTipoApunte, a.codigoBarraApunte,
+									       a.anoApunte, a.cantHoja, u.nombreUniversidad, f.nombreFacultad, a.descripcionApunte
+                                    FROM Apunte a JOIN Editorial e ON a.idEditorial = e.idEditorial
+                                			      JOIN Profesor p ON p.idProfesor = a.idProfesor
+                                			      JOIN TipoApunte ta ON ta.idTipoApunte = a.idTipoApunte
+                                			      JOIN Materia m ON a.idMateria = m.idMateria
+                                			      JOIN CarreraXMateria cxr ON cxr.idMateria = m.idMateria
+			                                      JOIN Carrera c ON cxr.idCarrera = c.idCarrera
+			                                       JOIN Facultad f ON c.idFacultad = f.idFacultad
+			                                       JOIN Universidad u ON f.idUniversidad = u.idUniversidad
+                                    WHERE ta.idTipoApunte like @idTipoApu AND a.nombreApunte like @nomApu AND u.idUniversidad like @idUni
+                                          AND f.idFacultad like @idFacu AND m.idMateria like @idMat AND a.baja = 0";
             SqlCommand cmd = new SqlCommand(consulta, obtenerBD());
             cmd.Parameters.AddWithValue(@"idTipoApu", idTipoApunte + '%');
             cmd.Parameters.AddWithValue(@"nomApu", nombreApunte + '%');
@@ -104,6 +104,44 @@ namespace BaseDeDatos
             dr.Close();
             cmd.Connection.Close();
             return lista;
+        }
+
+        public static ApunteEntidadQuery ConsultarApunteXMateria(int idMateria)
+        {
+            ApunteEntidadQuery apu = new ApunteEntidadQuery();
+            string consulta = @"SELECT DISTINCT a.idApunte, a.nombreApunte, a.precioApunte, m.nombreMateria, a.stock as 'stockApunte', e.nombreEditorial, p.nombreProfesor,
+                                           p.apellidoProfesor, ta.nombreTipoApunte, a.codigoBarraApunte,
+									       a.anoApunte, a.cantHoja, u.nombreUniversidad, f.nombreFacultad, a.descripcionApunte
+                                    FROM Apunte a JOIN Editorial e ON a.idEditorial = e.idEditorial
+                                			      JOIN Profesor p ON p.idProfesor = a.idProfesor
+                                			      JOIN TipoApunte ta ON ta.idTipoApunte = a.idTipoApunte
+                                			      JOIN Materia m ON a.idMateria = m.idMateria
+                                			WHERE  m.idMateria = @idMat AND a.baja = 0";
+            SqlCommand cmd = new SqlCommand(consulta, obtenerBD());
+            cmd.Parameters.AddWithValue(@"idMat", idMateria );
+            
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                
+                apu.idApunte = int.Parse(dr["idApunte"].ToString());
+                apu.nombreApunte = dr["nombreApunte"].ToString();
+                apu.precioApunte = float.Parse(dr["precioApunte"].ToString());
+                if (dr["stockApunte"] != DBNull.Value)
+                    apu.stock = int.Parse(dr["stockApunte"].ToString());
+                apu.nombreEditorial = dr["nombreEditorial"].ToString();
+                apu.nombreProfesor = dr["nombreProfesor"].ToString();
+                apu.apellidoProfesor = dr["apellidoProfesor"].ToString();
+                apu.nombreTipoApunte = dr["nombreTipoApunte"].ToString();
+                apu.anoApunte = int.Parse(dr["anoApunte"].ToString());
+                apu.cantHoja = int.Parse(dr["cantHoja"].ToString());
+                apu.codigoBarraApunte = dr["codigoBarraApunte"].ToString();
+                apu.descripcionApunte = dr["descripcionApunte"].ToString();
+                apu.nombreMateria = (string)dr["nombreMateria"];
+            }
+            dr.Close();
+            cmd.Connection.Close();
+            return apu ;
         }
          public static List<CarreraEntidad> ConsultarCarrerasXApunte(int idApunte)
         {
