@@ -166,7 +166,7 @@
                     <ItemTemplate>
                         <div class="col-sm-4 col-xs-6">
 
-                            <div style="background-color: #E9E9E9; text-align: center; margin: 10px; padding: 20px; width: 100%; height: 350px;">
+                            <div style="background-color: #E9E9E9; text-align: center; margin: 10px; padding: 20px; width: 100%; height: 350px; box-shadow: 2px 2px 10px 2px #000000;">
                                 <table style="width: 100%; height: 100%;">
                                     <tr style="height: 50%;">
                                         <td>
@@ -177,6 +177,7 @@
                                         <td>
                                             <hr style="border-top: 1px solid #ccc;" />
                                             <asp:Label ID="rep_nombre" runat="server" Text='<%# Eval("nombreApunte") %>' Font-Bold="True"></asp:Label>
+                                            <asp:TextBox ID="txt_id" runat="server" Text='<%# Eval("idApunte") %>' Visible="false" ></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr style="height: 15%;">
@@ -245,7 +246,7 @@
                     <ItemTemplate>
                         <div class="col-sm-4 col-xs-6">
 
-                            <div style="background-color: #E9E9E9; text-align: center; margin: 10px; padding: 20px; width: 100%; height: 350px;">
+                            <div style="background-color: #E9E9E9; text-align: center; margin: 10px; padding: 20px; width: 100%; height: 350px; box-shadow: 2px 2px 10px 2px #000000;">
                                 <table style="width: 100%; height: 100%;">
                                     <tr style="height: 50%;">
                                         <td>

@@ -39,16 +39,18 @@ namespace ProyectoAndrómeda
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Page.IsPostBack) return;
-            BindDataIntoRepeater();
-            BindDataIntoRepeater2();
+            Session["listaApuntes"] = ApunteDao.ConsultarApuntesSinFiltros();
+            Session["listaLibros"] = LibroDao.ConsultarLibros();
+            BindDataIntoRepeater((List<ApunteEntidadQuery>)Session["listaApuntes"]);
+            BindDataIntoRepeater2((List<LibroEntidadQuery>)Session["listaLibros"]);
             //Filtro
             CargarComboUniversidad();
         }
 
         // Bind PagedDataSource into Repeater
-        private void BindDataIntoRepeater()
+        private void BindDataIntoRepeater(List<ApunteEntidadQuery> lista)
         {
-            _pgsource.DataSource = ApunteDao.ConsultarApuntesSinFiltros();
+            _pgsource.DataSource = lista;
             _pgsource.AllowPaging = true;
             // Number of items to be displayed in the Repeater
             _pgsource.PageSize = _pageSize;
@@ -109,29 +111,29 @@ namespace ProyectoAndrómeda
         protected void lbFirst_Click(object sender, EventArgs e)
         {
             CurrentPage = 0;
-            BindDataIntoRepeater();
+            BindDataIntoRepeater((List<ApunteEntidadQuery>)Session["listaApuntes"]);
         }
         protected void lbLast_Click(object sender, EventArgs e)
         {
             CurrentPage = (Convert.ToInt32(ViewState["TotalPages"]) - 1);
-            BindDataIntoRepeater();
+            BindDataIntoRepeater((List<ApunteEntidadQuery>)Session["listaApuntes"]);
         }
         protected void lbPrevious_Click(object sender, EventArgs e)
         {
             CurrentPage -= 1;
-            BindDataIntoRepeater();
+            BindDataIntoRepeater((List<ApunteEntidadQuery>)Session["listaApuntes"]);
         }
         protected void lbNext_Click(object sender, EventArgs e)
         {
             CurrentPage += 1;
-            BindDataIntoRepeater();
+            BindDataIntoRepeater((List<ApunteEntidadQuery>)Session["listaApuntes"]);
         }
 
         protected void rptPaging_ItemCommand(object source, DataListCommandEventArgs e)
         {
             if (!e.CommandName.Equals("newPage")) return;
             CurrentPage = Convert.ToInt32(e.CommandArgument.ToString());
-            BindDataIntoRepeater();
+            BindDataIntoRepeater((List<ApunteEntidadQuery>)Session["listaApuntes"]);
         }
 
         protected void rptPaging_ItemDataBound(object sender, DataListItemEventArgs e)
@@ -165,9 +167,9 @@ namespace ProyectoAndrómeda
         }
 
         // Bind PagedDataSource into Repeater
-        private void BindDataIntoRepeater2()
+        private void BindDataIntoRepeater2(List<LibroEntidadQuery> lista)
         {
-            _pgsource2.DataSource = LibroDao.ConsultarLibros();
+            _pgsource2.DataSource = lista;
             _pgsource2.AllowPaging = true;
             // Number of items to be displayed in the Repeater
             _pgsource2.PageSize = _pageSize2;
@@ -228,29 +230,29 @@ namespace ProyectoAndrómeda
         protected void lbFirst2_Click(object sender, EventArgs e)
         {
             CurrentPage2 = 0;
-            BindDataIntoRepeater2();
+            BindDataIntoRepeater2((List<LibroEntidadQuery>)Session["listaLibros"]);
         }
         protected void lbLast2_Click(object sender, EventArgs e)
         {
             CurrentPage2 = (Convert.ToInt32(ViewState["TotalPages2"]) - 1);
-            BindDataIntoRepeater2();
+            BindDataIntoRepeater2((List<LibroEntidadQuery>)Session["listaLibros"]);
         }
         protected void lbPrevious2_Click(object sender, EventArgs e)
         {
             CurrentPage2 -= 1;
-            BindDataIntoRepeater2();
+            BindDataIntoRepeater2((List<LibroEntidadQuery>)Session["listaLibros"]);
         }
         protected void lbNext2_Click(object sender, EventArgs e)
         {
             CurrentPage2 += 1;
-            BindDataIntoRepeater2();
+            BindDataIntoRepeater2((List<LibroEntidadQuery>)Session["listaLibros"]);
         }
 
         protected void rptPaging2_ItemCommand(object source, DataListCommandEventArgs e)
         {
             if (!e.CommandName.Equals("newPage")) return;
             CurrentPage2 = Convert.ToInt32(e.CommandArgument.ToString());
-            BindDataIntoRepeater2();
+            BindDataIntoRepeater2((List<LibroEntidadQuery>)Session["listaLibros"]);
         }
 
         protected void rptPaging2_ItemDataBound(object sender, DataListItemEventArgs e)
@@ -272,7 +274,9 @@ namespace ProyectoAndrómeda
             switch (e.CommandName)
             {
                 case "ver":
-                    Response.Redirect("Home.aspx");
+                    int id = int.Parse(((TextBox)e.Item.FindControl("txt_id")).Text);
+                    string dir = "DetalleItem.aspx?idLibro=0&idApunte=" + id.ToString();
+                    Response.Redirect(dir);
                     break;
 
                 case "carrito":
@@ -285,13 +289,14 @@ namespace ProyectoAndrómeda
         ///////////////////////////CATALOGO LIBRO//////////////////////////////////////////// |
         ///////////////////////////////////////////////////////////////////////////////////// |
 
-        //Eventos de clic en boton "Ver" y el "Carrtio de compras"
+        //Eventos de clic en boton "Ver" y el "Carrtio de compras" de libro
         protected void repeater_libros_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             switch (e.CommandName)
             {
                 case "ver":
-                    Response.Redirect("Home.aspx");
+
+                   
                     break;
 
                 case "carrito":
@@ -548,6 +553,9 @@ namespace ProyectoAndrómeda
 
         protected void btn_filtrar_Click(object sender, EventArgs e)
         {
+            Session["listaApuntes"] = new List<ApunteEntidadQuery>();
+            Session["listaLibros"] = new List<LibroEntidadQuery>();
+
             List<int> listaIdMateria = new List<int>();
             listaIdMateria.AddRange(ListarIdMateriaSeleccionada(dgv_primero));
             listaIdMateria.AddRange(ListarIdMateriaSeleccionada(dgv_segundo));
@@ -565,14 +573,14 @@ namespace ProyectoAndrómeda
             if (chk_apunte.Checked)
             {
                 List<ApunteEntidadQuery> listaApunte = ListarApuntesXMaterias(listaIdMateria);
-                repeater_apuntes.DataSource = listaApunte;
-                repeater_apuntes.DataBind();
+                Session["listaApuntes"] = listaApunte;
+                BindDataIntoRepeater((List<ApunteEntidadQuery>)Session["listaApuntes"]);
             }
             if (chk_libro.Checked)
             {
                 List<LibroEntidadQuery> listaLibro = ListarLibroXMaterias(listaIdMateria);
-                repeater_libros.DataSource = listaLibro;
-                repeater_libros.DataBind();
+                Session["listaLibros"] = listaLibro;
+                BindDataIntoRepeater2((List<LibroEntidadQuery>)Session["listaLibros"]);
             }
         }
 
@@ -581,11 +589,11 @@ namespace ProyectoAndrómeda
             List<int> listaIdMateria = new List<int>();
             foreach (GridViewRow fila in grilla.Rows)
             {
-
+                int indice = fila.RowIndex;
                 CheckBox seleccion = ((CheckBox)fila.FindControl("chk_seleccionado"));
                 if (seleccion.Checked)
                 {
-                    listaIdMateria.Add(Convert.ToInt32(fila.Cells[0].Text));
+                    listaIdMateria.Add((Int32)grilla.DataKeys[indice].Value);
                 }
             }
 
@@ -614,6 +622,8 @@ namespace ProyectoAndrómeda
 
             return listaLibro;
         }
+
+       
     }
 
 

@@ -86,17 +86,16 @@ namespace BaseDeDatos
         /// Consultar: todos los libros
         /// </summary>
         /// <returns></returns>
-        public static List<LibroEntidad> ConsultarLibros()
+        public static List<LibroEntidadQuery> ConsultarLibros()
         {
-            //ARREGLO DE ALAMBRE VIEJO
-            List<LibroEntidad> lista = new List<LibroEntidad>();
+            List<LibroEntidadQuery> lista = new List<LibroEntidadQuery>();
             string consulta = @"SELECT idLibro, codigoBarraLibro, nombreLibro, autorLibro, descripcionLibro, stock,
                                 cantidadHojasLibro, precioLibro, idEditorial, idEstado, idMateria FROM Libro WHERE baja = 0";
             SqlCommand cmd = new SqlCommand(consulta, obtenerBD());
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                LibroEntidad libro = new LibroEntidad();
+                LibroEntidadQuery libro = new LibroEntidadQuery();
                 libro.idLibro = int.Parse(dr["idLibro"].ToString());
                 libro.codigoBarraLibro = dr["codigoBarraLibro"].ToString();
                 libro.nombreLibro = dr["nombreLibro"].ToString();
@@ -446,7 +445,7 @@ namespace BaseDeDatos
             LibroEntidadQuery libro = new LibroEntidadQuery();
             string consulta = @"SELECT DISTINCT l.idLibro, l.codigoBarraLibro, l.nombreLibro, l.autorLibro, l.descripcionLibro, l.stock,
                                        l.cantidadHojasLibro, l.precioLibro, e.nombreEditorial,  
-                                        f.nombreFacultad, m.nombreMateria
+                                        m.nombreMateria
                                 FROM Libro l INNER JOIN Materia m ON m.idMateria = l.idMateria
 			                                 INNER JOIN Editorial e ON e.idEditorial = l.idEditorial
 								WHERE  l.idMateria = @idMat  AND l.baja = 0";

@@ -10,19 +10,62 @@ namespace BaseDeDatos
 {
     public class ApunteDao: Conexion
     {
+
+        /// <summary>
+        /// Consultar: un solo apunte de un ID determinado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static ApunteEntidad ConsultarApunte(int id)
+        {
+            ApunteEntidad apu = new ApunteEntidad();
+            string consulta = @"SELECT idApunte, stock, precioApunte, cantHoja, nombreApunte, descripcionApunte, anoApunte,
+                                                codigoBarraApunte, idPrecioHoja, idCategoria, idTipoApunte, idEditorial, idEstado, 
+                                                idProfesor, idMateria
+                                FROM Apunte WHERE idApunte = @id";
+            SqlCommand cmd = new SqlCommand(consulta, obtenerBD());
+            cmd.Parameters.AddWithValue(@"id", id);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                apu.idApunte = int.Parse(dr["idApunte"].ToString());
+                if (dr["stock"] != DBNull.Value)
+                    apu.stock = int.Parse(dr["stock"].ToString());
+                apu.precioApunte = float.Parse(dr["precioApunte"].ToString());
+                apu.cantHoja = int.Parse(dr["cantHoja"].ToString());
+                apu.nombreApunte = dr["nombreApunte"].ToString();
+                apu.descripcionApunte = dr["descripcionApunte"].ToString();
+                apu.anoApunte = int.Parse(dr["anoApunte"].ToString());
+                apu.codigoBarraApunte = dr["codigoBarraApunte"].ToString();
+                if (dr["idPrecioHoja"] != DBNull.Value)
+                { apu.idPrecioHoja = int.Parse(dr["idPrecioHoja"].ToString()); }
+                apu.idCategoria = int.Parse(dr["idCategoria"].ToString());
+                apu.idTipoApunte = int.Parse(dr["idTipoApunte"].ToString());
+                apu.idEditorial = int.Parse(dr["idEditorial"].ToString());
+                if (dr["idEstado"] != DBNull.Value)
+                { apu.idEstado = int.Parse(dr["idEstado"].ToString()); }
+                if (dr["idProfesor"] != DBNull.Value)
+                { apu.idProfesor = int.Parse(dr["idProfesor"].ToString()); }
+                apu.idMateria = (int)dr["idMateria"];
+            }
+            dr.Close();
+            cmd.Connection.Close();
+            return apu;
+        }
+
         /// <summary>
         /// Consultar todos los apuntes sin filtros, traerlos pelados desde la base de datos
         /// </summary>
         /// <returns></returns>
-        public static List<ApunteEntidad> ConsultarApuntesSinFiltros()
+        public static List<ApunteEntidadQuery> ConsultarApuntesSinFiltros()
         {
-            List<ApunteEntidad> lista = new List<ApunteEntidad>();
+            List<ApunteEntidadQuery> lista = new List<ApunteEntidadQuery>();
             string query = @"SELECT DISTINCT a.idApunte, a.precioApunte, a.nombreApunte, a.stock FROM Apunte a WHERE a.baja = 0";
             SqlCommand cmd = new SqlCommand(query, obtenerBD());
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                ApunteEntidad apu = new ApunteEntidad();
+                ApunteEntidadQuery apu = new ApunteEntidadQuery();
                 apu.idApunte = int.Parse(dr["idApunte"].ToString());
                 if (dr["stock"] != DBNull.Value)
                     apu.stock = int.Parse(dr["stock"].ToString());
@@ -136,7 +179,7 @@ namespace BaseDeDatos
             ApunteEntidadQuery apu = new ApunteEntidadQuery();
             string consulta = @"SELECT DISTINCT a.idApunte, a.nombreApunte, a.precioApunte, m.nombreMateria, a.stock as 'stockApunte', e.nombreEditorial, p.nombreProfesor,
                                            p.apellidoProfesor, ta.nombreTipoApunte, a.codigoBarraApunte,
-									       a.anoApunte, a.cantHoja, u.nombreUniversidad, f.nombreFacultad, a.descripcionApunte
+									       a.anoApunte, a.cantHoja, a.descripcionApunte
                                     FROM Apunte a JOIN Editorial e ON a.idEditorial = e.idEditorial
                                 			      JOIN Profesor p ON p.idProfesor = a.idProfesor
                                 			      JOIN TipoApunte ta ON ta.idTipoApunte = a.idTipoApunte
@@ -148,7 +191,6 @@ namespace BaseDeDatos
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                
                 apu.idApunte = int.Parse(dr["idApunte"].ToString());
                 apu.nombreApunte = dr["nombreApunte"].ToString();
                 apu.precioApunte = float.Parse(dr["precioApunte"].ToString());

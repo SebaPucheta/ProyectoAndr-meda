@@ -68,6 +68,8 @@
                         </li>
                         <li><a class="page-scroll" href="#contact">Contacto</a>
                         </li>
+                        <li><a class="page-scroll" href="DetalleItem.aspx">Detalle</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
