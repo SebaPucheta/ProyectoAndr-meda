@@ -14,17 +14,20 @@ namespace ProyectoAndrómeda
         protected void Page_Load(object sender, EventArgs e)
         {
             int id;
-            if (int.Parse(Request.QueryString["idApunte"]) != 0)
+            if (Request.QueryString.Count > 0)
             {
-                id = int.Parse(Request.QueryString["idApunte"]);
-                cargarApunte(id);
+                if (int.Parse(Request.QueryString["idApunte"]) != 0)
+                {
+                    id = int.Parse(Request.QueryString["idApunte"]);
+                    cargarApunte(id);
+                }
+                if (int.Parse(Request.QueryString["idLibro"]) != 0)
+                {
+                    id = int.Parse(Request.QueryString["idLibro"]);
+                    cargarLibro(id);
+                }
             }
-            if (int.Parse(Request.QueryString["idLibro"]) != 0)
-            {
-                id = int.Parse(Request.QueryString["idLibro"]);
-                cargarLibro(id);
-            }
-                
+            //Entrar a "DetalleItem" pero no desde el catálogo
         }
 
         protected void cargarApunte(int id)
@@ -40,7 +43,13 @@ namespace ProyectoAndrómeda
 
         protected void cargarLibro(int id)
         {
-
+            LibroEntidad libro = new LibroEntidad();
+            libro = LibroDao.ConsultarLibro(id);
+            lbl_titulo.Text = libro.nombreLibro;
+            lbl_precio.Text = libro.precioLibro.ToString();
+            lbl_stock.Text = libro.stock.ToString();
+            lbl_codigo.Text = libro.codigoBarraLibro.ToString();
+            lbl_descripcion.Text = libro.descripcionLibro;
         }
 
 

@@ -31,7 +31,7 @@
                         <!--nombre-->
                         <tr>
                             <td>
-                                <asp:Label ID="lbl_titulo" style="font-weight:bold;" CssClass="h3" runat="server" Text="Label"></asp:Label>
+                                <asp:Label ID="lbl_titulo" style="font-weight:bold;" CssClass="h3" runat="server"></asp:Label>
                             </td>
                         </tr>
                         <!--precio-->
@@ -39,27 +39,27 @@
                             <td>
                                 <asp:Label ID="lbl_precio_titulo" style="color:darkgray;" CssClass="control-label" runat="server" Text="Precio:"></asp:Label>
                                 <asp:Label ID="lbl_precio_simbolo" style="font-weight:bold;" CssClass="control-label" runat="server" Text=" AR$ "></asp:Label>
-                                <asp:Label ID="lbl_precio" CssClass="control-label" runat="server" Text="Label"></asp:Label>
+                                <asp:Label ID="lbl_precio" CssClass="control-label" runat="server"></asp:Label>
                             </td>
                         </tr>
                         <!--codigo-->
                         <tr>
                             <td>
                                 <asp:Label style="color:darkgray;" ID="lbl_codigo_titulo" runat="server" Text="Código: "></asp:Label>
-                                <asp:Label ID="lbl_codigo" runat="server" Text="Label"></asp:Label>
+                                <asp:Label ID="lbl_codigo" runat="server"></asp:Label>
                             </td>
                         </tr>
                         <!--stock-->
                         <tr>
                             <td>
                                 <asp:Label ID="lbl_stock_titulo" style="color:darkgray;" runat="server" Text="Stock: "></asp:Label>
-                                <asp:Label ID="lbl_stock" runat="server" Text="Label"></asp:Label>
+                                <asp:Label ID="lbl_stock" runat="server"></asp:Label>
                             </td>
                         </tr>
                         <!--carrito-->
                         <tr>
                             <td>
-                                <asp:Label ID="lbl_carrito_titulo" runat="server" Text="Agregar al carro"></asp:Label>
+                                <asp:Label ID="lbl_carrito_titulo" runat="server" Text="Agregar al carrito"></asp:Label>
                                 <asp:LinkButton ID="btn_carrito" runat="server"><span class="glyphicon glyphicon-shopping-cart glyphicon-user" style="color:darkred" aria-hidden="true"></span></asp:LinkButton>
                             </td>
                         </tr>

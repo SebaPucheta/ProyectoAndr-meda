@@ -295,8 +295,9 @@ namespace ProyectoAndrómeda
             switch (e.CommandName)
             {
                 case "ver":
-
-                   
+                    int id = int.Parse(((TextBox)e.Item.FindControl("txt_id")).Text);
+                    string dir = "DetalleItem.aspx?idApunte=0&idLibro=" + id.ToString();
+                    Response.Redirect(dir);
                     break;
 
                 case "carrito":

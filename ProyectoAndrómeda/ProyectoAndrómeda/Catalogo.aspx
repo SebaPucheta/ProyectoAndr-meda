@@ -5,7 +5,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Body" runat="server">
 
-
+    <!--el tamaño de la imagen es el 5% de una A4 (124*176)px - original(3508*2480)px -->
 
 
     <div class="container">
@@ -20,7 +20,7 @@
         <div class="row">
 
             <!--panel izquierdo (filtros)-->
-            <div class="col-md-3" style="margin-bottom:100%">
+            <div class="col-md-3" style="margin-bottom:100%;">
                 <div class="sidebar topspace30">
                     <div class="wowwidget">
 
@@ -166,16 +166,16 @@
                     <ItemTemplate>
                         <div class="col-sm-4 col-xs-6">
 
-                            <div style="background-color: #E9E9E9; text-align: center; margin: 10px; padding: 20px; width: 100%; height: 350px; box-shadow: 2px 2px 10px 2px #000000;">
-                                <table style="width: 100%; height: 100%;">
+                            <div style="background-color: #E9E9E9; text-align: center; margin: 10px; padding: 20px; width: 100%; height: 375px; box-shadow: 2px 2px 10px 2px #000000;">
+                                <table class="table table-responsive" style="width: 100%; height: 100%;">
                                     <tr style="height: 50%;">
                                         <td>
-                                            <asp:Image ID="rep_imagen" runat="server" ImageUrl='<%# Eval("idApunte", "imagenes/{0}.jpg") %>' />
+                                            <%--<asp:Image ID="rep_imagen" runat="server" ImageUrl='<%# Eval("idApunte", "imagenes/{0}.jpg") %>' style="width:124px; height:176px;" />--%>
+                                            <asp:Image ID="Image1" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:124px; height:176px;" />
                                         </td>
                                     </tr>
                                     <tr style="height: 30%;">
                                         <td>
-                                            <hr style="border-top: 1px solid #ccc;" />
                                             <asp:Label ID="rep_nombre" runat="server" Text='<%# Eval("nombreApunte") %>' Font-Bold="True"></asp:Label>
                                             <asp:TextBox ID="txt_id" runat="server" Text='<%# Eval("idApunte") %>' Visible="false" ></asp:TextBox>
                                         </td>
@@ -200,7 +200,7 @@
                 </asp:Repeater>
             </div>
 
-            <!-- paginado libro-->
+            <!-- paginado apunte-->
             <div class="col-md-offset-3 col-sm-6" style="margin-top: 20px;">
                 <table class="table" style="width: 50%; height: 100%; text-align: center;">
                     <tr>
@@ -246,17 +246,18 @@
                     <ItemTemplate>
                         <div class="col-sm-4 col-xs-6">
 
-                            <div style="background-color: #E9E9E9; text-align: center; margin: 10px; padding: 20px; width: 100%; height: 350px; box-shadow: 2px 2px 10px 2px #000000;">
-                                <table style="width: 100%; height: 100%;">
+                            <div style="background-color: #E9E9E9; text-align: center; margin: 10px; padding: 20px; width: 100%; height: 375px; box-shadow: 2px 2px 10px 2px #000000;">
+                                <table class="table" style="width: 100%; height: 100%;">
                                     <tr style="height: 50%;">
                                         <td>
-                                            <asp:Image ID="rep_imagen" runat="server" ImageUrl='<%# Eval("idLibro", "imagenes/{0}.jpg") %>' />
+                                            <%--<asp:Image ID="rep_imagen" runat="server" ImageUrl='<%# Eval("idLibro", "imagenes/{0}.jpg") %>' style="width:124px; height:176px;" />--%>
+                                            <asp:Image ID="Image1" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:124px; height:176px;"/>
                                         </td>
                                     </tr>
                                     <tr style="height: 30%;">
                                         <td>
-                                            <hr style="border-top: 1px solid #ccc;" />
                                             <asp:Label ID="rep_nombre" runat="server" Text='<%# Eval("nombreLibro") %>' Font-Bold="True"></asp:Label>
+                                            <asp:TextBox ID="txt_id" runat="server" Text='<%# Eval("idLibro") %>' Visible="false" ></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr style="height: 15%;">
