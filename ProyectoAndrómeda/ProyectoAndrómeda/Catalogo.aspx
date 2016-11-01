@@ -201,8 +201,8 @@
             </div>
 
             <!-- paginado apunte-->
-            <div class="col-md-offset-3 col-sm-6" style="margin-top: 20px;">
-                <table class="table" style="width: 50%; height: 100%; text-align: center;">
+            <div class="col-sm-9" style="margin-top: 20px;">
+                <table class="table" style="height: 100%; text-align: center;">
                     <tr>
                         <td>
                             <asp:LinkButton ID="lbFirst" runat="server" OnClick="lbFirst_Click" CssClass="label" Style="color: black;">Inicio</asp:LinkButton>
@@ -281,8 +281,8 @@
             </div>
 
             <!-- paginado libro-->
-            <div class="col-md-offset-3 col-sm-6" style="margin-top: 20px;">
-                <table class="table" style="width: 50%; height: 100%; text-align: center;">
+            <div class="col-sm-9" style="margin-top: 20px;">
+                <table class="table text-center" style="height: 100%; text-align: center;">
                     <tr>
                         <td>
                             <asp:LinkButton ID="lbFirst2" runat="server" OnClick="lbFirst2_Click" CssClass="label" Style="color: black;">Inicio</asp:LinkButton>
