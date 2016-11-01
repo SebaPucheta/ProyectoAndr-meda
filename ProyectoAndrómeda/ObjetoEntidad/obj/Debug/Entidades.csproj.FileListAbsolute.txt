@@ -6,3 +6,4 @@ C:\Juan\Facultad\Habilitacion Profesional\GitHub - Andromeda\ProyectoAndromeda\P
 C:\Juan\Facultad\Habilitacion Profesional\GitHub - Andromeda\ProyectoAndromeda\ProyectoAndrómeda\ObjetoEntidad\bin\Debug\ObjetoEntidad.pdb
 C:\Juan\Facultad\Habilitacion Profesional\GitHub - Andromeda\ProyectoAndromeda\ProyectoAndrómeda\ObjetoEntidad\obj\Debug\ObjetoEntidad.dll
 C:\Juan\Facultad\Habilitacion Profesional\GitHub - Andromeda\ProyectoAndromeda\ProyectoAndrómeda\ObjetoEntidad\obj\Debug\ObjetoEntidad.pdb
+C:\Juan\Facultad\Habilitacion Profesional\GitHub - Andromeda\ProyectoAndromeda\ProyectoAndrómeda\ObjetoEntidad\obj\Debug\Entidades.csprojResolveAssemblyReference.cache

@@ -280,7 +280,9 @@ namespace ProyectoAndrómeda
                     break;
 
                 case "carrito":
-                    Response.Redirect("Home.aspx");
+                    int idCarrito = int.Parse(((TextBox)e.Item.FindControl("txt_id")).Text);
+                    string dirCarrito = "Carrito.aspx?idLibro=0&idApunte=" + idCarrito.ToString();
+                    Response.Redirect(dirCarrito);
                     break;
             }
         }
@@ -301,7 +303,9 @@ namespace ProyectoAndrómeda
                     break;
 
                 case "carrito":
-                    Response.Redirect("Home.aspx");
+                    int idCarrito = int.Parse(((TextBox)e.Item.FindControl("txt_id")).Text);
+                    string dirCarrito = "Carrito.aspx?idApunte=0&idLibro=" + idCarrito.ToString();
+                    Response.Redirect(dirCarrito);
                     break;
             }
         }

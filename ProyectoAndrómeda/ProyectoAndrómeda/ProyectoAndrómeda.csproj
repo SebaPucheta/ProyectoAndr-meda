@@ -58,9 +58,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Carrito.aspx" />
     <Content Include="Catalogo.aspx" />
     <Content Include="css\app.css" />
     <Content Include="DetalleItem.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
     <Content Include="imagenes\PortadaApunte2.png" />
     <Content Include="Master.Master" />
@@ -75,6 +77,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Carrito.aspx.cs">
+      <DependentUpon>Carrito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Carrito.aspx.designer.cs">
+      <DependentUpon>Carrito.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Catalogo.aspx.cs">
       <DependentUpon>Catalogo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -88,6 +97,9 @@
     </Compile>
     <Compile Include="DetalleItem.aspx.designer.cs">
       <DependentUpon>DetalleItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
@@ -109,6 +121,10 @@
     <ProjectReference Include="..\BaseDeDatos\BaseDeDatos.csproj">
       <Project>{ebfbe636-f9bb-458c-8240-c2697f8e9345}</Project>
       <Name>BaseDeDatos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Negocio\Negocio.csproj">
+      <Project>{2cbded40-7b31-4d90-b0fa-ee8d8420aae5}</Project>
+      <Name>Negocio</Name>
     </ProjectReference>
     <ProjectReference Include="..\ObjetoEntidad\Entidades.csproj">
       <Project>{ea586425-38f9-4e60-a2b3-d810fc1f2cd3}</Project>
