@@ -13,6 +13,6 @@ namespace Entidades
         public ItemEntidad item { get; set; }
         public int cantidad { get; set; }
         public float subtotal { get; set; }
-        public int idTipoItem { get; set; }
+        public string tipoItem { get; set; }
     }
 }

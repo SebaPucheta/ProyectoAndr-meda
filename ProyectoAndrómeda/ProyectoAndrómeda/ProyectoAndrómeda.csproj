@@ -58,15 +58,37 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\BaseDeDatos.dll" />
+    <Content Include="bin\BaseDeDatos.pdb" />
+    <Content Include="bin\mercadopago.dll" />
+    <Content Include="bin\Negocio.dll" />
+    <Content Include="bin\Negocio.pdb" />
+    <Content Include="bin\ObjetoEntidad.dll" />
+    <Content Include="bin\ObjetoEntidad.pdb" />
+    <Content Include="bin\ProyectoAndrómeda.dll" />
+    <Content Include="bin\ProyectoAndrómeda.pdb" />
+    <Content Include="button.aspx" />
     <Content Include="Carrito.aspx" />
     <Content Include="Catalogo.aspx" />
+    <Content Include="Compra.aspx" />
     <Content Include="css\app.css" />
     <Content Include="DetalleItem.aspx" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
     <Content Include="imagenes\PortadaApunte.png" />
     <Content Include="imagenes\PortadaApunte2.png" />
     <Content Include="Master.Master" />
+    <Content Include="bin\ProyectoAndrómeda.dll.config" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -75,6 +97,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Pago.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +114,13 @@
     </Compile>
     <Compile Include="Catalogo.aspx.designer.cs">
       <DependentUpon>Catalogo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Compra.aspx.cs">
+      <DependentUpon>Compra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Compra.aspx.designer.cs">
+      <DependentUpon>Compra.aspx</DependentUpon>
     </Compile>
     <Compile Include="DetalleItem.aspx.cs">
       <DependentUpon>DetalleItem.aspx</DependentUpon>
@@ -115,6 +145,13 @@
     </Compile>
     <Compile Include="Master.Master.designer.cs">
       <DependentUpon>Master.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Pago.aspx.cs">
+      <DependentUpon>Pago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pago.aspx.designer.cs">
+      <DependentUpon>Pago.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

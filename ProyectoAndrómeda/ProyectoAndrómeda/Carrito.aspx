@@ -20,23 +20,31 @@
             <div class="col-md-12">
                 <div style="background-color: #E9E9E9; padding: 25px; margin: 25px; box-shadow: 2px 2px 10px 2px #000000;">
 
-                    <asp:GridView ID="dgv_carrito" runat="server" CssClass="table table-bordered" AutoGenerateColumns="False">
+                    <asp:GridView ID="dgv_carrito" runat="server" CssClass="table table-responsive" AutoGenerateColumns="False">
                         <EmptyDataRowStyle ForeColor="Red" CssClass="table table-bordered" />
                         <Columns>
-
-
+                            <asp:ImageField></asp:ImageField>
                             <asp:BoundField DataField="idProductoCarrito" Visible="false" />
                             <asp:BoundField DataField="idProducto" Visible="false" />
                             <asp:BoundField DataField="nombreProducto" HeaderText="Nombre" />
-                            <asp:BoundField DataField="tipoProducto" HeaderText="Tipo proudcto" />
-                            <asp:BoundField DataField="precioUnitario" HeaderText="Precio unitario" ApplyFormatInEditMode="False" />
-                            <asp:BoundField DataField="cantidad" HeaderText="Cantidad" ApplyFormatInEditMode="False" />
-                            <asp:BoundField DataField="subtotal" HeaderText="Subtotal" ApplyFormatInEditMode="False" />
+                            <asp:BoundField DataField="tipoProducto" HeaderText="Tipo producto" />
+                            <asp:BoundField DataField="precioUnitario" HeaderText="Precio unitario" DataFormatString="{0:c}" />
+                            <asp:BoundField DataField="cantidad" HeaderText="Cantidad" />
+                            <%--Cantidad con textbox--%>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:TextBox ID="txt_cantidad" AutoPostBack="true" runat="server"></asp:TextBox>
+                                </ItemTemplate>
+                                <ControlStyle Width="40px" />
+                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                            </asp:TemplateField>
+
+                            <asp:BoundField DataField="subtotal" HeaderText="Subtotal" ApplyFormatInEditMode="False" DataFormatString="{0:C}" />
                             <asp:ImageField>
                             </asp:ImageField>
                             <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="btn_consultarApunte" CommandName="select" runat="server"><span class="glyphicon glyphicon-question-sign" style="color:black" aria-hidden="true"></span></asp:LinkButton>
+                                    <asp:LinkButton ID="btn_consultarApunte" CommandName="select" runat="server"><span class="glyphicon glyphicon-eye-open" style="color:black" aria-hidden="true"></span></asp:LinkButton>
                                 </ItemTemplate>
                                 <ControlStyle Width="10px" />
                                 <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
@@ -56,7 +64,7 @@
                     <div class="col-md-2">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></div>
-                            <asp:Label runat="server" CssClass="form-control" type="text" ID="lbl_total" />
+                            <asp:Label runat="server" CssClass="form-control" ID="lbl_total"  />
 
                         </div>
                     </div>
@@ -71,6 +79,7 @@
                     </div>
                     <br />
                     <asp:Button runat="server" ID="btn_confirmar" Text="Confirmar" CssClass="btn btn-lg btn_azul btn_flat" />
+                    <asp:Button runat="server" ID="btn_actualizar" Text="Actualizar carrito" CssClass="btn btn-lg btn_rojo btn_flat" OnClick="btn_actualizar_Click" />
                     <asp:Button runat="server" ID="btn_cancelar" Text="Cancelar" CssClass="btn btn-lg btn_rojo btn_flat" />
 
                 </div>

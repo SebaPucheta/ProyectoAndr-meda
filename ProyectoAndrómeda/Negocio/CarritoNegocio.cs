@@ -14,6 +14,7 @@ namespace Negocio
 
         public static DataView cargarProducto(ItemEntidad producto, ApunteEntidad apunte, LibroEntidad libro)
         {
+            
             DataTable tabla = new DataTable();
             DataRow fila;
 

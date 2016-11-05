@@ -16,22 +16,30 @@ namespace ProyectoAndrómeda
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            int id;
-            if (Request.QueryString.Count > 0)
+            if (!IsPostBack)
             {
-                if (int.Parse(Request.QueryString["idApunte"]) != 0)
+                int id;
+                if (Request.QueryString.Count > 0)
                 {
-                    id = int.Parse(Request.QueryString["idApunte"]);
-                    cargarApunte(id);
+                    if (int.Parse(Request.QueryString["idApunte"]) != 0)
+                    {
+                        id = int.Parse(Request.QueryString["idApunte"]);
+                        cargarApunte(id);
+                    }
+                    if (int.Parse(Request.QueryString["idLibro"]) != 0)
+                    {
+                        id = int.Parse(Request.QueryString["idLibro"]);
+                        cargarLibro(id);
+                    }
                 }
-                if (int.Parse(Request.QueryString["idLibro"]) != 0)
-                {
-                    id = int.Parse(Request.QueryString["idLibro"]);
-                    cargarLibro(id);
-                }
+                //Entrar a "Carrito" pero no desde el catálogo
+                cargarGrilla();
+
+                //Cargar el total del carrito
+                calcularTotal();
+
             }
-            //Entrar a "Carrito" pero no desde el catálogo
-            cargarGrilla();
+
         }
 
         protected void cargarApunte(int id)
@@ -39,14 +47,36 @@ namespace ProyectoAndrómeda
             ApunteEntidad apunte = new ApunteEntidad();
             apunte = ApunteDao.ConsultarApunte(id);
             List<ProductoCarrito> lista = (List<ProductoCarrito>)Session["carrito"];
+
+            //Verifico cada producto del carrito para no agregar el mismo dos veces
+            foreach (ProductoCarrito dato in lista)
+            {
+                //Como aca es solo cargar apunte, verifico de apuntes solo
+                if (dato.tipoItem == "Apunte")
+                {
+                    //Creo el objeto Apunte de la lista para verificar y lo comparo con el que cree afuera
+                    ApunteEntidad apunteVerificacion = new ApunteEntidad();
+                    apunteVerificacion = (ApunteEntidad)dato.item;
+
+                    //Si son iguales, salgo del metodo
+                    if (apunte.idApunte == apunteVerificacion.idApunte)
+                    {
+                        return;
+                    }
+                }
+            }
+
+            //Paso la verificación, no hay nada igual
             ProductoCarrito nuevoProducto = new ProductoCarrito();
             nuevoProducto.idProductoCarrito = lista.Count + 1;
             nuevoProducto.item = apunte;
-            nuevoProducto.idTipoItem = 1;
+            nuevoProducto.tipoItem = "Apunte";
             nuevoProducto.cantidad = 1;
+            nuevoProducto.subtotal = nuevoProducto.cantidad * apunte.precioApunte;
             lista.Add(nuevoProducto);
             Session["carrito"] = lista;
             cargarGrilla();
+
         }
 
         protected void cargarLibro(int id)
@@ -54,21 +84,46 @@ namespace ProyectoAndrómeda
             LibroEntidad libro = new LibroEntidad();
             libro = LibroDao.ConsultarLibro(id);
             List<ProductoCarrito> lista = (List<ProductoCarrito>)Session["carrito"];
+
+            //Verifico cada producto del carrito para no agregar el mismo dos veces
+            foreach (ProductoCarrito dato in lista)
+            {
+                //Como aca es solo cargar libros, verifico libros solo
+                if (dato.tipoItem == "Libro")
+                {
+                    //Creo el objeto Apunte de la lista para verificar y lo comparo con el que cree afuera
+                    LibroEntidad libroVerificacion = new LibroEntidad();
+                    libroVerificacion = (LibroEntidad)dato.item;
+
+                    //Si son iguales, salgo del metodo
+                    if (libro.idLibro == libroVerificacion.idLibro)
+                    {
+                        return;
+                    }
+                }
+            }
+
+            //Paso la verificación, no hay nada igual
             ProductoCarrito nuevoProducto = new ProductoCarrito();
+            nuevoProducto.idProductoCarrito = lista.Count + 1;
             nuevoProducto.item = libro;
-            nuevoProducto.idTipoItem = 2;
+            nuevoProducto.tipoItem = "Libro";
             nuevoProducto.cantidad = 1;
-            ((List<ProductoCarrito>)Session["carrito"]).Add(nuevoProducto);
+            nuevoProducto.subtotal = nuevoProducto.cantidad * libro.precioLibro;
+            lista.Add(nuevoProducto);
+            Session["carrito"] = lista;
             cargarGrilla();
         }
 
         //[0] img
-        //[1] idProducto
-        //[2] nombreProducto
-        //[3] tipoProducto
-        //[4] precioUnitario
-        //[5] cantidad
-        //[6] subtotal
+        //[1] idProductoCarrito
+        //[2] idProducto
+        //[3] nombreProducto
+        //[4] tipoProducto
+        //[5] precioUnitario
+        //[6] cantidad
+        //[..] nuevaCantindad
+        //[7] subtotal
 
         protected void cargarGrilla()
         {
@@ -77,48 +132,51 @@ namespace ProyectoAndrómeda
             DataRow fila;
 
             //Creo las columnas de la tabla
+            tabla.Columns.Add("img", typeof(string));
             tabla.Columns.Add("idProductoCarrito", typeof(int));
             tabla.Columns.Add("idProducto", typeof(int));
             tabla.Columns.Add("nombreProducto", typeof(string));
             tabla.Columns.Add("tipoProducto", typeof(string));
-            tabla.Columns.Add("precioUnitario", typeof(string));
-            tabla.Columns.Add("cantidad", typeof(string));
-            tabla.Columns.Add("subtotal", typeof(string));
-            tabla.Columns.Add("img", typeof(string));
+            tabla.Columns.Add("precioUnitario", typeof(float));
+            tabla.Columns.Add("cantidad", typeof(int));
+            tabla.Columns.Add("subtotal", typeof(float));
+
 
             foreach (ProductoCarrito dato in lista)
             {
-                if (dato.idTipoItem == 1)
+                if (dato.tipoItem == "Apunte")
                 {
                     fila = tabla.NewRow();
 
                     ApunteEntidad apunte = new ApunteEntidad();
                     apunte = (ApunteEntidad)dato.item;
-                    fila[0] = dato.idProductoCarrito;
-                    fila[1] = apunte.idApunte;
-                    fila[2] = apunte.nombreApunte;
-                    fila[3] = dato.idTipoItem;
-                    fila[4] = apunte.precioApunte;
-                    fila[5] = dato.cantidad;
-                    fila[6] = dato.subtotal;
-                    //fila[7] = imagen;
+                    //fila[0] = "~/imagenes/PortadaApunte.png";
+                    fila[1] = dato.idProductoCarrito;
+                    fila[2] = apunte.idApunte;
+                    fila[3] = apunte.nombreApunte;
+                    fila[4] = dato.tipoItem;
+                    fila[5] = apunte.precioApunte;
+                    fila[6] = dato.cantidad;
+                    fila[7] = dato.subtotal;
+
                     tabla.Rows.Add(fila);
                 }
 
-                if (dato.idTipoItem == 2)
+                if (dato.tipoItem == "Libro")
                 {
                     fila = tabla.NewRow();
 
                     LibroEntidad libro = new LibroEntidad();
                     libro = (LibroEntidad)dato.item;
-                    fila[0] = dato.idProductoCarrito;
-                    fila[1] = libro.idLibro;
-                    fila[2] = libro.nombreLibro;
-                    fila[3] = dato.idTipoItem;
-                    fila[4] = libro.precioLibro;
-                    fila[5] = dato.cantidad;
-                    fila[6] = dato.subtotal;
-                    //fila[7] = imagen;
+                    //fila[0] = "~/imagenes/PortadaApunte.png";
+                    fila[1] = dato.idProductoCarrito;
+                    fila[2] = libro.idLibro;
+                    fila[3] = libro.nombreLibro;
+                    fila[4] = dato.tipoItem;
+                    fila[5] = libro.precioLibro;
+                    fila[6] = dato.cantidad;
+                    fila[7] = dato.subtotal;
+
                     tabla.Rows.Add(fila);
                 }
             }
@@ -131,6 +189,58 @@ namespace ProyectoAndrómeda
         }
 
 
+        protected void calcularTotal()
+        {
+            float acumulador = 0;
+            List<ProductoCarrito> lista = (List<ProductoCarrito>)Session["carrito"];
+            foreach (ProductoCarrito dato in lista)
+            {
+                acumulador = acumulador + dato.subtotal;
+            }
+            lbl_total.Text = acumulador.ToString("0.00");
+        }
+
+
+        ///////////////////////////////////////////////EVENTOS////////////////////////////////////////////
+
+        protected void btn_actualizar_Click(object sender, EventArgs e)
+        {
+            List<ProductoCarrito> lista = (List<ProductoCarrito>)Session["carrito"];
+            foreach (GridViewRow row in dgv_carrito.Rows)
+            {
+                //Veo si tiene el txtbox le pusieron una cantidad
+                if (((TextBox)row.Cells[7].FindControl("txt_cantidad")).Text == "")
+                    break;
+
+                //Si le ingresaron una nueva cantidad, procedo
+                int nuevaCantidad = int.Parse(((TextBox)row.Cells[7].FindControl("txt_cantidad")).Text);
+                int idActual = int.Parse(dgv_carrito.DataKeys[row.RowIndex].Value.ToString());
+
+                foreach (ProductoCarrito dato in lista)
+                {
+                    if (dato.idProductoCarrito == idActual)
+                    {
+                        if (dato.tipoItem == "Apunte")
+                        {
+                            ApunteEntidad apunte = new ApunteEntidad();
+                            apunte = (ApunteEntidad)dato.item;
+                            dato.cantidad = nuevaCantidad;
+                            dato.subtotal = dato.cantidad * apunte.precioApunte;
+                        }
+
+                        if(dato.tipoItem == "Libro")
+                        {
+                            LibroEntidad libro = new LibroEntidad();
+                            libro = (LibroEntidad)dato.item;
+                            dato.cantidad = nuevaCantidad;
+                            dato.subtotal = dato.cantidad * libro.precioLibro;
+                        }
+                    }
+                }
+            }
+            cargarGrilla();
+            calcularTotal();
+        }
     }
 
 
