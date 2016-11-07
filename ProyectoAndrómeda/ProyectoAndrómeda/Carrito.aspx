@@ -20,10 +20,16 @@
             <div class="col-md-12">
                 <div style="background-color: #E9E9E9; padding: 25px; margin: 25px; box-shadow: 2px 2px 10px 2px #000000;">
 
-                    <asp:GridView ID="dgv_carrito" runat="server" CssClass="table table-responsive" AutoGenerateColumns="False">
+                    <asp:GridView ID="dgv_carrito" runat="server" CssClass="table table-responsive" AutoGenerateColumns="False" OnRowDeleting="dgv_carrito_RowDeleting" OnSelectedIndexChanged="dgv_carrito_SelectedIndexChanged">
                         <EmptyDataRowStyle ForeColor="Red" CssClass="table table-bordered" />
                         <Columns>
-                            <asp:ImageField></asp:ImageField>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <%--<asp:Image ID="img" ImageUrl='<%# Eval("idProducto", "imagenes/{0}.jpg") %>'  style="width:74px; height:126px;" runat="server" />--%>
+                                </ItemTemplate>
+                                <ControlStyle Width="40px" />
+                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                            </asp:TemplateField>
                             <asp:BoundField DataField="idProductoCarrito" Visible="false" />
                             <asp:BoundField DataField="idProducto" Visible="false" />
                             <asp:BoundField DataField="nombreProducto" HeaderText="Nombre" />

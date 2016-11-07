@@ -200,17 +200,18 @@ namespace ProyectoAndrómeda
             lbl_total.Text = acumulador.ToString("0.00");
         }
 
-
+        //////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////EVENTOS////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////
 
         protected void btn_actualizar_Click(object sender, EventArgs e)
         {
             List<ProductoCarrito> lista = (List<ProductoCarrito>)Session["carrito"];
             foreach (GridViewRow row in dgv_carrito.Rows)
             {
-                //Veo si tiene el txtbox le pusieron una cantidad
+                //Veo si tiene el txtbox le pusieron una cantidad sino salteo al otro item
                 if (((TextBox)row.Cells[7].FindControl("txt_cantidad")).Text == "")
-                    break;
+                    continue;
 
                 //Si le ingresaron una nueva cantidad, procedo
                 int nuevaCantidad = int.Parse(((TextBox)row.Cells[7].FindControl("txt_cantidad")).Text);
@@ -240,6 +241,49 @@ namespace ProyectoAndrómeda
             }
             cargarGrilla();
             calcularTotal();
+        }
+
+
+        protected void dgv_carrito_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            ((List<ProductoCarrito>)Session["carrito"]).RemoveAt(e.RowIndex);
+            cargarGrilla();
+        }
+
+
+        protected void dgv_carrito_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idProducto = (int)dgv_carrito.SelectedDataKey.Value;
+            int indice = (int)dgv_carrito.SelectedIndex;
+            string tipo = dgv_carrito.Rows[indice].Cells[4].Text;
+
+            List<ProductoCarrito> lista = ((List<ProductoCarrito>)Session["carrito"]);
+            foreach (ProductoCarrito dato in lista)
+            {
+                if(idProducto == dato.idProductoCarrito)
+                {
+                    if (tipo == "Apunte")
+                    {
+                        ApunteEntidad apunte = new ApunteEntidad();
+                        apunte = (ApunteEntidad)dato.item;
+                        int id = apunte.idApunte;
+                        string dir = "DetalleItem.aspx?idLibro=0&idApunte=" + id.ToString();
+                        Response.Redirect(dir);
+                        break;
+                    }
+
+                    if(tipo == "Libro")
+                    {
+                        LibroEntidad libro = new LibroEntidad();
+                        libro = (LibroEntidad)dato.item;
+                        int id = libro.idLibro;
+                        string dir = "DetalleItem.aspx?idApunte=0&idLibro=" + id.ToString();
+                        Response.Redirect(dir);
+                        break;
+                    }
+                }
+            }            
+            
         }
     }
 

@@ -54,6 +54,7 @@
                     <!--boton mercadopago-->
                     <div>
                         <%
+                            
                             MP mp = new MP("3505078557617488", "3J7yHycTVNr1Vkhf8LZLmqqbeuZFP7nq");
                             Hashtable preference = mp.createPreference("{\"items\":[{\"title\":\"EDUCOM\",\"quantity\":1,\"currency_id\":\"ARS\",\"unit_price\":123}]}");
                         %>
