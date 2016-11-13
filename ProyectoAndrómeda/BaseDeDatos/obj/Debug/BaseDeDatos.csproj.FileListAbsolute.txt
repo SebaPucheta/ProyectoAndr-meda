@@ -12,3 +12,10 @@ C:\Juan\Facultad\Habilitacion Profesional\GitHub - Andromeda\ProyectoAndromeda\P
 C:\Juan\Facultad\Habilitacion Profesional\GitHub - Andromeda\ProyectoAndromeda\ProyectoAndrómeda\BaseDeDatos\obj\Debug\BaseDeDatos.csprojResolveAssemblyReference.cache
 C:\Juan\Facultad\Habilitacion Profesional\GitHub - Andromeda\ProyectoAndromeda\ProyectoAndrómeda\BaseDeDatos\obj\Debug\BaseDeDatos.dll
 C:\Juan\Facultad\Habilitacion Profesional\GitHub - Andromeda\ProyectoAndromeda\ProyectoAndrómeda\BaseDeDatos\obj\Debug\BaseDeDatos.pdb
+C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\BaseDeDatos\bin\Debug\BaseDeDatos.dll
+C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\BaseDeDatos\bin\Debug\BaseDeDatos.pdb
+C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\BaseDeDatos\bin\Debug\ObjetoEntidad.dll
+C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\BaseDeDatos\bin\Debug\ObjetoEntidad.pdb
+C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\BaseDeDatos\obj\Debug\BaseDeDatos.csprojResolveAssemblyReference.cache
+C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\BaseDeDatos\obj\Debug\BaseDeDatos.dll
+C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\BaseDeDatos\obj\Debug\BaseDeDatos.pdb

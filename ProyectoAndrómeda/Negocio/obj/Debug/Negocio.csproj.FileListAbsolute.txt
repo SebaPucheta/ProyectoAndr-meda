@@ -7,3 +7,12 @@ C:\Juan\Facultad\Habilitacion Profesional\GitHub - Andromeda\ProyectoAndromeda\P
 C:\Juan\Facultad\Habilitacion Profesional\GitHub - Andromeda\ProyectoAndromeda\ProyectoAndrómeda\Negocio\bin\Debug\ObjetoEntidad.pdb
 C:\Juan\Facultad\Habilitacion Profesional\GitHub - Andromeda\ProyectoAndromeda\ProyectoAndrómeda\Negocio\obj\Debug\Negocio.dll
 C:\Juan\Facultad\Habilitacion Profesional\GitHub - Andromeda\ProyectoAndromeda\ProyectoAndrómeda\Negocio\obj\Debug\Negocio.pdb
+C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\Negocio\bin\Debug\Negocio.dll
+C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\Negocio\bin\Debug\Negocio.pdb
+C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\Negocio\bin\Debug\BaseDeDatos.dll
+C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\Negocio\bin\Debug\ObjetoEntidad.dll
+C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\Negocio\bin\Debug\BaseDeDatos.pdb
+C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\Negocio\bin\Debug\ObjetoEntidad.pdb
+C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\Negocio\obj\Debug\Negocio.csprojResolveAssemblyReference.cache
+C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\Negocio\obj\Debug\Negocio.dll
+C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\Negocio\obj\Debug\Negocio.pdb

@@ -79,6 +79,7 @@
     <Content Include="Home.aspx" />
     <Content Include="imagenes\PortadaApunte.png" />
     <Content Include="imagenes\PortadaApunte2.png" />
+    <Content Include="Login.aspx" />
     <Content Include="Master.Master" />
     <Content Include="bin\ProyectoAndrómeda.dll.config" />
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -98,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pago.aspx" />
+    <Content Include="RegistrarUsuarioCliente.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +141,12 @@
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Master.Master.cs">
       <DependentUpon>Master.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -154,6 +162,12 @@
       <DependentUpon>Pago.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistrarUsuarioCliente.aspx.cs">
+      <DependentUpon>RegistrarUsuarioCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrarUsuarioCliente.aspx.designer.cs">
+      <DependentUpon>RegistrarUsuarioCliente.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseDeDatos\BaseDeDatos.csproj">

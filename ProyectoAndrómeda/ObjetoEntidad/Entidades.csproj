@@ -44,6 +44,8 @@
     <Compile Include="CarreraEntidad.cs" />
     <Compile Include="CarreraEntidadQuery.cs" />
     <Compile Include="CategoriaEntidad.cs" />
+    <Compile Include="ClienteEntidad.cs" />
+    <Compile Include="ClienteEntidadQuery.cs" />
     <Compile Include="EditorialEntidad.cs" />
     <Compile Include="FacturaEntidad.cs" />
     <Compile Include="FacturaEntidadQuery.cs" />
@@ -58,6 +60,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TipoApunteEntidad.cs" />
     <Compile Include="UniversidadEntidad.cs" />
+    <Compile Include="UsuarioEntidad.cs" />
+    <Compile Include="UsuarioEntidadQuery.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
