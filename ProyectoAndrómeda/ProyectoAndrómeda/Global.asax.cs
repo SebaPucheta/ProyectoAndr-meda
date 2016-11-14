@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
 using Entidades;
+using BaseDeDatos;
 
 namespace ProyectoAndrómeda
 {
@@ -32,7 +33,11 @@ namespace ProyectoAndrómeda
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
-
+            if (HttpContext.Current.User != null)
+            {
+                var id = HttpContext.Current.User.Identity;
+                HttpContext.Current.User = new System.Security.Principal.GenericPrincipal(id, LoginDao.ObtenerRoles(id.Name));
+            }
         }
 
         protected void Application_Error(object sender, EventArgs e)

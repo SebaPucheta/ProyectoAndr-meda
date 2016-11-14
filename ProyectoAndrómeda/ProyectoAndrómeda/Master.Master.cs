@@ -11,7 +11,7 @@ namespace ProyectoAndrómeda
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            lbl_nombreUsuario.Text = HttpContext.Current.User.Identity.Name.ToString();
         }
     }
 }

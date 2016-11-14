@@ -470,5 +470,26 @@ namespace BaseDeDatos
             return libro;
         }
 
+
+        public static string ConsultarRutaPortada(int id)
+        {
+            LibroEntidad lib = new LibroEntidad();
+            string consulta = @"SELECT idLibro, imagenLibro 
+                                FROM Libro WHERE idLibro = @id";
+            SqlCommand cmd = new SqlCommand(consulta, obtenerBD());
+            cmd.Parameters.AddWithValue(@"id", id);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                lib.idLibro = int.Parse(dr["idLibro"].ToString());
+                if (dr["stock"] != DBNull.Value)
+                    lib.stock = int.Parse(dr["stock"].ToString());
+                lib.imagenLibro = dr["imagenLibro"].ToString();
+            }
+            dr.Close();
+            cmd.Connection.Close();
+            return lib.imagenLibro;
+        }
+
     }
 }

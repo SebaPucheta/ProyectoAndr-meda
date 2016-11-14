@@ -303,5 +303,25 @@ namespace BaseDeDatos
             cmd.Connection.Close();
             return lista;
         }
+
+        public static string ConsultarRutaPortada(int id)
+        {
+            ApunteEntidad apu = new ApunteEntidad();
+            string consulta = @"SELECT idApunte, imagenApunte 
+                                FROM Apunte WHERE idApunte = @id";
+            SqlCommand cmd = new SqlCommand(consulta, obtenerBD());
+            cmd.Parameters.AddWithValue(@"id", id);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                apu.idApunte = int.Parse(dr["idApunte"].ToString());
+                if (dr["stock"] != DBNull.Value)
+                    apu.stock = int.Parse(dr["stock"].ToString());
+                apu.imagenApunte = dr["imagenApunte"].ToString();
+            }
+            dr.Close();
+            cmd.Connection.Close();
+            return apu.imagenApunte;
+        }
     }
 }

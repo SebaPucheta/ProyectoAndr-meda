@@ -62,7 +62,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-menubuilder" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a class="page-scroll" href="Home.aspx">Home</a>
+                        <li><a class="page-scroll" href="Home.aspx">Home</a>
                         </li>
                         <%--<li><a class="page-scroll" href="#galeria">Galeria</a>
                         </li>--%>
@@ -72,8 +72,13 @@
                         </li>
                         <li><a class="page-scroll" href="DetalleItem.aspx">Detalle</a>
                         </li>
-                        <li><a class="page-scroll" href="Login.aspx">Entrar</a>
+                        <li>
+                            <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutText="Log out" LoginText="Log in" LogoutPageUrl="Home.aspx" />
                         </li>
+                        <li class="active"><a class="page-scroll" href="#contact">
+                            <asp:Label class="page-scroll" ID="lbl_nombreUsuario" runat="server"></asp:Label></a>
+                        </li>
+
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->

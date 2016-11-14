@@ -39,12 +39,55 @@ namespace ProyectoAndrómeda
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Page.IsPostBack) return;
+            if (Page.IsPostBack)
+            {
+                //Cuando se actualice la base de datos, agregarlo
+                //cargarPortadas();
+                return;
+            }
+
             Session["listaApuntes"] = ApunteDao.ConsultarApuntesSinFiltros();
             Session["listaLibros"] = LibroDao.ConsultarLibros();
             BindDataIntoRepeater((List<ApunteEntidadQuery>)Session["listaApuntes"]);
             BindDataIntoRepeater2((List<LibroEntidadQuery>)Session["listaLibros"]);
             //Filtro
             CargarComboUniversidad();
+
+            //Cuando se actualice la base de datos, agregarlo
+            //cargarPortadas();
+        }
+
+        private void cargarPortadas()
+        {
+            //ImageUrl='<%# Eval("idApunte", "imagenes/apunte/{0}.jpg") %>'
+            foreach (RepeaterItem dato in repeater_apuntes.Items)
+            {
+                int id = int.Parse(((TextBox)dato.FindControl("txt_id")).Text);
+                string path = ApunteDao.ConsultarRutaPortada(id);
+                if (path != "")
+                {
+                    ((System.Web.UI.WebControls.Image)dato.FindControl("rep_imagen")).ImageUrl = path;
+                }
+                else
+                {
+                    ((System.Web.UI.WebControls.Image)dato.FindControl("rep_imagen")).ImageUrl = "imagenes/sinPortada.png";
+                }
+            }
+
+            //ImageUrl='<%# Eval("idApunte", "imagenes/apunte/{0}.jpg") %>'
+            foreach (RepeaterItem dato in repeater_libros.Items)
+            {
+                int id = int.Parse(((TextBox)dato.FindControl("txt_id")).Text);
+                string path = LibroDao.ConsultarRutaPortada(id);
+                if (path != "")
+                {
+                    ((System.Web.UI.WebControls.Image)dato.FindControl("rep_imagen")).ImageUrl = path;
+                }
+                else
+                {
+                    ((System.Web.UI.WebControls.Image)dato.FindControl("rep_imagen")).ImageUrl = "imagenes/sinPortada.png";
+                }
+            }
         }
 
         // Bind PagedDataSource into Repeater

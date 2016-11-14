@@ -170,7 +170,7 @@
                                 <table class="table table-responsive" style="width: 100%; height: 100%;">
                                     <tr style="height: 50%;">
                                         <td>
-                                            <asp:Image ID="rep_imagen" runat="server" ImageUrl='<%# Eval("idApunte", "imagenes/Apunte{0}.jpg") %>' style="width:124px; height:176px;" />
+                                            <asp:Image ID="rep_imagen" runat="server"  style="width:124px; height:176px;" />
                                         </td>
                                     </tr>
                                     <tr style="height: 30%;">
@@ -245,7 +245,7 @@
                     <ItemTemplate>
                         <div class="col-sm-4 col-xs-6">
 
-                            <div style="background-color: #E9E9E9; text-align: center; margin: 10px; padding: 20px; width: 100%; height: 375px; box-shadow: 2px 2px 10px 2px #000000;">
+                            <div style="background-color: #E9E9E9; text-align: center; margin: 10px; padding: 20px; width: 100%; height: 375px; box-shadow: 2px 2px 10px; color:#000000;">
                                 <table class="table" style="width: 100%; height: 100%;">
                                     <tr style="height: 50%;">
                                         <td>
@@ -281,7 +281,7 @@
 
             <!-- paginado libro-->
             <div class="col-sm-9" style="margin-top: 20px;">
-                <table class="table text-center" style="height: 100%; text-align: center;">
+                <table class="table text-center" style="height: 100%; text-align:center">
                     <tr>
                         <td>
                             <asp:LinkButton ID="lbFirst2" runat="server" OnClick="lbFirst2_Click" CssClass="label" Style="color: black;">Inicio</asp:LinkButton>

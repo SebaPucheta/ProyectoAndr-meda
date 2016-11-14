@@ -19,6 +19,7 @@ namespace Entidades
         public int idEditorial { get; set; }
         public int? idEstado { get; set; }
         public int idMateria { get; set; }
+        public string imagenLibro { get; set; }
 
     }
 }
