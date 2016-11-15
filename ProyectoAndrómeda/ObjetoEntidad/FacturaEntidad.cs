@@ -12,6 +12,7 @@ namespace Entidades
         public DateTime fecha { get; set; }
         public float total { get; set; }
         public int idUsuario { get; set; }
+        public int idEstadoPago { get; set; }
         public List<ProductoCarrito> listaProductoCarrito { get; set; }
     }
 }

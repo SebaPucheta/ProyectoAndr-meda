@@ -75,7 +75,7 @@
                         <li>
                             <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutText="Log out" LoginText="Log in" LogoutPageUrl="Home.aspx" />
                         </li>
-                        <li class="active"><a class="page-scroll" href="#contact">
+                        <li class="active"><a class="page-scroll" href="PanelUsuario.aspx">
                             <asp:Label class="page-scroll" ID="lbl_nombreUsuario" runat="server"></asp:Label></a>
                         </li>
 

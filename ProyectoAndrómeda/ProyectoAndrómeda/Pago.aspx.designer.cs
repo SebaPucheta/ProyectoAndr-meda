@@ -94,13 +94,22 @@ namespace ProyectoAndrómeda {
         protected global::System.Web.UI.WebControls.Label lbl_inicioSesion;
         
         /// <summary>
-        /// Control btn_inicioSesion.
+        /// Control btn_iniciarSesionLogin.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_inicioSesion;
+        protected global::System.Web.UI.WebControls.LoginStatus btn_iniciarSesionLogin;
+        
+        /// <summary>
+        /// Control Image1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image Image1;
         
         /// <summary>
         /// Control btn_pago.
@@ -110,5 +119,14 @@ namespace ProyectoAndrómeda {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_pago;
+        
+        /// <summary>
+        /// Control btn_descargar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_descargar;
     }
 }

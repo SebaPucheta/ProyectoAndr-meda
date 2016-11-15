@@ -9,5 +9,10 @@ namespace Entidades
     public class FacturaEntidadQuery : FacturaEntidad
     {
         public string nombreTipoPago { get; set; }
+        public string nombreUsuario { get; set; }
+        public string nombreEstadoPago { get; set; }
+        public string nombreCliente { get; set; }
+        public string apellidoCliente { get; set; }
+        public string mailCliente { get; set; }
     }
 }

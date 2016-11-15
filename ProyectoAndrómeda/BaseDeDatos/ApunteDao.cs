@@ -323,5 +323,20 @@ namespace BaseDeDatos
             cmd.Connection.Close();
             return apu.imagenApunte;
         }
+
+
+        public static string ConsultarTipoApunte(int id)
+        {
+            ApunteEntidad apu = new ApunteEntidad();
+            string consulta = @"SELECT nombreTipoApunte 
+                                FROM Apunte a INNER JOIN TipoApunte t ON a.idTipoApunte = t.idTipoApunte
+                                WHERE idApunte = @id";
+            SqlCommand cmd = new SqlCommand(consulta, obtenerBD());
+            cmd.Parameters.AddWithValue(@"id", id);
+            string tipoApunte = cmd.ExecuteScalar().ToString();
+
+            return tipoApunte;
+        }
+
     }
 }

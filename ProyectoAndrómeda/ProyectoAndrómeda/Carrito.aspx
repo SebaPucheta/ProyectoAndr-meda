@@ -30,8 +30,8 @@
                                 <ControlStyle Width="40px" />
                                 <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
                             </asp:TemplateField>
-                            <asp:BoundField DataField="idProductoCarrito" Visible="false" />
-                            <asp:BoundField DataField="idProducto" Visible="false" />
+                            <asp:BoundField DataField="idProductoCarrito" Visible="true" />
+                            <asp:BoundField DataField="idProducto" Visible="true" />
                             <asp:BoundField DataField="nombreProducto" HeaderText="Nombre" />
                             <asp:BoundField DataField="tipoProducto" HeaderText="Tipo producto" />
                             <asp:BoundField DataField="precioUnitario" HeaderText="Precio unitario" DataFormatString="{0:c}" />
@@ -84,9 +84,9 @@
                         <span style="background-color: white; position: relative; top: -0.5em;"> </span>
                     </div>
                     <br />
-                    <asp:Button runat="server" ID="btn_confirmar" Text="Confirmar" CssClass="btn btn-lg btn_azul btn_flat" />
-                    <asp:Button runat="server" ID="btn_actualizar" Text="Actualizar carrito" CssClass="btn btn-lg btn_rojo btn_flat" OnClick="btn_actualizar_Click" />
-                    <asp:Button runat="server" ID="btn_cancelar" Text="Cancelar" CssClass="btn btn-lg btn_rojo btn_flat" />
+                    <asp:Button runat="server" ID="btn_confirmar" Text="Confirmar" CssClass="btn btn-lg btn-danger" OnClick="btn_confirmar_Click" OnClientClick="return confirm('Una vez confirmado se registra la transacción. ¿Desea continuar?');" />
+                    <asp:Button runat="server" ID="btn_actualizar" Text="Actualizar carrito" CssClass="btn btn-lg btn-danger" OnClick="btn_actualizar_Click" />
+                    <asp:Button runat="server" ID="btn_cancelar" Text="Cancelar" CssClass="btn btn-lg btn-danger" OnClick="btn_cancelar_Click" />
 
                 </div>
             </div>

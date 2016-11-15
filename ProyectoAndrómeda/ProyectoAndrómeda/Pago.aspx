@@ -15,7 +15,7 @@
         <!--primera fila (titulo)-->
         <div class="row">
             <div class="col-md-12">
-                <h2 class="page-header">Confirmar compra</h2>
+                <h2 class="page-header">Proceder al pago</h2>
             </div>
         </div>
 
@@ -30,27 +30,27 @@
                         <div class="col-md-8">
 
                             <!--tabla con los datos-->
-                            <table class="table table-responsive">
+                            <table id="tab_datos" class="table table-responsive">
                                 <tr>
                                     <td>
                                         <asp:Label ID="lbl_nombre" runat="server" Text="Nombre"></asp:Label>
-                                        <asp:TextBox ID="txt_nombre" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <asp:TextBox ID="txt_nombre" runat="server" CssClass="form-control" Enabled="False"></asp:TextBox>
                                     </td>
                                     <td>
                                         <asp:Label ID="lbl_apellido" runat="server" Text="Apellido"></asp:Label>
-                                        <asp:TextBox ID="txt_apellido" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <asp:TextBox ID="txt_apellido" runat="server" CssClass="form-control" Enabled="False"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
                                         <asp:Label ID="lbl_mail" runat="server" Text="Correo electrónico"></asp:Label>
-                                        <asp:TextBox ID="txt_mail" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <asp:TextBox ID="txt_mail" runat="server" CssClass="form-control" Enabled="False"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <asp:Label ID="lbl_total" runat="server" Text="Total a pagar"></asp:Label>
-                                        <div class="input-group">
+                                        <div class="input-group col-md-5">
                                             <div class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></div>
                                             <asp:Label runat="server" CssClass="form-control" ID="lbl_totalTotal" />
                                         </div>
@@ -62,27 +62,25 @@
                             <table class="table table-responsive">
                                 <tr>
                                     <td>
-                                        <asp:Label ID="lbl_inicioSesion" runat="server" Text="Primero de iniciar sesión"></asp:Label>
+                                        <asp:Label ID="lbl_inicioSesion" runat="server" Text="Primero debe iniciar sesión"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:Button ID="btn_inicioSesion" runat="server" Text="Iniciar Sesion" class="btn btn-danger" OnClick="btn_pago_Click" />
+                                        <asp:LoginStatus ID="btn_iniciarSesionLogin" CssClass="btn btn-danger" runat="server" LogoutText="Log out" LoginText="Iniciar Sesión" LogoutPageUrl="Home.aspx" />
                                     </td>
                                 </tr>
                             </table>
 
-
-
                         </div>
+
+                        <div class="col-md-4">
+                            <!-- algo de MP -->
+                            <asp:Image ID="Image1" runat="server" ImageUrl="http://www.fusionstore.com.ar/uploads/images/33563_mercadopago.png" style="width:100%; height:100%;" />
+                            
+                        </div>
+
                     </div>
-
-
-                    <div class="col-md-4">
-                        <!-- algo de MP -->
-                    </div>
-
-
 
 
                     <!--boton mercadopago-->
@@ -90,9 +88,8 @@
                         <div class="col-md-12">
                             <asp:Button ID="btn_pago" runat="server" Text="Pagar" class="btn btn-danger" OnClick="btn_pago_Click" />
 
-                            <%--<script type="text/javascript" src="//resources.mlstatic.com/mptools/render.js"></script>--%>
-                            <%-- <a  id="a_pago" name="MP-Checkout" class="red">Pagar</a>
-                        <script type="text/javascript" src="//resources.mlstatic.com/mptools/render.js"></script>--%>
+                            <asp:Button ID="btn_descargar" runat="server" Text="Descargar" class="btn btn-danger" OnClick="btn_descargar_Click" />
+                            
                         </div>
                     </div>
 
@@ -103,7 +100,7 @@
 
 
 
-    <!--termina container-->
+        <!--termina container-->
     </div>
 
 </asp:Content>

@@ -10,6 +10,12 @@ using System.Data;
 using Entidades;
 using Negocio;
 
+//Para el mail
+using System.Text;
+using System.Net.Mail;
+using System.Net;
+using System.Data;
+
 namespace ProyectoAndrómeda
 {
     public partial class Carrito : System.Web.UI.Page
@@ -200,6 +206,127 @@ namespace ProyectoAndrómeda
             lbl_total.Text = acumulador.ToString("0.00");
         }
 
+        //Creo facutura para la trasacción - VER NUMERO DE ESTADO
+        protected FacturaEntidad crearFacturaEntidad()
+        {
+            FacturaEntidad factura = new FacturaEntidad();
+            factura.total = float.Parse(lbl_total.Text);
+            factura.idUsuario = UsuarioDao.ConsultarIdUsuario(HttpContext.Current.User.Identity.Name);
+            //Ponele que el 3 es pendiente
+            factura.idEstadoPago = 3;
+            factura.listaProductoCarrito = (List<ProductoCarrito>)Session["carrito"];
+            return factura;
+        }
+
+        //Validar stock de un apunte impreso
+        protected bool faltaStock()
+        {
+            bool faltaStock = false;
+            List<ProductoCarrito> lista = (List<ProductoCarrito>)Session["carrito"];
+            foreach (ProductoCarrito dato in lista)
+            {
+                if (dato.tipoItem == "Apunte")
+                {
+                    //Restar la cantidad de stock al apunte SI ES IMPRESO
+                    if (ApunteDao.ConsultarTipoApunte(((ApunteEntidad)(dato.item)).idApunte) == "Impreso")
+                    {
+                        int cantidad = dato.cantidad;
+                        int stock = ((ApunteEntidad)dato.item).stock;
+                        if (stock < cantidad)
+                            faltaStock = true;
+                    }
+                }
+
+                if (dato.tipoItem == "Libro")
+                {
+                    int cantidad = dato.cantidad;
+                    int stock = ((LibroEntidad)dato.item).stock;
+                    if (stock < cantidad)
+                        faltaStock = true;
+                }
+            }
+            return faltaStock;
+        }
+
+        ////fila[0] = "~/imagenes/PortadaApunte.png";
+        //fila[1] = dato.idProductoCarrito;
+        //            fila[2] = libro.idLibro;
+        //            fila[3] = libro.nombreLibro;
+        //            fila[4] = dato.tipoItem;
+        //            fila[5] = libro.precioLibro;
+        //            fila[6] = dato.cantidad;
+        //            fila[7] = dato.subtotal;
+
+        private string CrearCorreo()
+        {
+            float total = 0;
+            string correo = "Se han realizado las siguientes ventas:";
+            foreach (GridViewRow fila in dgv_carrito.Rows)
+            {
+                //Replace("$", "")
+                string prueba = fila.Cells[8].Text.Replace("$", "").Replace(",", ".").Trim();
+                total += float.Parse(prueba);
+                if (fila.Cells[4].Text.Equals("Apunte"))
+                {
+                    if (int.Parse(fila.Cells[6].Text) == 1)
+                    {
+                        correo = correo + "\n Se vendio 1 unidad del apunte " + fila.Cells[3].Text + " en formato " + ApunteDao.ConsultarTipoApunte(int.Parse(fila.Cells[2].Text)).ToLower() + " por un total de " + fila.Cells[8].Text;
+                    }
+                    else
+                    {
+                        correo = correo + "\n Se vendio " + fila.Cells[6].Text + " unidades de los apuntes " + fila.Cells[3].Text + " en formato " + ApunteDao.ConsultarTipoApunte(int.Parse(fila.Cells[2].Text)).ToLower() + " por un total de " + fila.Cells[8].Text;
+                    }
+                }
+                else
+                {
+                    if (int.Parse(fila.Cells[6].Text) == 1)
+                    {
+                        correo = correo + "\n Se vendio 1 unidad del libro " + fila.Cells[3].Text + " por un total de " + fila.Cells[8].Text;
+                    }
+                    else
+                    {
+                        correo = correo + "\n Se vendio " + fila.Cells[6].Text + " unidades de los libros " + fila.Cells[3].Text + " por un total de " + fila.Cells[8].Text;
+                    }
+                }
+
+            }
+            correo = correo + "\n El total de la venta es de $" + total;
+            return correo;
+        }
+
+
+        private Boolean SendMail(string correo, string body)
+        {
+            try
+            {
+                //Configuración del Mensaje
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                //Especificamos el correo desde el que se enviará el Email y el nombre de la persona que lo envía
+                mail.From = new MailAddress("seba.pucheta.17@gmail.com", "EDUCOM", Encoding.UTF8);
+                //Aquí ponemos el asunto del correo
+                mail.Subject = "Venta realizada";
+                //Aquí ponemos el mensaje que incluirá el correo
+                mail.Body = body;
+                //Especificamos a quien enviaremos el Email, no es necesario que sea Gmail, puede ser cualquier otro proveedor
+                mail.To.Add(correo);
+                //Si queremos enviar archivos adjuntos tenemos que especificar la ruta en donde se encuentran
+                //mail.Attachments.Add(new Attachment(@"C:\Documentos\carta.docx"));
+
+                //Configuracion del SMTP
+                SmtpServer.Port = 587; //Puerto que utiliza Gmail para sus servicios
+                //Especificamos las credenciales con las que enviaremos el mail
+                SmtpServer.Credentials = new System.Net.NetworkCredential("seba.pucheta.17@gmail.com", "43614315616628");
+                SmtpServer.EnableSsl = true;
+                SmtpServer.Send(mail);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         //////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////EVENTOS////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -229,7 +356,7 @@ namespace ProyectoAndrómeda
                             dato.subtotal = dato.cantidad * apunte.precioApunte;
                         }
 
-                        if(dato.tipoItem == "Libro")
+                        if (dato.tipoItem == "Libro")
                         {
                             LibroEntidad libro = new LibroEntidad();
                             libro = (LibroEntidad)dato.item;
@@ -260,7 +387,7 @@ namespace ProyectoAndrómeda
             List<ProductoCarrito> lista = ((List<ProductoCarrito>)Session["carrito"]);
             foreach (ProductoCarrito dato in lista)
             {
-                if(idProducto == dato.idProductoCarrito)
+                if (idProducto == dato.idProductoCarrito)
                 {
                     if (tipo == "Apunte")
                     {
@@ -272,7 +399,7 @@ namespace ProyectoAndrómeda
                         break;
                     }
 
-                    if(tipo == "Libro")
+                    if (tipo == "Libro")
                     {
                         LibroEntidad libro = new LibroEntidad();
                         libro = (LibroEntidad)dato.item;
@@ -282,8 +409,30 @@ namespace ProyectoAndrómeda
                         break;
                     }
                 }
-            }            
-            
+            }
+
+        }
+
+        protected void btn_confirmar_Click(object sender, EventArgs e)
+        {
+            //Hago la transacción
+            if (faltaStock())
+            {
+                Response.Write("<script>window.alert('Falta stock')</script>");
+                return;
+            }
+
+            //Enviar mail
+            SendMail("marvinien1.0@gmail.com", CrearCorreo());
+
+
+            int idFactura = FacturaDao.RegistrarFactura(crearFacturaEntidad());
+            Response.Redirect("Pago.aspx?fact=" + idFactura.ToString());
+        }
+
+        protected void btn_cancelar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

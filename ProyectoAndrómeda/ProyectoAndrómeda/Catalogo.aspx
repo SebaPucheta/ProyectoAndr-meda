@@ -170,7 +170,7 @@
                                 <table class="table table-responsive" style="width: 100%; height: 100%;">
                                     <tr style="height: 50%;">
                                         <td>
-                                            <asp:Image ID="rep_imagen" runat="server"  style="width:124px; height:176px;" />
+                                            <asp:Image ID="rep_imagen" runat="server" ImageUrl='<%# Eval("idApunte", "imagenes/apunte/{0}.jpg") %>' style="width:124px; height:176px;" />
                                         </td>
                                     </tr>
                                     <tr style="height: 30%;">

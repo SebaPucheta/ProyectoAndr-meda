@@ -148,6 +148,23 @@ namespace BaseDeDatos
             return usu;
         }
 
+
+        public static int ConsultarIdUsuario(string nombre)
+        {
+            int id = 0;
+            string query = @"SELECT idUsuario FROM Usuario WHERE nombreUsuario = @nombre";
+            SqlCommand cmd = new SqlCommand(query, obtenerBD());
+            cmd.Parameters.AddWithValue(@"nombre", nombre);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                id = int.Parse(dr["idUsuario"].ToString());
+            }
+            dr.Close();
+            cmd.Connection.Close();
+            return id;
+        }
+
         public static UsuarioEntidadQuery ConsultarUnUsuarioPorNick(string nombreUsuario)
         {
             UsuarioEntidadQuery usu = new UsuarioEntidadQuery();

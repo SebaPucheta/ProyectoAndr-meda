@@ -38,13 +38,9 @@ namespace ProyectoAndrómeda
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Page.IsPostBack) return;
             if (Page.IsPostBack)
-            {
-                //Cuando se actualice la base de datos, agregarlo
-                //cargarPortadas();
                 return;
-            }
+           
 
             Session["listaApuntes"] = ApunteDao.ConsultarApuntesSinFiltros();
             Session["listaLibros"] = LibroDao.ConsultarLibros();
@@ -53,8 +49,7 @@ namespace ProyectoAndrómeda
             //Filtro
             CargarComboUniversidad();
 
-            //Cuando se actualice la base de datos, agregarlo
-            //cargarPortadas();
+            
         }
 
         private void cargarPortadas()

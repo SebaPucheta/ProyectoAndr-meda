@@ -42,6 +42,7 @@
     <Compile Include="ApunteDao.cs" />
     <Compile Include="CarreraDao.cs" />
     <Compile Include="Conexion.cs" />
+    <Compile Include="FacturaDao.cs" />
     <Compile Include="FacultadDao.cs" />
     <Compile Include="LibroDao.cs" />
     <Compile Include="LoginDao.cs" />
