@@ -41,7 +41,7 @@ namespace BaseDeDatos
                         cmd2.ExecuteNonQuery();
 
                         //Restar la cantidad de stock al apunte SI ES IMPRESO
-                        if (  ApunteDao.ConsultarTipoApunte( ((ApunteEntidad)(detalleFactura.item)).idApunte )  == "Impreso")
+                        if (ApunteDao.ConsultarTipoApunte(((ApunteEntidad)(detalleFactura.item)).idApunte) == "Impreso")
                         {
                             string query3 = "UPDATE Apunte SET stock = stock - @cantidad";
                             SqlCommand cmd3 = new SqlCommand(query3, cnn, trans);
@@ -100,6 +100,79 @@ namespace BaseDeDatos
             cmd.Connection.Close();
             return factura;
 
+        }
+
+
+        public static List<FacturaEntidadQuery> ConsultarFacturasQueryXUsuario(int id)
+        {
+            string query = @"SELECT f.idFactura, f.fecha, f.total, f.idUsuario, ep.descripcion, f.idFacturaMP
+                             FROM Factura f INNER JOIN EstadoPago ep ON (f.idEstadoPago = ep.idEstadoPago)
+                             WHERE f.idUsuario = @id";
+            SqlCommand cmd = new SqlCommand(query, obtenerBD());
+            cmd.Parameters.AddWithValue(@"id", id);
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            List<FacturaEntidadQuery> lista = new List<FacturaEntidadQuery>();
+
+            while (dr.Read())
+            {
+                FacturaEntidadQuery factura = new FacturaEntidadQuery();
+                factura.idFactura = int.Parse(dr["idFactura"].ToString());
+                factura.fecha = DateTime.Parse(dr["fecha"].ToString());
+                factura.total = float.Parse(dr["total"].ToString());
+                factura.idUsuario = int.Parse(dr["idUsuario"].ToString());
+                factura.nombreEstadoPago = dr["descripcion"].ToString();
+                if (dr["idFacturaMP"] != DBNull.Value)
+                    factura.idFacturaMP = int.Parse(dr["idFacturaMP"].ToString());
+                lista.Add(factura);
+            }
+
+            dr.Close();
+            cmd.Connection.Close();
+            return lista;
+        }
+
+        public static List<ProductoCarritoQuery> ConsultarDetalleDeFactura(int id)
+        {
+            string query = @"SELECT idDetalleFactura, idItem, cantidad, subtotal, idTipoItem
+                             FROM DetalleFactura
+                             WHERE idFactura = @id";
+            SqlCommand cmd = new SqlCommand(query, obtenerBD());
+            cmd.Parameters.AddWithValue(@"id", id);
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            List<ProductoCarritoQuery> lista = new List<ProductoCarritoQuery>();
+
+            while (dr.Read())
+            {
+                ProductoCarritoQuery prod = new ProductoCarritoQuery();
+                prod.idProductoCarrito = int.Parse(dr["idDetalleFactura"].ToString());
+                int idProducto = int.Parse(dr["idItem"].ToString());
+                prod.cantidad = int.Parse(dr["cantidad"].ToString());
+                prod.subtotal = float.Parse(dr["subtotal"].ToString());
+                //Consulto el Item
+
+                if (int.Parse(dr["idTipoItem"].ToString()) == 2)
+                {
+                    //APUNTE
+                    prod.item = ApunteDao.ConsultarApunte(idProducto);
+                    prod.nombreItem = ((ApunteEntidad)prod.item).nombreApunte;
+                    prod.tipoItem = "Apunte";
+                }
+                else
+                {
+                    //LIBRO
+                    prod.item = LibroDao.ConsultarLibro(idProducto);
+                    prod.nombreItem = ((LibroEntidad)prod.item).nombreLibro;
+                    prod.tipoItem = "Libro";
+                }
+
+                lista.Add(prod);
+            }
+
+            dr.Close();
+            cmd.Connection.Close();
+            return lista;
         }
 
 

@@ -17,8 +17,7 @@ namespace BaseDeDatos
         /// <returns>SqlConnection con la base de datos abierta</returns>
         protected static SqlConnection obtenerBD()
         {
-
-            string stringConexion = @"Data Source=POSEIDON\SQLEXPRESS;Initial Catalog=HP6;Integrated Security=True";
+            string stringConexion = @"Data Source=POSEIDON\SQLEXPRESS;Initial Catalog=HP9;Integrated Security=True";
             SqlConnection con = new SqlConnection(stringConexion);
             con.Open();
             return con;

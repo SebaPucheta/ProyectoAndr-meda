@@ -76,7 +76,7 @@
 
                         <div class="col-md-4">
                             <!-- algo de MP -->
-                            <asp:Image ID="Image1" runat="server" ImageUrl="http://www.fusionstore.com.ar/uploads/images/33563_mercadopago.png" style="width:100%; height:100%;" />
+                            <asp:Image ID="Image1" runat="server" ImageUrl="http://www.fusionstore.com.ar/uploads/images/33563_mercadopago.png" style="width:100%; height:348px;" />
                             
                         </div>
 
