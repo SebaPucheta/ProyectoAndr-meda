@@ -4,11 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+//Datos
 using Entidades;
 using BaseDeDatos;
-
+//Manejo de grillas
 using System.Data;
+//Descarga apuntes
+using System.IO;
+
+using System.Web.UI.WebControls;
 
 namespace ProyectoAndrómeda
 {
@@ -41,9 +45,9 @@ namespace ProyectoAndrómeda
             tabla.Columns.Add("idProductoCarrito", typeof(int));
             tabla.Columns.Add("nombreItem", typeof(string));
             tabla.Columns.Add("tipoItem", typeof(string));
-            tabla.Columns.Add("precioUnitario", typeof(float));
             tabla.Columns.Add("cantidad", typeof(int));
             tabla.Columns.Add("subtotal", typeof(float));
+            tabla.Columns.Add("idItem", typeof(int));
 
 
             foreach (ProductoCarrito dato in lista)
@@ -57,9 +61,9 @@ namespace ProyectoAndrómeda
                     fila[0] = dato.idProductoCarrito;
                     fila[1] = apunte.nombreApunte;
                     fila[2] = dato.tipoItem;
-                    fila[3] = apunte.precioApunte;
-                    fila[4] = dato.cantidad;
-                    fila[5] = dato.subtotal;
+                    fila[3] = dato.cantidad;
+                    fila[4] = dato.subtotal;
+                    fila[5] = apunte.idApunte;
 
                     tabla.Rows.Add(fila);
                 }
@@ -73,9 +77,9 @@ namespace ProyectoAndrómeda
                     fila[0] = dato.idProductoCarrito;
                     fila[1] = libro.nombreLibro;
                     fila[2] = dato.tipoItem;
-                    fila[3] = libro.precioLibro;
-                    fila[4] = dato.cantidad;
-                    fila[5] = dato.subtotal;
+                    fila[3] = dato.cantidad;
+                    fila[4] = dato.subtotal;
+                    fila[5] = libro.idLibro;
 
                     tabla.Rows.Add(fila);
                 }
@@ -86,18 +90,25 @@ namespace ProyectoAndrómeda
             dgv_detalle.DataKeyNames = new string[] { "idProductoCarrito" };
             dgv_detalle.DataSource = dataView;
             dgv_detalle.DataBind();
+
+            foreach (GridViewRow row in dgv_detalle.Rows)
+            {
+                if (row.Cells[2].Text == "Apunte")
+                {
+                    if (ApunteDao.ConsultarTipoApunte(int.Parse(row.Cells[5].Text)) == "Digital")
+                        row.FindControl("btn_descargar").Visible = true;
+                }
+
+            }
+
         }
 
 
-        //<!--informacion de usuario-->
-        //               <!--usuario-->
-        //               <!--nombre-->
-        //               <!--apellido-->
-        //               <!--email-->
-        //               <!--dni-->
+        //PANEL USUARIO
 
         protected void ocultarInformacionDeUsuario()
         {
+            lbl_misdatos.Visible = false;
             lbl_nombre.Visible = false;
             txt_nombre.Visible = false;
             lbl_apellido.Visible = false;
@@ -112,6 +123,7 @@ namespace ProyectoAndrómeda
 
         protected void mostrarInformaciónDeUsuario()
         {
+            lbl_misdatos.Visible = true;
             lbl_nombre.Visible = true;
             txt_nombre.Visible = true;
             lbl_apellido.Visible = true;
@@ -127,6 +139,23 @@ namespace ProyectoAndrómeda
             hfactura.Visible = false;
             dgv_detalle.Visible = false;
             dgv_factura.Visible = false;
+        }
+
+        private void DescargarArchivo(int idApunte)
+        {
+            string filename = @"C:\Juan\Facultad\Habilitacion Profesional\GitHub - Andromeda\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\archivos\" + idApunte + ".pdf"; ;
+            FileInfo fileInfo = new FileInfo(filename);
+
+            if (fileInfo.Exists)
+            {
+                Response.Clear();
+                Response.AddHeader("Content-Disposition", "attachment; filename=" + fileInfo.Name);
+                Response.AddHeader("Content-Length", fileInfo.Length.ToString());
+                Response.ContentType = "application/octet-stream";
+                Response.Flush();
+                Response.TransmitFile(fileInfo.FullName);
+                Response.End();
+            }
         }
 
 
@@ -154,5 +183,45 @@ namespace ProyectoAndrómeda
         {
             mostrarInformaciónDeUsuario();
         }
+
+        //Botones de la grilla de detalle
+        protected void dgv_detalle_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            switch (e.CommandName)
+            {
+                case "select":
+                    foreach (GridViewRow fila in dgv_detalle.Rows)
+                    {
+                        if (fila.Cells[2].Text.Equals("Apunte"))
+                        {
+                            //APUNTE
+                            string direccion = "DetalleItem.aspx?idLibro=0&idApunte=" + fila.Cells[5].Text.ToString();
+                            Response.Redirect(direccion);
+                            break;
+                        }
+                        else
+                        {
+                            //LIBRO
+                            string direccion = "DetalleItem.aspx?idApunte=0&idLibro=" + fila.Cells[5].Text.ToString();
+                            Response.Redirect(direccion);
+                            break;
+                        }
+                    }
+                    break;
+
+                case "download":
+
+                    int index = Convert.ToInt32(e.CommandArgument);
+                    GridViewRow row = dgv_detalle.Rows[index];
+
+                    DescargarArchivo(int.Parse(row.Cells[5].Text));
+                    break;
+
+            }
+        }
+
+
+
+
     }
 }

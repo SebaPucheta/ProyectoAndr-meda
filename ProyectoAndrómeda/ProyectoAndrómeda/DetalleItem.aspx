@@ -19,8 +19,8 @@
         <div class="row">
             <!--imagen-->
             <div class="col-md-5">
-                <div style="background-color: #E9E9E9; padding: 25px; margin: 25px; box-shadow: 2px 2px 10px 2px #000000;">
-                    <asp:Image ID="img_portada" runat="server" />
+                <div style="background-color: #E9E9E9; padding: 25px; margin: 25px; box-shadow: 2px 2px 10px 2px #000000; text-align:center;">
+                    <asp:Image ID="img_portada" runat="server" style="width:155px; height:207px; " />
                 </div>
             </div>
             <!--datos-->

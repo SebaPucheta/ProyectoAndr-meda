@@ -189,7 +189,7 @@
                                         <td>
                                             <asp:LinkButton ID="btn_ver" runat="server" CommandName="ver" CssClass="btn btn-danger">Ver</asp:LinkButton>
                                             <asp:LinkButton ID="btn_carrito" CommandName="carrito" runat="server"><span class="glyphicon glyphicon-shopping-cart glyphicon-user" style="color:black" aria-hidden="true"></span></asp:LinkButton>
-
+                                            <asp:LinkButton ID="img_digital" Visible="false" Enabled="false" runat="server"><span class="glyphicon glyphicon glyphicon-phone glyphicon-user" style="color:#CB0014;" aria-hidden="true"></span></asp:LinkButton>
                                         </td>
                                     </tr>
                                 </table>

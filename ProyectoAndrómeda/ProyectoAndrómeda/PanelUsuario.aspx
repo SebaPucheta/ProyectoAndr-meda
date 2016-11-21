@@ -31,10 +31,14 @@
 
                 <!--informacion de usuario-->
                 <div class="row">
+                    <asp:Label ID="lbl_misdatos" CssClass="h3 page-header" runat="server" Text="Mis datos" Visible="false"></asp:Label>
+                    <br />
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                         <!--usuario-->
                         <asp:Label ID="lbl_usuario" class="control-label" runat="server" Text="Nombre de usuario"></asp:Label>
-                        <asp:TextBox ID="txt_usuario" class="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txt_usuario" class="form-control" runat="server" Enabled="false" ></asp:TextBox>
                     </div>
                 </div>
 
@@ -42,12 +46,12 @@
                     <div class="col-md-6">
                         <!--nombre-->
                         <asp:Label ID="lbl_nombre" class="control-label" runat="server" Text="Nombre"></asp:Label>
-                        <asp:TextBox ID="txt_nombre" class="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txt_nombre" class="form-control" runat="server" Enabled="false" ></asp:TextBox>
                     </div>
                     <div class="col-md-6">
                         <!--apellido-->
                         <asp:Label ID="lbl_apellido" class="control-label" runat="server" Text="Apellido"></asp:Label>
-                        <asp:TextBox ID="txt_apellido" class="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txt_apellido" class="form-control" runat="server" Enabled="false" ></asp:TextBox>
                     </div>
                 </div>
 
@@ -55,7 +59,7 @@
                     <div class="col-md-12">
                     <!--email-->
                     <asp:Label ID="lbl_email" class="control-label" runat="server" Text="Correo electrónico"></asp:Label>
-                    <asp:TextBox ID="txt_email" class="form-control" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txt_email" class="form-control" runat="server" Enabled="false" ></asp:TextBox>
                         </div>
                 </div>
 
@@ -63,7 +67,7 @@
                     <div class="col-md-6">
                         <!--dni-->
                         <asp:Label ID="lbl_dni" class="control-label" runat="server" Text="Número de documento"></asp:Label>
-                        <asp:TextBox ID="txt_dni" class="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txt_dni" class="form-control" runat="server" Enabled="false" ></asp:TextBox>
                     </div>
                     <div class="col-md-6">
                         <!-- -->
@@ -80,7 +84,8 @@
 
                 <div class="row">
                     <br />
-                    <asp:GridView ID="dgv_detalle" runat="server" AutoGenerateColumns="false" class="table table-responsive">
+                    <asp:GridView ID="dgv_detalle" runat="server" AutoGenerateColumns="false" class="table table-responsive" 
+                        OnRowCommand="dgv_detalle_RowCommand">
 
                         <HeaderStyle BackColor="#CB0014" Font-Bold="True" ForeColor="White" />
                         <EmptyDataRowStyle ForeColor="Red" />
@@ -91,10 +96,19 @@
                             <asp:BoundField DataField="tipoItem" HeaderText="Tipo producto" />
                             <asp:BoundField DataField="cantidad" HeaderText="Cantidad" />
                             <asp:BoundField DataField="subtotal" HeaderText="Subtotal" ApplyFormatInEditMode="False" DataFormatString="{0:C}" />
+                            <asp:BoundField DataField="idItem" Visible="true" />
 
                             <asp:TemplateField>
                                 <ItemTemplate>
                                     <asp:LinkButton ID="btn_consultarDetalle" CommandName="select" runat="server"><span class="glyphicon glyphicon-eye-open" style="color:#CB0014" aria-hidden="true"></span></asp:LinkButton>
+                                </ItemTemplate>
+                                <ControlStyle Width="10px" />
+                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                            </asp:TemplateField>
+
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="btn_descargar" Visible="false" CommandName="download" CommandArgument="<%# Container.DataItemIndex %>" runat="server"><span class="glyphicon glyphicon-download" style="color:#CB0014" aria-hidden="true"></span></asp:LinkButton>
                                 </ItemTemplate>
                                 <ControlStyle Width="10px" />
                                 <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />

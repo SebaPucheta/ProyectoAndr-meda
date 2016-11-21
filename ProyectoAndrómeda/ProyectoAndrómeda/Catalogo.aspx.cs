@@ -40,7 +40,7 @@ namespace ProyectoAndrómeda
         {
             if (Page.IsPostBack)
                 return;
-           
+
 
             Session["listaApuntes"] = ApunteDao.ConsultarApuntesSinFiltros();
             Session["listaLibros"] = LibroDao.ConsultarLibros();
@@ -49,7 +49,7 @@ namespace ProyectoAndrómeda
             //Filtro
             CargarComboUniversidad();
 
-            
+
         }
 
         private void cargarPortadas()
@@ -106,6 +106,17 @@ namespace ProyectoAndrómeda
             // Bind data into repeater
             repeater_apuntes.DataSource = _pgsource;
             repeater_apuntes.DataBind();
+
+            foreach (RepeaterItem item in repeater_apuntes.Items)
+            {
+                TextBox txtid = (TextBox)item.FindControl("txt_id");
+                int idIdentificado = int.Parse(txtid.Text);
+                if(ApunteDao.ConsultarTipoApunte(idIdentificado) == "Digital" )
+                {
+                    LinkButton img = (LinkButton)item.FindControl("img_digital");
+                    img.Visible = true;
+                }
+            }
 
             // Call the function to do paging
             HandlePaging();
@@ -666,7 +677,7 @@ namespace ProyectoAndrómeda
             return listaLibro;
         }
 
-       
+
     }
 
 
