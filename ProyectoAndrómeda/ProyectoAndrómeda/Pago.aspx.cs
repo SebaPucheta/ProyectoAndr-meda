@@ -35,7 +35,7 @@ namespace ProyectoAndrómeda
         //Mostrar u ocultar componentes segun si inicie sesion o no
         protected void MostrarTablaSegunSesion()
         {
-            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            if (Session["idUsuario"].ToString().Equals(""))
             {
                 lbl_nombre.Visible = true;
                 lbl_apellido.Visible = true;

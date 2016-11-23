@@ -63,12 +63,12 @@ namespace BaseDeDatos
                 cli.idCliente = Convert.ToInt32(cmd.ExecuteScalar());
 
                 consulta = @"INSERT INTO Usuario (nombreUsuario, contrasena, idCliente, idRol) VALUES (@usuario, @pass, @idCli, @idRol)";
-                cmd = new SqlCommand(consulta, cn, trans);
-                cmd.Parameters.AddWithValue("@usuario", cli.email);
-                cmd.Parameters.AddWithValue("@pass", user.contrasena);
-                cmd.Parameters.AddWithValue("@idCli", cli.idCliente);
-                cmd.Parameters.AddWithValue("@idRol", user.idRol);
-                cmd.ExecuteNonQuery();
+                SqlCommand cmd2 = new SqlCommand(consulta, cn, trans);
+                cmd2.Parameters.AddWithValue("@usuario", cli.email);
+                cmd2.Parameters.AddWithValue("@pass", user.contrasena);
+                cmd2.Parameters.AddWithValue("@idCli", cli.idCliente);
+                cmd2.Parameters.AddWithValue("@idRol", user.idRol);
+                cmd2.ExecuteNonQuery();
             }
             catch
             {
@@ -124,7 +124,7 @@ namespace BaseDeDatos
             string query = @"SELECT u.idUsuario, u.nombreUsuario, u.contrasena, r.nombreRol, c.nombreCliente, c.apellidoCliente, c.nroDni, t.nombreTipoDNI, c.email
                              FROM Usuario u INNER JOIN Rol r ON u.idRol = r.idRol
                                             INNER JOIN Cliente c ON u.idCLiente = c.idCliente
-                                            INNER JOIN TipoDNI t ON c.idTipoDNI = t.idTipoDNI
+                                            LEFT JOIN TipoDNI t ON c.idTipoDNI = t.idTipoDNI
                              WHERE u.idusuario = @idUsuario";
 
             SqlCommand cmd = new SqlCommand(query, obtenerBD());
@@ -137,11 +137,11 @@ namespace BaseDeDatos
                 usu.nombreUsuario = dr["nombreUsuario"].ToString();
                 usu.contrasena = dr["contrasena"].ToString();
                 usu.nombreRol = dr["nombreRol"].ToString();
-                usu.clienteQuery.nombreCliente = dr["nombreCliente"].ToString();
-                usu.clienteQuery.apellidoCliente = dr["apellidoCliente"].ToString();
-                usu.clienteQuery.nroDni = int.Parse(dr["nroDni"].ToString());
-                usu.nombreTipoDNI = dr["nombreTipoDNI"].ToString();
-                usu.clienteQuery.email = dr["email"].ToString();
+                ClienteEntidadQuery cliente = new ClienteEntidadQuery();
+                cliente.nombreCliente = dr["nombreCliente"].ToString();
+                cliente.apellidoCliente = dr["apellidoCliente"].ToString();
+                cliente.email = dr["email"].ToString();
+                usu.clienteQuery = cliente;
             }
             dr.Close();
             cmd.Connection.Close();
@@ -223,7 +223,23 @@ namespace BaseDeDatos
             return cli;
         }
 
+        public static int IniciarSesion(string email, string pass)
+        {
+            int idUsuario = 0;
+            string query = @"SELECT u.idUsuario
+                             FROM Usuario u 
+                             WHERE u.nombreUsuario =  @email and u.contrasena = @pass";
 
+            SqlCommand cmd = new SqlCommand(query, obtenerBD());
+            cmd.Parameters.AddWithValue(@"email", email);
+            cmd.Parameters.AddWithValue(@"pass", pass);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                idUsuario = int.Parse(dr["idUsuario"].ToString());
+            }
+            return idUsuario;
+        }
 
 
 

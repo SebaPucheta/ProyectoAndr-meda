@@ -24,10 +24,49 @@ namespace ProyectoAndrómeda
             Response.Redirect("RegistrarUsuarioCliente.aspx");
         }
 
-        protected void log_in_Authenticate(object sender, AuthenticateEventArgs e)
+        //protected void log_in_Authenticate(object sender, AuthenticateEventArgs e)
+        //{
+        //    if (LoginDao.Autenticar(log_in.UserName, log_in.Password))
+        //        FormsAuthentication.RedirectFromLoginPage(log_in.UserName, log_in.RememberMeSet);
+        //}
+
+        protected void btn_login_onclick(object sender, EventArgs e)
         {
-            if (LoginDao.Autenticar(log_in.UserName, log_in.Password))
-                FormsAuthentication.RedirectFromLoginPage(log_in.UserName, log_in.RememberMeSet);
+            int idUsuario = UsuarioDao.IniciarSesion(txt_email.Text, txt_pass.Text);
+            if(idUsuario==0)
+            {
+
+            }
+            else
+            {
+                Session["idUsuario"] = idUsuario;
+                UsuarioEntidadQuery usuario = UsuarioDao.ConsultarUnUsuario(idUsuario);
+                Session["nombreUsuario"] = usuario.clienteQuery.nombreCliente;
+                Response.Redirect("Home.aspx");
+            }
+        }
+
+        protected void btn_registrar_onclick(object sender, EventArgs e)
+        {
+            UsuarioDao.RegistrarUsuarioCliente(CargarUsuario(), CargarCliente());
+        }
+
+        private UsuarioEntidad CargarUsuario()
+        {
+            UsuarioEntidad nuevoUsuario = new UsuarioEntidad();
+            nuevoUsuario.nombreUsuario = txt_emailNuevo.Text;
+            nuevoUsuario.contrasena = txt_passNuevo.Text;
+            nuevoUsuario.idRol = 2;
+            return nuevoUsuario;
+        }
+
+        private ClienteEntidad CargarCliente()
+        {
+            ClienteEntidad nuevoCliente = new ClienteEntidad();
+            nuevoCliente.nombreCliente = txt_nombre.Text;
+            nuevoCliente.apellidoCliente = txt_apellido.Text;
+            nuevoCliente.email = txt_emailNuevo.Text;
+            return nuevoCliente;
         }
     }
 }

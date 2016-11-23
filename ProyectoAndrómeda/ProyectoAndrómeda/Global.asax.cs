@@ -23,7 +23,8 @@ namespace ProyectoAndrómeda
 
             Session["objetoApunteEntidad"] = null;
             Session["objetoLibroEntidad"] = null;
-
+            Session["idUsuario"] = "";
+            Session["nombreUsuario"] = "";
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)

@@ -25,11 +25,10 @@ namespace ProyectoAndrómeda
 
         protected void cargarGrillaFactura()
         {
-            int idUsuario = UsuarioDao.ConsultarIdUsuario(HttpContext.Current.User.Identity.Name);
+            int idUsuario = int.Parse(Session["idUsuario"].ToString());
             dgv_factura.DataSource = FacturaDao.ConsultarFacturasQueryXUsuario(idUsuario);
             dgv_factura.DataKeyNames = new string[] { "idFactura" };
             dgv_factura.DataBind();
-
         }
 
 

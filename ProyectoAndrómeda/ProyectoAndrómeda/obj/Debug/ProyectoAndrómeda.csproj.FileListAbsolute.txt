@@ -32,3 +32,5 @@ C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAn
 C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\obj\Debug\ProyectoAndrómeda.csprojResolveAssemblyReference.cache
 C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\obj\Debug\ProyectoAndrómeda.dll
 C:\Users\Martin\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\obj\Debug\ProyectoAndrómeda.pdb
+C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\bin\Negocio.dll
+C:\Users\Sebastián\Documents\GitHub\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\bin\Negocio.pdb

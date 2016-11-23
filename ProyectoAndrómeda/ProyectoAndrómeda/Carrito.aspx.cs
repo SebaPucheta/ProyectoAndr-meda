@@ -211,7 +211,7 @@ namespace ProyectoAndrómeda
         {
             FacturaEntidad factura = new FacturaEntidad();
             factura.total = float.Parse(lbl_total.Text);
-            factura.idUsuario = UsuarioDao.ConsultarIdUsuario(HttpContext.Current.User.Identity.Name);
+            factura.idUsuario = int.Parse(Session["idUsuario"].ToString()); ;
             //Ponele que el 3 es pendiente
             factura.idEstadoPago = 3;
             factura.listaProductoCarrito = (List<ProductoCarrito>)Session["carrito"];
