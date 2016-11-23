@@ -20,7 +20,7 @@
             <!--imagen-->
             <div class="col-md-5">
                 <div style="background-color: #E9E9E9; padding: 25px; margin: 25px; box-shadow: 2px 2px 10px 2px #000000; text-align:center;">
-                    <asp:Image ID="img_portada" runat="server" style="width:155px; height:207px; " />
+                    <asp:Image ID="img_portada" runat="server" style="width:215px; height:307px; " />
                 </div>
             </div>
             <!--datos-->
@@ -32,6 +32,7 @@
                         <tr>
                             <td>
                                 <asp:Label ID="lbl_titulo" style="font-weight:bold;" CssClass="h3" runat="server"></asp:Label>
+                                <asp:LinkButton ID="img_digital" Visible="false" Enabled="false" runat="server"><span class="glyphicon glyphicon glyphicon-phone glyphicon-user" style="color:#CB0014;" aria-hidden="true"></span></asp:LinkButton>
                             </td>
                         </tr>
                         <!--precio-->
@@ -60,23 +61,28 @@
                         <tr>
                             <td>
                                 <asp:Label ID="lbl_carrito_titulo" runat="server" Text="Agregar al carrito"></asp:Label>
-                                <asp:LinkButton ID="btn_carrito" runat="server"><span class="glyphicon glyphicon-shopping-cart glyphicon-user" style="color:darkred" aria-hidden="true"></span></asp:LinkButton>
+                                <asp:LinkButton ID="btn_carrito" runat="server" OnClick="btn_carrito_Click"><span class="glyphicon glyphicon-shopping-cart glyphicon-user" style="color:darkred" aria-hidden="true"></span></asp:LinkButton>
                             </td>
                         </tr>
+
+                        <!--descripcion-->
+                         <tr>
+                            <td>
+                                <asp:Label ID="lbl_titulo_descripcion" runat="server" Font-Bold="true" Text="Descripción"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="lbl_descripcion" CssClass="control-label" runat="server" Text="Label"></asp:Label>
+                            </td>
+                        </tr>
+
                     </table>
                 </div>
             </div>
         </div>
 
 
-        <!--tercera fila (descripcion)-->
-        <div class="row">
-            <div class="col-md-12">
-                <div style="background-color: #E9E9E9; padding: 25px; margin: 25px; box-shadow: 2px 2px 10px 2px #000000;">
-                    <asp:Label ID="lbl_descripcion" CssClass="control-label" runat="server" Text="Label"></asp:Label>
-                </div>
-            </div>
-        </div>
 
     </div>
 

@@ -39,7 +39,7 @@
                             <%--Cantidad con textbox--%>
                             <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:TextBox ID="txt_cantidad" AutoPostBack="true" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txt_cantidad" AutoPostBack="false" runat="server"></asp:TextBox>
                                 </ItemTemplate>
                                 <ControlStyle Width="40px" />
                                 <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />

@@ -211,7 +211,7 @@ namespace ProyectoAndrómeda
         {
             FacturaEntidad factura = new FacturaEntidad();
             factura.total = float.Parse(lbl_total.Text);
-            factura.idUsuario = int.Parse(Session["idUsuario"].ToString()); ;
+            factura.idUsuario = UsuarioDao.ConsultarIdUsuario(HttpContext.Current.User.Identity.Name);
             //Ponele que el 3 es pendiente
             factura.idEstadoPago = 3;
             factura.listaProductoCarrito = (List<ProductoCarrito>)Session["carrito"];
@@ -418,7 +418,14 @@ namespace ProyectoAndrómeda
             //Hago la transacción
             if (faltaStock())
             {
-                Response.Write("<script>window.alert('Falta stock')</script>");
+                Response.Write("<script>window.alert('No hay stock disponible de alguno de los productos')</script>");
+                return;
+            }
+
+            //Si no esta logueado y toco el boton de confirmar
+            if (!HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                Response.Write("<script>window.alert('Primero debe iniciar sesión')</script>");
                 return;
             }
 
@@ -430,9 +437,11 @@ namespace ProyectoAndrómeda
             Response.Redirect("Pago.aspx?fact=" + idFactura.ToString());
         }
 
+
         protected void btn_cancelar_Click(object sender, EventArgs e)
         {
-
+            Session["carrito"] = new List<ProductoCarrito>();
+            Response.Redirect("Home.aspx");
         }
     }
 

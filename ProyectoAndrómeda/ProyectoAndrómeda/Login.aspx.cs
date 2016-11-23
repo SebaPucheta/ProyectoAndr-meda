@@ -17,7 +17,7 @@ namespace ProyectoAndrómeda
         {
 
         }
-        
+
 
         protected void lbt_Click(object sender, EventArgs e)
         {
@@ -32,19 +32,23 @@ namespace ProyectoAndrómeda
 
         protected void btn_login_onclick(object sender, EventArgs e)
         {
-            int idUsuario = UsuarioDao.IniciarSesion(txt_email.Text, txt_pass.Text);
-            if(idUsuario==0)
-            {
+            if (LoginDao.Autenticar(txt_email.Text, txt_pass.Text))
+                FormsAuthentication.RedirectFromLoginPage(txt_email.Text, true);
+                                                                          //bool del "recuerdame"
 
-            }
-            else
-            {
-                Session["idUsuario"] = idUsuario;
-                UsuarioEntidadQuery usuario = UsuarioDao.ConsultarUnUsuario(idUsuario);
-                Session["nombreUsuario"] = usuario.clienteQuery.nombreCliente;
-                Response.Redirect("Home.aspx");
-            }
-        }
+        //int idUsuario = UsuarioDao.IniciarSesion(txt_email.Text, txt_pass.Text);
+        //if (idUsuario == 0)
+        //{
+
+        //}
+        //else
+        //{
+        //    Session["idUsuario"] = idUsuario;
+        //    UsuarioEntidadQuery usuario = UsuarioDao.ConsultarUnUsuario(idUsuario);
+        //    Session["nombreUsuario"] = usuario.clienteQuery.nombreCliente;
+        //    Response.Redirect("Home.aspx");
+        //}
+    }
 
         protected void btn_registrar_onclick(object sender, EventArgs e)
         {

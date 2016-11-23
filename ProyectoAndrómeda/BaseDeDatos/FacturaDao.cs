@@ -121,7 +121,8 @@ namespace BaseDeDatos
                 factura.fecha = DateTime.Parse(dr["fecha"].ToString());
                 factura.total = float.Parse(dr["total"].ToString());
                 factura.idUsuario = int.Parse(dr["idUsuario"].ToString());
-                factura.nombreEstadoPago = dr["descripcion"].ToString();
+                if (dr["descripcion"] != DBNull.Value)
+                    factura.nombreEstadoPago = dr["descripcion"].ToString();
                 if (dr["idFacturaMP"] != DBNull.Value)
                     factura.idFacturaMP = int.Parse(dr["idFacturaMP"].ToString());
                 lista.Add(factura);
@@ -173,6 +174,27 @@ namespace BaseDeDatos
             dr.Close();
             cmd.Connection.Close();
             return lista;
+        }
+
+        public static bool FacturaPagada(int id)
+        {
+            string query = @"SELECT ep.descripcion
+                             FROM Factura f INNER JOIN EstadoPago ep ON (f.idEstadoPago = ep.idEstadoPago)
+                             WHERE idFactura = @id";
+            SqlCommand cmd = new SqlCommand(query, obtenerBD());
+            cmd.Parameters.AddWithValue(@"id", id);
+
+            bool resultado = false;
+
+            //Verifico que no sea nulo
+            var firstColumn = cmd.ExecuteScalar();
+            if (firstColumn != null)
+            {
+                if (cmd.ExecuteScalar().ToString() == "Aprobado")
+                    resultado = true;
+            }
+            cmd.Connection.Close();
+            return resultado;
         }
 
 

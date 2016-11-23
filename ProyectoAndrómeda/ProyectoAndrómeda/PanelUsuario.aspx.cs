@@ -20,15 +20,28 @@ namespace ProyectoAndrómeda
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            cargarInformacionDeUsuario();
         }
 
         protected void cargarGrillaFactura()
         {
-            int idUsuario = int.Parse(Session["idUsuario"].ToString());
+            //dgv_factura.DataSource = null;
+            //dgv_factura.DataBind();
+
+            int idUsuario = UsuarioDao.ConsultarIdUsuario(HttpContext.Current.User.Identity.Name);
             dgv_factura.DataSource = FacturaDao.ConsultarFacturasQueryXUsuario(idUsuario);
             dgv_factura.DataKeyNames = new string[] { "idFactura" };
             dgv_factura.DataBind();
+
+            foreach (GridViewRow row in dgv_factura.Rows)
+            {
+                if (row.Cells[3].Text == "Pendiente")
+                {
+                    row.FindControl("btn_pagar").Visible = true;
+                }
+
+            }
+
         }
 
 
@@ -94,6 +107,7 @@ namespace ProyectoAndrómeda
             {
                 if (row.Cells[2].Text == "Apunte")
                 {
+                    //Si no lo hago visible no funciona nose por que
                     if (ApunteDao.ConsultarTipoApunte(int.Parse(row.Cells[5].Text)) == "Digital")
                         row.FindControl("btn_descargar").Visible = true;
                 }
@@ -118,9 +132,16 @@ namespace ProyectoAndrómeda
             txt_email.Visible = false;
             lbl_dni.Visible = false;
             txt_dni.Visible = false;
+
+            hdetalle.Visible = true;
+            hfactura.Visible = true;
+            dgv_factura.Visible = true;
+            dgv_detalle.Visible = true;
+
+            Session["idFacturaPanel"] = null;
         }
 
-        protected void mostrarInformaciónDeUsuario()
+        protected void mostrarInformacionDeUsuario()
         {
             lbl_misdatos.Visible = true;
             lbl_nombre.Visible = true;
@@ -138,7 +159,21 @@ namespace ProyectoAndrómeda
             hfactura.Visible = false;
             dgv_detalle.Visible = false;
             dgv_factura.Visible = false;
+
+            Session["idFacturaPanel"] = null;
         }
+
+        protected void cargarInformacionDeUsuario()
+        {
+            UsuarioEntidadQuery usu = UsuarioDao.ConsultarUnUsuario(UsuarioDao.ConsultarIdUsuario(HttpContext.Current.User.Identity.Name));
+            ClienteEntidadQuery cli = usu.clienteQuery;
+            txt_nombre.Text = cli.nombreCliente;
+            txt_apellido.Text = cli.apellidoCliente;
+            txt_usuario.Text = usu.nombreUsuario;
+            txt_email.Text = cli.email;
+            txt_dni.Text = cli.nroDni.ToString();
+        }
+
 
         private void DescargarArchivo(int idApunte)
         {
@@ -166,21 +201,37 @@ namespace ProyectoAndrómeda
         //Boton panel "Mis pedidos"
         protected void btn_pedidos_Click(object sender, EventArgs e)
         {
-            cargarGrillaFactura();
-            hfactura.Visible = true;
             ocultarInformacionDeUsuario();
+            cargarGrillaFactura();
         }
 
-        protected void btn_consultarFactura_SelectedIndexChanged(object sender, EventArgs e)
+        //Botones de la grilla de factura
+        protected void dgv_factura_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            cargarGrillaDetalleFactura((int)dgv_factura.SelectedDataKey.Value);
-            hdetalle.Visible = true;
+            switch (e.CommandName)
+            {
+                case "select":
+                    int index = Convert.ToInt32(e.CommandArgument);
+                    GridViewRow row = dgv_factura.Rows[index];
+                    cargarGrillaDetalleFactura(int.Parse(row.Cells[0].Text));
+                    //id de la factura seleccionada
+                    Session["idFacturaPanel"] = int.Parse(row.Cells[0].Text);
+                    break;
+
+                case "pagar":
+                    int indexDownload = Convert.ToInt32(e.CommandArgument);
+                    GridViewRow rowDownload = dgv_factura.Rows[indexDownload];
+                    int idFacturaSeleccionada = int.Parse(rowDownload.Cells[0].Text);
+                    Response.Redirect("Pago.aspx?fact=" + idFacturaSeleccionada.ToString());
+                    break;
+            }
         }
+
 
         //Boton panel "Mis datos"
         protected void brn_datos_Click(object sender, EventArgs e)
         {
-            mostrarInformaciónDeUsuario();
+            mostrarInformacionDeUsuario();
         }
 
         //Botones de la grilla de detalle
@@ -209,18 +260,34 @@ namespace ProyectoAndrómeda
                     break;
 
                 case "download":
+                    try
+                    {
+                        if (FacturaDao.FacturaPagada((int)Session["idFacturaPanel"]))
+                        {
+                            int index = Convert.ToInt32(e.CommandArgument);
+                            GridViewRow row = dgv_detalle.Rows[index];
 
-                    int index = Convert.ToInt32(e.CommandArgument);
-                    GridViewRow row = dgv_detalle.Rows[index];
+                            DescargarArchivo(int.Parse(row.Cells[5].Text));
+                            break;
+                        }
+                        else
+                        {
+                            Response.Write("<script>window.alert('Debe pagar el pedido')</script>");
+                            break;
+                        }
+                    }
+                    catch (NullReferenceException nullex)
+                    {
+                        Response.Write("<script>window.alert('Ha habido un error')</script>");
+                        break;
+                    }
+                   
 
-                    DescargarArchivo(int.Parse(row.Cells[5].Text));
-                    break;
 
             }
+
+
+
         }
-
-
-
-
     }
 }

@@ -31,6 +31,15 @@ namespace ProyectoAndrómeda {
         protected global::System.Web.UI.WebControls.Label lbl_titulo;
         
         /// <summary>
+        /// Control img_digital.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton img_digital;
+        
+        /// <summary>
         /// Control lbl_precio_titulo.
         /// </summary>
         /// <remarks>
@@ -110,6 +119,15 @@ namespace ProyectoAndrómeda {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btn_carrito;
+        
+        /// <summary>
+        /// Control lbl_titulo_descripcion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_titulo_descripcion;
         
         /// <summary>
         /// Control lbl_descripcion.

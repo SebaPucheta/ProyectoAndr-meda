@@ -12,7 +12,7 @@ using System.Collections;
 using mercadopago;
 
 using System.IO;
-
+using System.Data;
 
 namespace ProyectoAndrómeda
 {
@@ -27,47 +27,8 @@ namespace ProyectoAndrómeda
                 {
 
                 }
-                MostrarTablaSegunSesion();
+                //MostrarTablaSegunSesion();
                 CompletarDatos();
-            }
-        }
-
-        //Mostrar u ocultar componentes segun si inicie sesion o no
-        protected void MostrarTablaSegunSesion()
-        {
-            if (Session["idUsuario"].ToString().Equals(""))
-            {
-                lbl_nombre.Visible = true;
-                lbl_apellido.Visible = true;
-                lbl_mail.Visible = true;
-                txt_nombre.Visible = true;
-                txt_apellido.Visible = true;
-                txt_mail.Visible = true;
-
-                lbl_total.Visible = true;
-                lbl_totalTotal.Visible = true;
-
-                lbl_inicioSesion.Visible = false;
-                btn_iniciarSesionLogin.Visible = false;
-
-                btn_pago.Visible = true;
-            }
-            else
-            {
-                lbl_nombre.Visible = false;
-                lbl_apellido.Visible = false;
-                lbl_mail.Visible = false;
-                txt_nombre.Visible = false;
-                txt_apellido.Visible = false;
-                txt_mail.Visible = false;
-
-                lbl_total.Visible = true;
-                lbl_totalTotal.Visible = true;
-
-                lbl_inicioSesion.Visible = true;
-                btn_iniciarSesionLogin.Visible = true;
-
-                btn_pago.Visible = false;
             }
         }
 
@@ -102,7 +63,31 @@ namespace ProyectoAndrómeda
         }
 
 
+        protected void ConsultarPago()
+        {
 
+           
+            
+
+            MP mp = new MP("3505078557617488", "3J7yHycTVNr1Vkhf8LZLmqqbeuZFP7nq");
+
+            Dictionary<String, String> filters = new Dictionary<String, String>();
+            filters.Add("status", "approved");
+            Hashtable searchResult = mp.searchPayment(filters);
+
+            mp.getAccessToken();
+
+            //Response.Write(searchResult);
+
+            //foreach (fila in searchResult)
+
+
+            GridView1.DataSource = searchResult;
+            //GridView1.DataKeyNames = new string[] { "id" };
+            GridView1.DataBind();
+
+
+        }
 
         protected void GenerarPago()
         {
@@ -123,13 +108,13 @@ namespace ProyectoAndrómeda
 
         }
 
-        protected void consultarPago(object sender, EventArgs e)
-        {
-            MP mp = new MP("TEST - 3505078557617488 - 093014 - 425df6acc81bf5469720198d7307c132__LB_LC__ - 147119687");
-            //  Hashtable payment = mp.get("/v1/payments/[ID]");
+        //protected void consultarPago(object sender, EventArgs e)
+        //{
+        //    MP mp = new MP("TEST - 3505078557617488 - 093014 - 425df6acc81bf5469720198d7307c132__LB_LC__ - 147119687");
+        //    //  Hashtable payment = mp.get("/v1/payments/[ID]");
 
-            //  Console.WriteLine(payment.ToString());
-        }
+        //    //  Console.WriteLine(payment.ToString());
+        //}
 
 
 
@@ -146,9 +131,6 @@ namespace ProyectoAndrómeda
             string url = (((Hashtable)preference["response"])["sandbox_init_point"]).ToString();
 
 
-
-
-
             foreach (DictionaryEntry de in preference)
             {
                 string keymercadopago = de.Key.ToString();
@@ -157,10 +139,7 @@ namespace ProyectoAndrómeda
                 //Console.WriteLine();
             }
 
-
             Response.Write("<script>window.open('" + url + "','Popup','width=800,height=500')</script>");
-
-
 
         }
 
@@ -179,8 +158,15 @@ namespace ProyectoAndrómeda
                     DescargarArchivo(((ApunteEntidad)(dato.item)).idApunte);
                 }
             }
-
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            ConsultarPago();
+        }
+
+
+
 
     }
 }

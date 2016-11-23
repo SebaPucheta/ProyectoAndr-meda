@@ -81,7 +81,6 @@
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
     <Content Include="imagenes\PortadaApunte.png" />
-    <Content Include="imagenes\PortadaApunte2.png" />
     <Content Include="Login.aspx" />
     <Content Include="Master.Master" />
     <Content Include="bin\ProyectoAndrómeda.dll.config" />

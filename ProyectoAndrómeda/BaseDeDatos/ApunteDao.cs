@@ -184,7 +184,7 @@ namespace BaseDeDatos
                                 			      JOIN Profesor p ON p.idProfesor = a.idProfesor
                                 			      JOIN TipoApunte ta ON ta.idTipoApunte = a.idTipoApunte
                                 			      JOIN Materia m ON a.idMateria = m.idMateria
-                                			WHERE  m.idMateria = @idMat AND a.baja = 0";
+                                	WHERE  m.idMateria = @idMat AND a.baja = 0";
             SqlCommand cmd = new SqlCommand(consulta, obtenerBD());
             cmd.Parameters.AddWithValue(@"idMat", idMateria );
             

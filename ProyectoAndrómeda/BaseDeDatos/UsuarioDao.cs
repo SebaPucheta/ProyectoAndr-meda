@@ -223,22 +223,47 @@ namespace BaseDeDatos
             return cli;
         }
 
-        public static int IniciarSesion(string email, string pass)
+
+
+        //FALTO CERRAR CONEXION
+
+        //public static int IniciarSesion(string email, string pass)
+        //{
+        //    int idUsuario = 0;
+        //    string query = @"SELECT u.idUsuario
+        //                     FROM Usuario u 
+        //                     WHERE u.nombreUsuario =  @email and u.contrasena = @pass";
+
+        //    SqlCommand cmd = new SqlCommand(query, obtenerBD());
+        //    cmd.Parameters.AddWithValue(@"email", email);
+        //    cmd.Parameters.AddWithValue(@"pass", pass);
+        //    SqlDataReader dr = cmd.ExecuteReader();
+        //    while (dr.Read())
+        //    {
+        //        idUsuario = int.Parse(dr["idUsuario"].ToString());
+        //    }
+        //    return idUsuario;
+        //}
+
+        public static string ConsultarNombreYApellidoUsuario(string nombreUsuario)
         {
-            int idUsuario = 0;
-            string query = @"SELECT u.idUsuario
-                             FROM Usuario u 
-                             WHERE u.nombreUsuario =  @email and u.contrasena = @pass";
+            string cliente = "";
+
+            string query = @"SELECT c.nombreCliente, c.apellidoCliente
+                             FROM Usuario u INNER JOIN Cliente c ON u.idCliente = c.idCliente
+                             WHERE u.nombreUsuario = @nombreUsuario";
 
             SqlCommand cmd = new SqlCommand(query, obtenerBD());
-            cmd.Parameters.AddWithValue(@"email", email);
-            cmd.Parameters.AddWithValue(@"pass", pass);
+            cmd.Parameters.AddWithValue(@"nombreUsuario", nombreUsuario);
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                idUsuario = int.Parse(dr["idUsuario"].ToString());
+                cliente = dr["nombreCliente"].ToString() + " " + dr["apellidoCliente"].ToString();
             }
-            return idUsuario;
+
+            dr.Close();
+            cmd.Connection.Close();
+            return cliente;
         }
 
 

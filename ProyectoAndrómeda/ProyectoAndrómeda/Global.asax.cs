@@ -19,8 +19,13 @@ namespace ProyectoAndrómeda
 
         protected void Session_Start(object sender, EventArgs e)
         {
+            //Carrito que se va guardando mientras consulto un catálogo
             Session["carrito"] = new List<ProductoCarrito>();
 
+            //Guardo id de la factura para saber si se puede o no descargar un archivo
+            Session["idFacturaPanel"] = null;
+
+            //
             Session["objetoApunteEntidad"] = null;
             Session["objetoLibroEntidad"] = null;
             Session["idUsuario"] = "";

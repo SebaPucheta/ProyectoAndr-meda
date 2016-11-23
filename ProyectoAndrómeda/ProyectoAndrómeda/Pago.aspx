@@ -58,26 +58,13 @@
                                 </tr>
                             </table>
 
-                            <!-- tabla inicio de sesion-->
-                            <table class="table table-responsive">
-                                <tr>
-                                    <td>
-                                        <asp:Label ID="lbl_inicioSesion" runat="server" Text="Primero debe iniciar sesión"></asp:Label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:LoginStatus ID="btn_iniciarSesionLogin" CssClass="btn btn-danger" runat="server" LogoutText="Log out" LoginText="Iniciar Sesión" LogoutPageUrl="Home.aspx" />
-                                    </td>
-                                </tr>
-                            </table>
 
                         </div>
 
                         <div class="col-md-4">
                             <!-- algo de MP -->
-                            <asp:Image ID="Image1" runat="server" ImageUrl="http://www.fusionstore.com.ar/uploads/images/33563_mercadopago.png" style="width:100%; height:348px;" />
-                            
+                            <asp:Image ID="Image1" runat="server" ImageUrl="http://www.fusionstore.com.ar/uploads/images/33563_mercadopago.png" Style="width: 100%; height: 348px;" />
+
                         </div>
 
                     </div>
@@ -87,11 +74,20 @@
                     <div class="row">
                         <div class="col-md-12">
                             <asp:Button ID="btn_pago" runat="server" Text="Pagar" class="btn btn-danger" OnClick="btn_pago_Click" />
-
                             <asp:Button ID="btn_descargar" runat="server" Text="Descargar" class="btn btn-danger" OnClick="btn_descargar_Click" />
-                            
+
+
+
+                            <asp:Button ID="Button1" runat="server" Text="ConsultarPAGO" OnClick="Button1_Click" />
+
+                            <asp:GridView ID="GridView1" runat="server">
+                              
+                            </asp:GridView>
+
                         </div>
                     </div>
+
+
 
                     <!-- cajita gris -->
                 </div>

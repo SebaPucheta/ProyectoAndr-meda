@@ -41,6 +41,8 @@ namespace ProyectoAndrómeda
             lbl_descripcion.Text = apunte.descripcionApunte;
             img_portada.ImageUrl = "imagenes/apunte/" + apunte.idApunte.ToString() + ".jpg";
 
+                if (ApunteDao.ConsultarTipoApunte(id) == "Digital")
+                    img_digital.Visible = true;
         }
 
         protected void cargarLibro(int id)
@@ -55,6 +57,24 @@ namespace ProyectoAndrómeda
             img_portada.ImageUrl = "imagenes/libro/" + libro.idLibro.ToString() + ".jpg";
         }
 
+        protected void btn_carrito_Click(object sender, EventArgs e)
+        {
+            int id;
+            string dirCarrito;
+            if (int.Parse(Request.QueryString["idApunte"]) != 0)
+            {
+                id = int.Parse(Request.QueryString["idApunte"]);
+                dirCarrito = "Carrito.aspx?idLibro=0&idApunte=" + id.ToString();
+                Response.Redirect(dirCarrito);
+            }
+            if (int.Parse(Request.QueryString["idLibro"]) != 0)
+            {
+                id = int.Parse(Request.QueryString["idLibro"]);
+                dirCarrito = "Carrito.aspx?idLibro=0&idApunte=" + id.ToString();
+                Response.Redirect(dirCarrito);
+            }
 
+        
+        }
     }
 }
