@@ -213,7 +213,7 @@ namespace ProyectoAndrómeda
             factura.total = float.Parse(lbl_total.Text);
             factura.idUsuario = UsuarioDao.ConsultarIdUsuario(HttpContext.Current.User.Identity.Name);
             //Ponele que el 3 es pendiente
-            factura.idEstadoPago = 3;
+            factura.idEstadoPago = 2;
             factura.listaProductoCarrito = (List<ProductoCarrito>)Session["carrito"];
             return factura;
         }

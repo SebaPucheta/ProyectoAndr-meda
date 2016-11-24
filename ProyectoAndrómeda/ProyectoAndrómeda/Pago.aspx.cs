@@ -10,6 +10,7 @@ using BaseDeDatos;
 
 using System.Collections;
 using mercadopago;
+using NUnit.Framework;
 
 using System.IO;
 using System.Data;
@@ -44,36 +45,49 @@ namespace ProyectoAndrómeda
         }
 
 
-        private void DescargarArchivo(int idApunte)
-        {
-
-            string filename = @"C:\Juan\Facultad\Habilitacion Profesional\GitHub - Andromeda\ProyectoAndromeda\ProyectoAndrómeda\ProyectoAndrómeda\archivos\" + idApunte + ".pdf"; ;
-            FileInfo fileInfo = new FileInfo(filename);
-
-            if (fileInfo.Exists)
-            {
-                Response.Clear();
-                Response.AddHeader("Content-Disposition", "attachment; filename=" + fileInfo.Name);
-                Response.AddHeader("Content-Length", fileInfo.Length.ToString());
-                Response.ContentType = "application/octet-stream";
-                Response.Flush();
-                Response.TransmitFile(fileInfo.FullName);
-                Response.End();
-            }
-        }
-
-
         protected void ConsultarPago()
         {
-
-           
-            
-
             MP mp = new MP("3505078557617488", "3J7yHycTVNr1Vkhf8LZLmqqbeuZFP7nq");
 
             Dictionary<String, String> filters = new Dictionary<String, String>();
+
             filters.Add("status", "approved");
-            Hashtable searchResult = mp.searchPayment(filters);
+
+            Hashtable searchResult = mp.searchPayment(filters, 0, 10);
+
+
+            Response.Write(searchResult);
+
+            Label1.Text = "";
+            foreach(var id in searchResult.Keys)
+            {
+                Label1.Text = Label1.Text + " / " + searchResult[id].ToString() + " key:" + id.ToString();
+            }
+
+           
+
+
+
+            //foreach (var id in searchResult.Keys)
+            //{
+            //    if (searchResult[id] is int)
+            //        continue;
+            //    Hashtable tabla2 = (System.Collections.Hashtable)searchResult[id];
+            //    foreach (var id2 in tabla2.Keys)
+            //    {
+            //        if (tabla2[id2] is System.Collections.ArrayList)
+            //            continue;
+
+            //        Hashtable tabla3 = (System.Collections.Hashtable)tabla2[id2];
+            //        foreach(var id3 in tabla3.Keys)
+            //        {
+            //            Label1.Text = Label1.Text + " / " + tabla2[id2].ToString();
+            //        }
+            //    }
+            //}
+
+
+
 
             mp.getAccessToken();
 
@@ -81,10 +95,6 @@ namespace ProyectoAndrómeda
 
             //foreach (fila in searchResult)
 
-
-            GridView1.DataSource = searchResult;
-            //GridView1.DataKeyNames = new string[] { "id" };
-            GridView1.DataBind();
 
 
         }
@@ -100,26 +110,20 @@ namespace ProyectoAndrómeda
             string pref = "{\"items\":[{\"title\":\"EDUCOM\",\"quantity\":1,\"currency_id\":\"ARS\",\"unit_price\":" + lbl_totalTotal.Text + "}]}";
             Hashtable preference = mp.createPreference(pref);
 
-            //Hashtable payment_info = mp.getPaymentInfo(Request["id"]);
 
+            Label1.Text = Request.QueryString["id"].ToString();
 
-            //if ((int)payment_info["status"] == 200)
-            //    Response.Write(payment_info["response"]);
+            Hashtable payment_info = mp.getPaymentInfo(Request.QueryString["id"]);
+
+            if ((int)payment_info["status"] == 200)
+                Response.Write(payment_info["response"]);
 
         }
 
-        //protected void consultarPago(object sender, EventArgs e)
-        //{
-        //    MP mp = new MP("TEST - 3505078557617488 - 093014 - 425df6acc81bf5469720198d7307c132__LB_LC__ - 147119687");
-        //    //  Hashtable payment = mp.get("/v1/payments/[ID]");
-
-        //    //  Console.WriteLine(payment.ToString());
-        //}
 
 
 
-
-
+    
         protected void btn_pago_Click(object sender, EventArgs e)
         {
             MP mp = new MP("3505078557617488", "3J7yHycTVNr1Vkhf8LZLmqqbeuZFP7nq");
@@ -129,36 +133,63 @@ namespace ProyectoAndrómeda
             Hashtable preference = mp.createPreference(pref);
 
             string url = (((Hashtable)preference["response"])["sandbox_init_point"]).ToString();
+            //Response.Write("<script>window.open('" + url + "','Popup','width=800,height=500')</script>");
 
 
-            foreach (DictionaryEntry de in preference)
-            {
-                string keymercadopago = de.Key.ToString();
-                string idmercadopago = de.Value.ToString();
-                //Console.WriteLine("\t[{0}]:\t{1}\t{2}", i++, de.Key, de.Value);
-                //Console.WriteLine();
-            }
+            string idPago = url;
+            string[] urlCortada = idPago.Split('=');
+            string idPagoPosta = urlCortada[1];
 
-            Response.Write("<script>window.open('" + url + "','Popup','width=800,height=500')</script>");
+            Label1.Text = idPagoPosta;
 
+
+            Hashtable consulta = mp.getPreference(idPagoPosta);
+            
+            string urlConsulta = (((Hashtable)consulta["response"])["sandbox_init_point"]).ToString();
+            //Response.Write("<script>window.open('" + urlConsulta + "','Popup','width=800,height=500')</script>");
+
+
+            //Consulta
+            Hashtable result = mp.refundPayment(idPago);
+
+
+            //if ((int)payment_info["status"] == 200)
+            Response.Write("<script>window.alert('" + result + "')</script>");
+
+
+
+
+            
         }
 
-        protected void btn_inicioSesion_Click(object sender, EventArgs e)
+
+        protected void verEstado(object sender, EventArgs e)
         {
-            Response.Redirect("Login.aspx");
-        }
+            
+            // Create an instance with your MercadoPago credentials (CLIENT_ID and CLIENT_SECRET): 
+            // Argentina: https://www.mercadopago.com/mla/herramientas/aplicaciones 
+            // Brasil: https://www.mercadopago.com/mlb/ferramentas/aplicacoes
+            MP mp = new MP("3505078557617488", "3J7yHycTVNr1Vkhf8LZLmqqbeuZFP7nq");
 
-        protected void btn_descargar_Click(object sender, EventArgs e)
-        {
-            List<ProductoCarrito> lista = (List<ProductoCarrito>)Session["carrito"];
-            foreach (ProductoCarrito dato in lista)
-            {
-                if (dato.tipoItem == "Apunte" && ApunteDao.ConsultarTipoApunte(((ApunteEntidad)(dato.item)).idApunte) == "Digital")
-                {
-                    DescargarArchivo(((ApunteEntidad)(dato.item)).idApunte);
-                }
-            }
+            // Sets the filters you want
+            Dictionary<String, String> filters = new Dictionary<String, String>();
+            filters.Add("site_id", "MLA"); // Argentina: MLA; Brasil: MLB
+                        //KEY       //VALUE
+
+            // Search payment data according to filters
+            Hashtable searchResult = mp.searchPayment(filters);
+
+            //// Show payment information
+            //foreach (Hashtable payment in searchResult.SelectToken("response.results"))
+            //{
+            //    Response.Write(payment["collection"]["id"]);
+            //}
+
+
         }
+        
+
+       
 
         protected void Button1_Click(object sender, EventArgs e)
         {

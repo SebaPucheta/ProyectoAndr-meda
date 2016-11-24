@@ -74,16 +74,14 @@
                     <div class="row">
                         <div class="col-md-12">
                             <asp:Button ID="btn_pago" runat="server" Text="Pagar" class="btn btn-danger" OnClick="btn_pago_Click" />
-                            <asp:Button ID="btn_descargar" runat="server" Text="Descargar" class="btn btn-danger" OnClick="btn_descargar_Click" />
 
 
 
                             <asp:Button ID="Button1" runat="server" Text="ConsultarPAGO" OnClick="Button1_Click" />
 
-                            <asp:GridView ID="GridView1" runat="server">
-                              
-                            </asp:GridView>
+                            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
 
+                 
                         </div>
                     </div>
 

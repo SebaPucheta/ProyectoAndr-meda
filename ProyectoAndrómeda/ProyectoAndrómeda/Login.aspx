@@ -34,7 +34,7 @@
                   <asp:Button runat="server" text="Register" CssClass="btnlogin" ID="btn_registrar" OnClick="btn_registrar_onclick" />
                 
               </div>
-              <div class="cta"><a href="http://andytran.me">Forgot your password?</a></div>
+             <%-- <div class="cta"><a href="http://andytran.me">Forgot your password?</a></div>--%>
             </div>
 
        <br /><br /><br /><br /><br /><br /><br />
