@@ -20,6 +20,35 @@ namespace ProyectoAndrómeda
             }
         }
 
+        protected void CargarNuevosItem(List<ItemEntidad> listaItem)
+        {
+            for(int i=1;i<4;i++)
+            {
+                string nombreLblNombre = "lbl_nombreItemNuevo" + i;
+                Label lblNombre = Controls.OfType<Label>().FirstOrDefault(x => x.ID == nombreLblNombre);
+                string nombreLblPrecio = "lbl_precioItemNuevo" + i;
+                Label lblPrecio = Controls.OfType<Label>().FirstOrDefault(x => x.ID == nombreLblPrecio);
+                if ( listaItem[i-1] is ApunteEntidad)
+                {
+                    CargarApunteNuevo((ApunteEntidad)listaItem[i - 1], lblNombre, lblPrecio);
+                }
+                else
+                {
+                    CargarLibroNuevo((LibroEntidad)listaItem[i - 1], lblNombre, lblPrecio);
+                }
+            }
+        }
 
+
+        protected void CargarApunteNuevo(ApunteEntidad apunte, Label lblNombre, Label lblPrecio)
+        {
+            lblNombre.Text = apunte.nombreApunte;
+            lblPrecio.Text = "Precio: $" + apunte.precioApunte.ToString();
+        }
+        protected void CargarLibroNuevo(LibroEntidad libro, Label lblNombre, Label lblPrecio)
+        {
+            lblNombre.Text = libro.nombreLibro;
+            lblPrecio.Text = "Precio: $" + libro.precioLibro.ToString();
+        }
     }
 }

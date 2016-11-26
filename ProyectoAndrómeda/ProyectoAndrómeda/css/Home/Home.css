@@ -1,0 +1,179 @@
+body{
+  overflow-x: hidden;
+}
+h1{
+  text-align: center;
+  margin-top: -35px;
+  font-family: "Dosis";
+  font-size: 50px;
+}
+@font-face {
+  font-family:"Dosis";
+  src:url("Font/PlayfairDisplay-Bold.ttf");
+}
+
+.titulo-nuevos{
+  margin-right: 126px;
+  color: rgb(159, 0, 0)
+}
+
+.titulo-vendidos{
+
+}
+
+.titulo-marcas{
+
+}
+/*Los mas vendidos*/
+.contenidoRecuadro{
+  margin:  25px;
+  text-align: center;
+}
+
+.contenedorRecuadro{
+  background-color: rgb(255, 255, 255);
+}
+
+.recuadro{
+    margin-left:  100px;
+    margin-bottom: 0;
+    width: 300px;
+    height: 420px;
+}
+
+.contenidoRecuadro .btn-ver{
+  border: none;
+  color: rgb(255, 255, 255);
+  width: 250px;
+  height: 50px;
+  background-color:  #CF000F;
+}
+
+.contenidoRecuadro .btn-ver:hover{
+  background-color:  #dd0919;
+  margin: 0;
+}
+
+.recuadro .img{
+  position: relative;
+  width: 150px;
+  height: 300px;
+}
+
+/*Transicion Recuadro */
+.recuadro::before, .recuadro::after {
+  box-sizing: border-box;
+  content:   '';
+  margin-left: 110px;
+  width: 30px;
+  height: 50px;
+  position: absolute;;
+  width: 10%;
+  height: 10%;
+}
+.recuadro::before, .recuadro::after {
+  top:0 ;
+  left: 5.6%;
+
+  height: 90%;
+  width: 47.5%;
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  -webkit-transform-origin:;
+  -moz-transform-origin:;
+  -ms-transform-origin:;
+  -o-transform-origin:;
+  transform-origin: center;
+}
+.recuadro::before {
+
+  border-top: 1px solid #cf1e1e;
+  border-bottom: 1px solid #cf1e1e;
+  -webkit-transform: scale3d(0, 1, 1);
+          transform: scale3d(0, 1, 1);
+}
+.recuadro::after {
+
+  border-left: 1px solid #cf1e1e;
+  border-right: 1px solid #cf1e1e;
+  -webkit-transform: scale3d(1, 0, 1);
+          transform: scale3d(1, 0, 1);
+}
+.recuadro:hover::before, .recuadro:hover::after {
+  -webkit-transform: scale3d(1, 1, 1);
+  -moz-transform: scale3d(1, 1, 1);
+  -ms-transform: scale3d(1, 1, 1);
+  -o-transform: scale3d(1, 1, 1);
+          transform: scale3d(1, 1, 1);
+  -webkit-transition: -webkit-transform 0.5s;
+  -moz-transform: -webkit-transform 0.5s;
+  -ms-transform: -webkit-transform 0.5s;
+  -o-transform: -webkit-transform 0.5s;
+  transition: -webkit-transform 0.5s;
+-webkit-transform 0.5s;
+}
+
+/*Los nuevos*/
+
+.contenedorRecuadroParallax{
+    background-image: url("Background/CoffeAndBook.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    margin-top: 50px;
+    padding-top: 50px;
+    width: 110%;
+}
+.recuadroParallax{
+    padding-top: 5px;
+    margin-left:  60px;
+    margin-bottom: 30px;
+    width: 300px;
+    height: 450px;
+    background-color: rgba(255, 255, 255, 0.25);
+}
+.recuadroParallax:hover{
+    background-color: rgba(255, 255, 255, 0.5);
+}
+@media only screen and (max-device-width: 1100px)
+{
+  .contenedorRecuadroParallax{
+      background-image: url("Background/CoffeAndBook.jpg");
+      background-repeat: no-repeat;
+      background-size: contain;;
+      position: relative;
+      padding-top: 50px;
+      width: 100%;
+  }
+}
+
+/*Marcas*/
+
+.contenedorMarcas{
+    margin-top: 20px;
+}
+.contenedorMarcas .alfaomega .img-alfaomega{
+  width: 200px;
+  margin-left:  150px;
+  margin-right: 150px;
+}
+.contenedorMarcas .estrada .img-estrada{
+  width: 200px;
+  margin-left:  150px;
+  margin-right: 150px;
+}
+.contenedorMarcas .educo .img-educo{
+  width: 200px;
+  margin-left:  150px;
+  margin-right: 150px;
+}
+.contenedorMarcas .pearson .img-pearson{
+  width: 100px;
+  margin-left:  150px;
+  margin-right: 150px;
+}
+.contenedorMarcas .az .img-az{
+  margin-left:  150px;
+  margin-right: 150px;
+}

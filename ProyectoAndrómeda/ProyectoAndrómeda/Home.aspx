@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" EnableEventValidation="true" Inherits="ProyectoAndrómeda.Home" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+    <link href="css/Home/Home.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Body" runat="server">
     <div id="home">
@@ -116,18 +117,101 @@
                 <a class="right carousel-control animated fadeInRight" href="#c-slide" data-slide="next"><i class="glyphicon glyphicon-arrow-right"></i></a>
             </section>
             <!-- /.carousel end-->
+</div>
+
+
+    
+
+    <!--Los mas vendidos-->
+    <div class="row container-fluid contenedorRecuadro">
+        <h1 class="titulo-vendidos">Best-Seller</h1>
+       <div class="col-lg-4">
+                <div class="recuadro">
+                    <div class="contenidoRecuadro">
+                        <asp:Image ID="img_itemVendido1" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img"/>
+                        <asp:Label runat="server" ID="lbl_nombreItemVendido1" ></asp:Label>
+                        <asp:Label runat="server" ID="lbl_precioItemVendido1" ></asp:Label>
+                        <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemPopular1" />
+                    </div>
+                 </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="recuadro">
+                    <div class="contenidoRecuadro">
+                        <asp:Image ID="img_itemVendido2" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img" />
+                        <asp:Label runat="server" ID="lbl_nombreItemVendido2" ></asp:Label>
+                        <asp:Label runat="server" ID="lbl_precioItemVendido2" ></asp:Label>
+                        <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemPopular2" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="recuadro">
+                    <div class="contenidoRecuadro">
+                        <asp:Image ID="img_itemVendido3" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img" />
+                        <asp:Label runat="server" ID="lbl_nombreItemVendido3" ></asp:Label>
+                        <asp:Label runat="server" ID="lbl_precioItemVendido3" ></asp:Label>
+                        <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemPopular3" />
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!-- Page Content -->
-    <div id="galeria" class="container">
-        <div class="row">
-
-
-        </div>
-    </div>
+         <!--Los Nuevos-->
+        <div class="row container-fluid contenedorRecuadroParallax">
+            <h1 class="titulo-nuevos">Nuevos</h1>
+           <div class="col-lg-4">
+                    <div class="recuadroParallax">
+                        <div class="contenidoRecuadro">
+                            <asp:Image ID="Image5" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img"/>
+                            <asp:Label runat="server" ID="lbl_nombreItemNuevo1" ></asp:Label>
+                            <asp:Label runat="server" ID="lbl_precioItemNuevo1" ></asp:Label>
+                            <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="Button1" />
+                        </div>
+                     </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="recuadroParallax">
+                        <div class="contenidoRecuadro">
+                            <asp:Image ID="Image6" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img" />
+                            <asp:Label runat="server" ID="lbl_nombreItemNuevo2" ></asp:Label>
+                            <asp:Label runat="server" ID="lbl_precioItemNuevo2" ></asp:Label>
+                            <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="Button2" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="recuadroParallax">
+                        <div class="contenidoRecuadro">
+                            <asp:Image ID="Image7" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img" />
+                            <asp:Label runat="server" ID="lbl_nombreItemNuevo3" ></asp:Label>
+                            <asp:Label runat="server" ID="lbl_precioItemNuevo3" ></asp:Label>
+                            <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="Button3" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+     <!-- Marcas -->
+        
+            <h1 class="titulo-marcas">Marcas</h1>
+            <div class="row container-fluid contenedorMarcas">
+                <div class="col-lg-2 alfaomega">
+                <asp:Image ID="Image8" runat="server" ImageUrl="~\css\Home\LogoEditorial/Alfaomega.png" CssClass="img-alfaomega" />
+                </div>
+                <div class="col-lg-2 az">
+                <asp:Image ID="Image9" runat="server" ImageUrl="~\css\Home\LogoEditorial/az.png" CssClass="img-az" />
+                </div>
+                <div class="col-lg-2 estrada">
+                <asp:Image ID="Image10" runat="server" ImageUrl="~\css\Home\LogoEditorial/Estrada.png" CssClass="img-estrada" />
+                </div>
+                <div class="col-lg-2 educo">
+                <asp:Image ID="Image11" runat="server" ImageUrl="~\css\Home\LogoEditorial/LOGO EDUCO.jpg" CssClass="img-educo" />
+                </div>
+                <div class="col-lg-2 pearson">
+                <asp:Image ID="Image12" runat="server" ImageUrl="~\css\Home\LogoEditorial/pearson.png" CssClass="img-pearson" />
+                </div>
+            </div>  
     <!--container barra lateral-->
 
-
-
+    </div>
 </asp:Content>
