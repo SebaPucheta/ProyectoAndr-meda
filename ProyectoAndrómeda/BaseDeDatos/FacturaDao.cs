@@ -19,12 +19,13 @@ namespace BaseDeDatos
             try
             {
 
-                string query1 = "INSERT INTO Factura(fecha, total, idUsuario, idEstadoPago) VALUES (@fecha, @total, @idUsuario, @idEstadoPago); select scope_identity()";
+                string query1 = "INSERT INTO Factura(fecha, total, idUsuario, idEstadoPago, idFacturaMP) VALUES (@fecha, @total, @idUsuario, @idEstadoPago, @idFacturaMP); select scope_identity()";
                 SqlCommand cmd1 = new SqlCommand(query1, cnn, trans);
                 cmd1.Parameters.AddWithValue(@"fecha", DateTime.Now);
                 cmd1.Parameters.AddWithValue(@"total", factura.total);
                 cmd1.Parameters.AddWithValue(@"idUsuario", factura.idUsuario);
                 cmd1.Parameters.AddWithValue(@"idEstadoPago", factura.idEstadoPago);
+                cmd1.Parameters.AddWithValue(@"idFacturaMP", factura.idFacturaMP);
                 idFactura = int.Parse(cmd1.ExecuteScalar().ToString());
 
                 foreach (ProductoCarrito detalleFactura in factura.listaProductoCarrito)
@@ -75,7 +76,7 @@ namespace BaseDeDatos
 
         public static FacturaEntidadQuery ConsultarUnaFactura(int id)
         {
-            string query = @"SELECT f.idFactura, f.fecha, f.total, f.idUsuario, c.nombreCliente, c.apellidoCliente, c.email
+            string query = @"SELECT f.idFactura, f.fecha, f.total, f.idUsuario, f.idEstadoPago, f.idFacturaMP, c.nombreCliente, c.apellidoCliente, c.email
                              FROM Factura f INNER JOIN Usuario u ON f.idUsuario = u.idUsuario
                                             INNER JOIN Cliente c ON u.idCliente = c.idCliente
                              WHERE f.idFactura = @id";
@@ -94,6 +95,9 @@ namespace BaseDeDatos
                 factura.nombreCliente = dr["nombreCliente"].ToString();
                 factura.apellidoCliente = dr["apellidoCliente"].ToString();
                 factura.mailCliente = dr["email"].ToString();
+
+                factura.idEstadoPago = int.Parse(dr["idEstadoPago"].ToString());
+                factura.idFacturaMP = dr["idFacturaMP"].ToString();
             }
 
             dr.Close();
@@ -124,7 +128,7 @@ namespace BaseDeDatos
                 if (dr["descripcion"] != DBNull.Value)
                     factura.nombreEstadoPago = dr["descripcion"].ToString();
                 if (dr["idFacturaMP"] != DBNull.Value)
-                    factura.idFacturaMP = int.Parse(dr["idFacturaMP"].ToString());
+                    factura.idFacturaMP = dr["idFacturaMP"].ToString();
                 lista.Add(factura);
             }
 

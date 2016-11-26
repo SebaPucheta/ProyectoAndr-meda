@@ -13,8 +13,9 @@ using Negocio;
 //Para el mail
 using System.Text;
 using System.Net.Mail;
-using System.Net;
-using System.Data;
+
+using mercadopago;
+using System.Collections;
 
 namespace ProyectoAndrómeda
 {
@@ -207,14 +208,18 @@ namespace ProyectoAndrómeda
         }
 
         //Creo facutura para la trasacción - VER NUMERO DE ESTADO
-        protected FacturaEntidad crearFacturaEntidad()
+        protected FacturaEntidad crearFacturaEntidad(string idMP)
         {
             FacturaEntidad factura = new FacturaEntidad();
             factura.total = float.Parse(lbl_total.Text);
             factura.idUsuario = UsuarioDao.ConsultarIdUsuario(HttpContext.Current.User.Identity.Name);
-            //Ponele que el 3 es pendiente
+            //Ponele que el 2 es pendiente
             factura.idEstadoPago = 2;
+            //Id facuta MercadoPago
+            factura.idFacturaMP = idMP;
+            //Carrito con todos los objetos
             factura.listaProductoCarrito = (List<ProductoCarrito>)Session["carrito"];
+
             return factura;
         }
 
@@ -327,6 +332,36 @@ namespace ProyectoAndrómeda
             }
         }
 
+
+        protected string GenerarPago()
+        {
+            //Pongo CLIENT_ID y CLIENT_SECRET -- Aplicacion: 233620557 -- mp-app-233620557
+            MP mp = new MP("4180047074500934", "oTJvHcjBcmbO73LsYTNseZhUmzaNYkx1");
+            mp.sandboxMode(true);
+
+            //Reemplazo comas por puntos
+            string total = (lbl_total.Text).Replace(",", ".").Trim();
+
+            //Creo la preferencia de la boleta como si fuera un objeto json, en un string
+            string preferenceData = "{\"items\":" +
+                                        "[{" +
+                                            "\"title\":\"EDUCOM\"," +
+                                            "\"quantity\":1," +
+                                            "\"currency_id\":\"ARS\"," +
+                                            "\"unit_price\":" + total +
+                                        "}]" +
+                                     "}";
+
+            //Creo la preferencia en una hashtable
+            Hashtable preference = mp.createPreference(preferenceData);
+
+            //Para obtener el ID del pago
+            string idMP = (((Hashtable)preference["response"])["id"]).ToString();
+
+            return idMP;
+        }
+
+
         //////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////EVENTOS////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -413,6 +448,8 @@ namespace ProyectoAndrómeda
 
         }
 
+
+        //Confirmar la transaccion
         protected void btn_confirmar_Click(object sender, EventArgs e)
         {
             //Hago la transacción
@@ -432,8 +469,10 @@ namespace ProyectoAndrómeda
             //Enviar mail
             SendMail("marvinien1.0@gmail.com", CrearCorreo());
 
+            //Generar id factura mercado pago
+            string idMP = GenerarPago();
 
-            int idFactura = FacturaDao.RegistrarFactura(crearFacturaEntidad());
+            int idFactura = FacturaDao.RegistrarFactura(crearFacturaEntidad(idMP));
             Response.Redirect("Pago.aspx?fact=" + idFactura.ToString());
         }
 

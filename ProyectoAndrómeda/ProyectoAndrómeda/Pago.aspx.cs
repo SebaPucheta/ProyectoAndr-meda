@@ -11,9 +11,14 @@ using BaseDeDatos;
 using System.Collections;
 using mercadopago;
 using NUnit.Framework;
+using System.Net;
 
 using System.IO;
 using System.Data;
+
+//Para consultar estados cURL
+using System.Net;
+
 
 namespace ProyectoAndrómeda
 {
@@ -33,6 +38,18 @@ namespace ProyectoAndrómeda
             }
         }
 
+        protected MP getMP()
+        {
+            //Pongo CLIENT_ID y CLIENT_SECRET -- Aplicacion: 233620557 -- mp-app-233620557
+            MP mp = new MP("4180047074500934", "oTJvHcjBcmbO73LsYTNseZhUmzaNYkx1");
+            mp.sandboxMode(true); //RECORDAR QUE ESTA EN CARRITO.CS
+            return mp;
+            
+            //Claves en Modo SANDBOX
+            //Public key: TEST-3211f4aa-1933-4df1-9522-61746d226942
+            //Access token: TEST-3505078557617488-093014-425df6acc81bf5469720198d7307c132__LB_LC__-147119687
+        }
+
         //Completar los datos con la factura reciente
         protected void CompletarDatos()
         {
@@ -44,156 +61,69 @@ namespace ProyectoAndrómeda
             lbl_totalTotal.Text = factura.total.ToString();
         }
 
+        protected string getNumeroIDMercadoPago()
+        {
+            MP mp = getMP();
+
+            //Busco la id de la factura de MP en la base de datos
+            int idFacturaAConsultar = int.Parse(Request.QueryString["fact"]);
+            string idMP = (FacturaDao.ConsultarUnaFactura(idFacturaAConsultar)).idFacturaMP;
+
+            return idMP;
+        }
 
         protected void ConsultarPago()
         {
-            MP mp = new MP("3505078557617488", "3J7yHycTVNr1Vkhf8LZLmqqbeuZFP7nq");
+            MP mp = getMP();
+            string idMP = getNumeroIDMercadoPago();
 
-            Dictionary<String, String> filters = new Dictionary<String, String>();
+            //Consulto la preferencia del id de Mercado Pago de la factura
+            Hashtable preference = mp.getPreference(idMP);
 
-            filters.Add("status", "approved");
-
-            Hashtable searchResult = mp.searchPayment(filters, 0, 10);
-
-
-            Response.Write(searchResult);
-
-            Label1.Text = "";
-            foreach(var id in searchResult.Keys)
-            {
-                Label1.Text = Label1.Text + " / " + searchResult[id].ToString() + " key:" + id.ToString();
-            }
-
-           
-
-
-
-            //foreach (var id in searchResult.Keys)
-            //{
-            //    if (searchResult[id] is int)
-            //        continue;
-            //    Hashtable tabla2 = (System.Collections.Hashtable)searchResult[id];
-            //    foreach (var id2 in tabla2.Keys)
-            //    {
-            //        if (tabla2[id2] is System.Collections.ArrayList)
-            //            continue;
-
-            //        Hashtable tabla3 = (System.Collections.Hashtable)tabla2[id2];
-            //        foreach(var id3 in tabla3.Keys)
-            //        {
-            //            Label1.Text = Label1.Text + " / " + tabla2[id2].ToString();
-            //        }
-            //    }
-            //}
-
-
-
-
-            mp.getAccessToken();
-
-            //Response.Write(searchResult);
-
-            //foreach (fila in searchResult)
-
-
-
-        }
-
-        protected void GenerarPago()
-        {
-
-            //href = "<% Response.Write(((Hashtable)preference["response"])["sandbox_init_point"]); %>"
-
-            MP mp = new MP("3505078557617488", "3J7yHycTVNr1Vkhf8LZLmqqbeuZFP7nq");
-            mp.sandboxMode(false);
-
-            string pref = "{\"items\":[{\"title\":\"EDUCOM\",\"quantity\":1,\"currency_id\":\"ARS\",\"unit_price\":" + lbl_totalTotal.Text + "}]}";
-            Hashtable preference = mp.createPreference(pref);
-
-
-            Label1.Text = Request.QueryString["id"].ToString();
-
-            Hashtable payment_info = mp.getPaymentInfo(Request.QueryString["id"]);
-
-            if ((int)payment_info["status"] == 200)
-                Response.Write(payment_info["response"]);
-
-        }
-
-
-
-
-    
-        protected void btn_pago_Click(object sender, EventArgs e)
-        {
-            MP mp = new MP("3505078557617488", "3J7yHycTVNr1Vkhf8LZLmqqbeuZFP7nq");
-            mp.sandboxMode(true);
-
-            string pref = "{\"items\":[{\"title\":\"EDUCOM\",\"quantity\":1,\"currency_id\":\"ARS\",\"unit_price\":" + lbl_totalTotal.Text + "}]}";
-            Hashtable preference = mp.createPreference(pref);
-
+            //Para abrir la ventana de la boleta para pagar
             string url = (((Hashtable)preference["response"])["sandbox_init_point"]).ToString();
-            //Response.Write("<script>window.open('" + url + "','Popup','width=800,height=500')</script>");
 
-
-            string idPago = url;
-            string[] urlCortada = idPago.Split('=');
-            string idPagoPosta = urlCortada[1];
-
-            Label1.Text = idPagoPosta;
-
-
-            Hashtable consulta = mp.getPreference(idPagoPosta);
-            
-            string urlConsulta = (((Hashtable)consulta["response"])["sandbox_init_point"]).ToString();
-            //Response.Write("<script>window.open('" + urlConsulta + "','Popup','width=800,height=500')</script>");
-
-
-            //Consulta
-            Hashtable result = mp.refundPayment(idPago);
-
-
-            //if ((int)payment_info["status"] == 200)
-            Response.Write("<script>window.alert('" + result + "')</script>");
-
-
-
-
-            
+            //Abrir en una ventana par apagar por Mercado Pago
+            Response.Write("<script>window.open('" + url + "','Popup','width=800,height=500')</script>");
         }
 
-
-        protected void verEstado(object sender, EventArgs e)
-        {
-            
-            // Create an instance with your MercadoPago credentials (CLIENT_ID and CLIENT_SECRET): 
-            // Argentina: https://www.mercadopago.com/mla/herramientas/aplicaciones 
-            // Brasil: https://www.mercadopago.com/mlb/ferramentas/aplicacoes
-            MP mp = new MP("3505078557617488", "3J7yHycTVNr1Vkhf8LZLmqqbeuZFP7nq");
-
-            // Sets the filters you want
-            Dictionary<String, String> filters = new Dictionary<String, String>();
-            filters.Add("site_id", "MLA"); // Argentina: MLA; Brasil: MLB
-                        //KEY       //VALUE
-
-            // Search payment data according to filters
-            Hashtable searchResult = mp.searchPayment(filters);
-
-            //// Show payment information
-            //foreach (Hashtable payment in searchResult.SelectToken("response.results"))
-            //{
-            //    Response.Write(payment["collection"]["id"]);
-            //}
-
-
-        }
         
 
-       
+        protected void VerEstado()
+        {
+            MP mp = new MP("TEST-3505078557617488-093014-425df6acc81bf5469720198d7307c132__LB_LC__-147119687");
 
-        protected void Button1_Click(object sender, EventArgs e)
+            ////Prueba 1
+            string id = getNumeroIDMercadoPago();
+            //Hashtable payment = mp.get("/v1/payments/" + id, true);
+            //Response.Write("<script>window.alert('" + ((Hashtable)((Hashtable)payment["response"])["payments"])["status"] + "')</script>");
+
+
+            Dictionary<String, String> filters = new Dictionary<String, String>();
+            filters.Add("status", "approved");
+
+            Hashtable resultado = mp.get("/v1/payments/" + id, filters);
+
+            //ESTO NO ANDA
+            //Response.Write("<script>window.alert('" + (((Hashtable)resultado["response"])["external_reference"]).ToString() + "')</script>");
+        }
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////EVENTOS/////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////
+
+        //Boton de "Pagar"
+        protected void btn_pago_Click(object sender, EventArgs e)
         {
             ConsultarPago();
+        }
+
+
+        //Boton de "Consultar pago" que NO VA EN REALIDAD
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            VerEstado();
         }
 
 

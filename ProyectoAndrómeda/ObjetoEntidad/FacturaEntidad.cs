@@ -13,7 +13,7 @@ namespace Entidades
         public float total { get; set; }
         public int idUsuario { get; set; }
         public int idEstadoPago { get; set; }
-        public int idFacturaMP { get; set; }
+        public string idFacturaMP { get; set; }
         public List<ProductoCarrito> listaProductoCarrito { get; set; }
     }
 }

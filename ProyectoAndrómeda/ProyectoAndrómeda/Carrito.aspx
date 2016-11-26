@@ -71,7 +71,6 @@
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></div>
                             <asp:Label runat="server" CssClass="form-control" ID="lbl_total"  />
-
                         </div>
                     </div>
                     <br />
