@@ -13,40 +13,67 @@ namespace ProyectoAndrómeda {
     public partial class Home {
         
         /// <summary>
-        /// Control Image1.
+        /// Control img_itemVendido0.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
+        protected global::System.Web.UI.WebControls.Image img_itemVendido0;
         
         /// <summary>
-        /// Control Image2.
+        /// Control lbl_idItemVendido0.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image2;
+        protected global::System.Web.UI.WebControls.Label lbl_idItemVendido0;
         
         /// <summary>
-        /// Control Image3.
+        /// Control lbl_tipoItemVendido0.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image3;
+        protected global::System.Web.UI.WebControls.Label lbl_tipoItemVendido0;
         
         /// <summary>
-        /// Control Image4.
+        /// Control lbl_nombreItemVendido0.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image4;
+        protected global::System.Web.UI.WebControls.Label lbl_nombreItemVendido0;
+        
+        /// <summary>
+        /// Control lbl_descripcionItemVendido0.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_descripcionItemVendido0;
+        
+        /// <summary>
+        /// Control lbl_precioItemVendido0.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_precioItemVendido0;
+        
+        /// <summary>
+        /// Control btn_verItemPopular0.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_verItemPopular0;
         
         /// <summary>
         /// Control img_itemVendido1.
@@ -58,6 +85,24 @@ namespace ProyectoAndrómeda {
         protected global::System.Web.UI.WebControls.Image img_itemVendido1;
         
         /// <summary>
+        /// Control lbl_idItemVendido1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_idItemVendido1;
+        
+        /// <summary>
+        /// Control lbl_tipoItemVendido1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_tipoItemVendido1;
+        
+        /// <summary>
         /// Control lbl_nombreItemVendido1.
         /// </summary>
         /// <remarks>
@@ -65,6 +110,15 @@ namespace ProyectoAndrómeda {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbl_nombreItemVendido1;
+        
+        /// <summary>
+        /// Control lbl_descripcionItemVendido1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_descripcionItemVendido1;
         
         /// <summary>
         /// Control lbl_precioItemVendido1.
@@ -94,6 +148,24 @@ namespace ProyectoAndrómeda {
         protected global::System.Web.UI.WebControls.Image img_itemVendido2;
         
         /// <summary>
+        /// Control lbl_idItemVendido2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_idItemVendido2;
+        
+        /// <summary>
+        /// Control lbl_tipoItemVendido2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_tipoItemVendido2;
+        
+        /// <summary>
         /// Control lbl_nombreItemVendido2.
         /// </summary>
         /// <remarks>
@@ -101,6 +173,15 @@ namespace ProyectoAndrómeda {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbl_nombreItemVendido2;
+        
+        /// <summary>
+        /// Control lbl_descripcionItemVendido2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_descripcionItemVendido2;
         
         /// <summary>
         /// Control lbl_precioItemVendido2.
@@ -121,49 +202,94 @@ namespace ProyectoAndrómeda {
         protected global::System.Web.UI.WebControls.Button btn_verItemPopular2;
         
         /// <summary>
-        /// Control img_itemVendido3.
+        /// Control img_itemNuevo0.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image img_itemVendido3;
+        protected global::System.Web.UI.WebControls.Image img_itemNuevo0;
         
         /// <summary>
-        /// Control lbl_nombreItemVendido3.
+        /// Control lbl_idItemNuevo0.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_nombreItemVendido3;
+        protected global::System.Web.UI.WebControls.Label lbl_idItemNuevo0;
         
         /// <summary>
-        /// Control lbl_precioItemVendido3.
+        /// Control lbl_tipoItemNuevo0.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_precioItemVendido3;
+        protected global::System.Web.UI.WebControls.Label lbl_tipoItemNuevo0;
         
         /// <summary>
-        /// Control btn_verItemPopular3.
+        /// Control lbl_nombreItemNuevo0.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_verItemPopular3;
+        protected global::System.Web.UI.WebControls.Label lbl_nombreItemNuevo0;
         
         /// <summary>
-        /// Control Image5.
+        /// Control lbl_descripcionItemNuevo0.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image5;
+        protected global::System.Web.UI.WebControls.Label lbl_descripcionItemNuevo0;
+        
+        /// <summary>
+        /// Control lbl_precioItemNuevo0.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_precioItemNuevo0;
+        
+        /// <summary>
+        /// Control btn_verItemNuevo0.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_verItemNuevo0;
+        
+        /// <summary>
+        /// Control img_itemNuevo1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image img_itemNuevo1;
+        
+        /// <summary>
+        /// Control lbl_idItemNuevo1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_idItemNuevo1;
+        
+        /// <summary>
+        /// Control lbl_tipoItemNuevo1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_tipoItemNuevo1;
         
         /// <summary>
         /// Control lbl_nombreItemNuevo1.
@@ -175,6 +301,15 @@ namespace ProyectoAndrómeda {
         protected global::System.Web.UI.WebControls.Label lbl_nombreItemNuevo1;
         
         /// <summary>
+        /// Control lbl_descripcionItemNuevo1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_descripcionItemNuevo1;
+        
+        /// <summary>
         /// Control lbl_precioItemNuevo1.
         /// </summary>
         /// <remarks>
@@ -184,22 +319,40 @@ namespace ProyectoAndrómeda {
         protected global::System.Web.UI.WebControls.Label lbl_precioItemNuevo1;
         
         /// <summary>
-        /// Control Button1.
+        /// Control btn_verItemNuevo1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button btn_verItemNuevo1;
         
         /// <summary>
-        /// Control Image6.
+        /// Control img_itemNuevo2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image6;
+        protected global::System.Web.UI.WebControls.Image img_itemNuevo2;
+        
+        /// <summary>
+        /// Control lbl_idItemNuevo2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_idItemNuevo2;
+        
+        /// <summary>
+        /// Control lbl_tipoItemNuevo2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_tipoItemNuevo2;
         
         /// <summary>
         /// Control lbl_nombreItemNuevo2.
@@ -211,6 +364,15 @@ namespace ProyectoAndrómeda {
         protected global::System.Web.UI.WebControls.Label lbl_nombreItemNuevo2;
         
         /// <summary>
+        /// Control lbl_descripcionItemNuevo2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_descripcionItemNuevo2;
+        
+        /// <summary>
         /// Control lbl_precioItemNuevo2.
         /// </summary>
         /// <remarks>
@@ -220,49 +382,13 @@ namespace ProyectoAndrómeda {
         protected global::System.Web.UI.WebControls.Label lbl_precioItemNuevo2;
         
         /// <summary>
-        /// Control Button2.
+        /// Control btn_verItemNuevo2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
-        
-        /// <summary>
-        /// Control Image7.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image7;
-        
-        /// <summary>
-        /// Control lbl_nombreItemNuevo3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_nombreItemNuevo3;
-        
-        /// <summary>
-        /// Control lbl_precioItemNuevo3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_precioItemNuevo3;
-        
-        /// <summary>
-        /// Control Button3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button3;
+        protected global::System.Web.UI.WebControls.Button btn_verItemNuevo2;
         
         /// <summary>
         /// Control Image8.

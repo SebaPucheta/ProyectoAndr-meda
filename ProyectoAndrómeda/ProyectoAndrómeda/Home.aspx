@@ -40,15 +40,15 @@
                                 <div class="col-md-6 text-center fadein scaleInv anim_2">
                                     <div class="text-center">
                                         <div class="fadein scaleInv anim_3">
-                                            <asp:Image ID="Image1" CssClass="slide1-3 animated rollIn" ImageUrl="~/preview/dotnet-templates/Shop-item/img/slide1-3.png" runat="server"></asp:Image>
+                                            <%--<asp:Image ID="Image1" CssClass="slide1-3 animated rollIn" ImageUrl="~/preview/dotnet-templates/Shop-item/img/slide1-3.png" runat="server"></asp:Image>--%>
 
                                         </div>
                                         <div class="fadein scaleInv anim_8">
-                                            <asp:Image ID="Image2" CssClass="slide1-1 animated rollIn" ImageUrl="~/preview/dotnet-templates/Shop-item/img/slide1-1.png" runat="server"></asp:Image>
+                                            <%--<asp:Image ID="Image2" CssClass="slide1-1 animated rollIn" ImageUrl="~/preview/dotnet-templates/Shop-item/img/slide1-1.png" runat="server"></asp:Image>--%>
 
                                         </div>
                                         <div class="fadein scaleInv anim_5">
-                                            <asp:Image ID="Image3" CssClass="slide1-2 animated rollIn" ImageUrl="~/preview/dotnet-templates/Shop-item/img/slide1-2.png" runat="server"></asp:Image>
+                                            <%--<asp:Image ID="Image3" CssClass="slide1-2 animated rollIn" ImageUrl="~/preview/dotnet-templates/Shop-item/img/slide1-2.png" runat="server"></asp:Image>--%>
                                         </div>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6 animated fadeInUp notransition">
-                                    <asp:Image ID="Image4" Style="width: 90%;" ImageUrl="~/preview/dotnet-templates/Shop-item/img/slide1-1.png" runat="server"></asp:Image>
+                                    <%--<asp:Image ID="Image4" Style="width: 90%;" ImageUrl="~/preview/dotnet-templates/Shop-item/img/slide1-1.png" runat="server"></asp:Image>--%>
 
                                 </div>
                                 <div class="col-md-6 animated fadeInDown  notransition topspace30 text-right">
@@ -128,30 +128,39 @@
        <div class="col-lg-4">
                 <div class="recuadro">
                     <div class="contenidoRecuadro">
-                        <asp:Image ID="img_itemVendido1" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img"/>
-                        <asp:Label runat="server" ID="lbl_nombreItemVendido1" ></asp:Label>
-                        <asp:Label runat="server" ID="lbl_precioItemVendido1" ></asp:Label>
-                        <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemPopular1" />
+                        <asp:Image ID="img_itemVendido0" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img"/>
+                        <asp:Label runat="server" ID="lbl_idItemVendido0" Visible="false" ></asp:Label>
+                        <asp:Label runat="server" ID="lbl_tipoItemVendido0" Visible="false" ></asp:Label>
+                        <asp:Label runat="server" ID="lbl_nombreItemVendido0" ></asp:Label>
+                        <asp:Label runat="server" ID="lbl_descripcionItemVendido0" ></asp:Label>
+                        <asp:Label runat="server" ID="lbl_precioItemVendido0" ></asp:Label>
+                        <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemPopular0" OnClick="btn_verItemPopular0_Click" />
                     </div>
                  </div>
             </div>
             <div class="col-lg-4">
                 <div class="recuadro">
                     <div class="contenidoRecuadro">
-                        <asp:Image ID="img_itemVendido2" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img" />
-                        <asp:Label runat="server" ID="lbl_nombreItemVendido2" ></asp:Label>
-                        <asp:Label runat="server" ID="lbl_precioItemVendido2" ></asp:Label>
-                        <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemPopular2" />
+                        <asp:Image ID="img_itemVendido1" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img" />
+                        <asp:Label runat="server" ID="lbl_idItemVendido1" Visible="false" ></asp:Label>
+                        <asp:Label runat="server" ID="lbl_tipoItemVendido1" Visible="false" ></asp:Label>
+                        <asp:Label runat="server" ID="lbl_nombreItemVendido1" ></asp:Label>
+                        <asp:Label runat="server" ID="lbl_descripcionItemVendido1" ></asp:Label>
+                        <asp:Label runat="server" ID="lbl_precioItemVendido1" ></asp:Label>
+                        <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemPopular1" OnClick="btn_verItemPopular1_Click" />
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="recuadro">
                     <div class="contenidoRecuadro">
-                        <asp:Image ID="img_itemVendido3" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img" />
-                        <asp:Label runat="server" ID="lbl_nombreItemVendido3" ></asp:Label>
-                        <asp:Label runat="server" ID="lbl_precioItemVendido3" ></asp:Label>
-                        <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemPopular3" />
+                        <asp:Image ID="img_itemVendido2" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img" />
+                        <asp:Label runat="server" ID="lbl_idItemVendido2" Visible="false" ></asp:Label>
+                        <asp:Label runat="server" ID="lbl_tipoItemVendido2" Visible="false" ></asp:Label>
+                        <asp:Label runat="server" ID="lbl_nombreItemVendido2" ></asp:Label>
+                        <asp:Label runat="server" ID="lbl_descripcionItemVendido2" ></asp:Label>
+                        <asp:Label runat="server" ID="lbl_precioItemVendido2" ></asp:Label>
+                        <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemPopular2" OnClick="btn_verItemPopular2_Click" />
                     </div>
                 </div>
             </div>
@@ -163,37 +172,44 @@
            <div class="col-lg-4">
                     <div class="recuadroParallax">
                         <div class="contenidoRecuadro">
-                            <asp:Image ID="Image5" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img"/>
-                            <asp:Label runat="server" ID="lbl_nombreItemNuevo1" ></asp:Label>
-                            <asp:Label runat="server" ID="lbl_precioItemNuevo1" ></asp:Label>
-                            <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="Button1" />
+                            <asp:Image ID="img_itemNuevo0" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img"/>
+                            <asp:Label runat="server" ID="lbl_idItemNuevo0" Visible="false" ></asp:Label>
+                            <asp:Label runat="server" ID="lbl_tipoItemNuevo0" Visible="false" ></asp:Label>
+                            <asp:Label runat="server" ID="lbl_nombreItemNuevo0" ></asp:Label>
+                            <asp:Label runat="server" ID="lbl_descripcionItemNuevo0" ></asp:Label>
+                            <asp:Label runat="server" ID="lbl_precioItemNuevo0" ></asp:Label>
+                            <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemNuevo0" OnClick="btn_verItemNuevo0_Click" />
                         </div>
                      </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="recuadroParallax">
                         <div class="contenidoRecuadro">
-                            <asp:Image ID="Image6" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img" />
-                            <asp:Label runat="server" ID="lbl_nombreItemNuevo2" ></asp:Label>
-                            <asp:Label runat="server" ID="lbl_precioItemNuevo2" ></asp:Label>
-                            <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="Button2" />
+                            <asp:Image ID="img_itemNuevo1" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img" />
+                            <asp:Label runat="server" ID="lbl_idItemNuevo1" Visible="false" ></asp:Label>
+                            <asp:Label runat="server" ID="lbl_tipoItemNuevo1" Visible="false" ></asp:Label>
+                            <asp:Label runat="server" ID="lbl_nombreItemNuevo1" ></asp:Label>
+                            <asp:Label runat="server" ID="lbl_descripcionItemNuevo1" ></asp:Label>
+                            <asp:Label runat="server" ID="lbl_precioItemNuevo1" ></asp:Label>
+                            <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemNuevo1" OnClick="btn_verItemNuevo1_Click" />
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="recuadroParallax">
                         <div class="contenidoRecuadro">
-                            <asp:Image ID="Image7" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img" />
-                            <asp:Label runat="server" ID="lbl_nombreItemNuevo3" ></asp:Label>
-                            <asp:Label runat="server" ID="lbl_precioItemNuevo3" ></asp:Label>
-                            <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="Button3" />
+                            <asp:Image ID="img_itemNuevo2" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img" />
+                            <asp:Label runat="server" ID="lbl_idItemNuevo2" Visible="false" ></asp:Label>
+                            <asp:Label runat="server" ID="lbl_tipoItemNuevo2" Visible="false" ></asp:Label>
+                            <asp:Label runat="server" ID="lbl_nombreItemNuevo2" ></asp:Label>
+                            <asp:Label runat="server" ID="lbl_descripcionItemNuevo2" ></asp:Label>
+                            <asp:Label runat="server" ID="lbl_precioItemNuevo2" ></asp:Label>
+                            <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemNuevo2" OnClick="btn_verItemNuevo2_Click" />
                         </div>
                     </div>
                 </div>
             </div>
      <!-- Marcas -->
-        
-            <h1 class="titulo-marcas">Marcas</h1>
             <div class="row container-fluid contenedorMarcas">
                 <div class="col-lg-2 alfaomega">
                 <asp:Image ID="Image8" runat="server" ImageUrl="~\css\Home\LogoEditorial/Alfaomega.png" CssClass="img-alfaomega" />

@@ -30,15 +30,17 @@ h1{
   text-align: center;
 }
 
-.contenedorRecuadro{
-  background-color: rgb(255, 255, 255);
-}
-
 .recuadro{
     margin-left:  100px;
-    margin-bottom: 0;
+    margin-bottom: 30px;
+    padding-top: 5px;
     width: 300px;
-    height: 420px;
+    height: 450px;
+    background-color: rgba(255, 255, 255);
+  }
+
+.recuadro:hover{
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .contenidoRecuadro .btn-ver{
@@ -54,14 +56,9 @@ h1{
   margin: 0;
 }
 
-.recuadro .img{
-  position: relative;
-  width: 150px;
-  height: 300px;
-}
 
 /*Transicion Recuadro */
-.recuadro::before, .recuadro::after {
+/*.recuadro::before, .recuadro::after {
   box-sizing: border-box;
   content:   '';
   margin-left: 110px;
@@ -74,7 +71,6 @@ h1{
 .recuadro::before, .recuadro::after {
   top:0 ;
   left: 5.6%;
-
   height: 90%;
   width: 47.5%;
   -webkit-transform-origin: center;
@@ -112,7 +108,7 @@ h1{
   transition: -webkit-transform 0.5s;
 -webkit-transform 0.5s;
 }
-
+*/
 /*Los nuevos*/
 
 .contenedorRecuadroParallax{
