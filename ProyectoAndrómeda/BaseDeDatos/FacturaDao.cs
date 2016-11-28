@@ -18,14 +18,15 @@ namespace BaseDeDatos
             int idFactura = 0;
             try
             {
-
-                string query1 = "INSERT INTO Factura(fecha, total, idUsuario, idEstadoPago, idFacturaMP) VALUES (@fecha, @total, @idUsuario, @idEstadoPago, @idFacturaMP); select scope_identity()";
+                //EN LA WEB EL ID USUARIO ES IDUSUARIOCLIENTE -- SON LOS CLIENTES
+                string query1 = "INSERT INTO Factura(fecha, total, idUsuarioCliente, idEstadoPago, idFacturaMP, idTipoPago) VALUES (@fecha, @total, @idUsuarioCliente, @idEstadoPago, @idFacturaMP, @idTipoPago); select scope_identity()";
                 SqlCommand cmd1 = new SqlCommand(query1, cnn, trans);
                 cmd1.Parameters.AddWithValue(@"fecha", DateTime.Now);
                 cmd1.Parameters.AddWithValue(@"total", factura.total);
-                cmd1.Parameters.AddWithValue(@"idUsuario", factura.idUsuario);
-                cmd1.Parameters.AddWithValue(@"idEstadoPago", factura.idEstadoPago);
+                cmd1.Parameters.AddWithValue(@"idUsuarioCliente", factura.idUsuario);
+                cmd1.Parameters.AddWithValue(@"idEstadoPago", 2); //Registro en pendiente | 1="Aprobado" | 2="Pendiente" | 3="Cancelado"
                 cmd1.Parameters.AddWithValue(@"idFacturaMP", factura.idFacturaMP);
+                cmd1.Parameters.AddWithValue(@"idTipoPago", 2); //1="Ventanilla" | 2="Web"
                 idFactura = int.Parse(cmd1.ExecuteScalar().ToString());
 
                 foreach (ProductoCarrito detalleFactura in factura.listaProductoCarrito)
@@ -76,9 +77,10 @@ namespace BaseDeDatos
 
         public static FacturaEntidadQuery ConsultarUnaFactura(int id)
         {
-            string query = @"SELECT f.idFactura, f.fecha, f.total, f.idUsuario, f.idEstadoPago, f.idFacturaMP, c.nombreCliente, c.apellidoCliente, c.email
-                             FROM Factura f INNER JOIN Usuario u ON f.idUsuario = u.idUsuario
+            string query = @"SELECT f.idFactura, f.fecha, f.total, f.idUsuarioCliente, f.idEstadoPago, f.idFacturaMP, f.idEstadoPago, tp.descripcion, c.nombreCliente, c.apellidoCliente, c.email
+                             FROM Factura f INNER JOIN Usuario u ON f.idUsuarioCliente = u.idUsuario
                                             INNER JOIN Cliente c ON u.idCliente = c.idCliente
+                                            INNER JOIN TipoPago tp ON tp.idTipoPago = f.idTipoPago
                              WHERE f.idFactura = @id";
             SqlCommand cmd = new SqlCommand(query, obtenerBD());
             cmd.Parameters.AddWithValue(@"id", id);
@@ -91,13 +93,14 @@ namespace BaseDeDatos
                 factura.idFactura = int.Parse(dr["idFactura"].ToString());
                 factura.fecha = DateTime.Parse(dr["fecha"].ToString());
                 factura.total = float.Parse(dr["total"].ToString());
-                factura.idUsuario = int.Parse(dr["idUsuario"].ToString());
+                factura.idUsuario = int.Parse(dr["idUsuarioCliente"].ToString());
                 factura.nombreCliente = dr["nombreCliente"].ToString();
                 factura.apellidoCliente = dr["apellidoCliente"].ToString();
                 factura.mailCliente = dr["email"].ToString();
 
                 factura.idEstadoPago = int.Parse(dr["idEstadoPago"].ToString());
                 factura.idFacturaMP = dr["idFacturaMP"].ToString();
+                factura.nombreTipoPago = dr["descripcion"].ToString();
             }
 
             dr.Close();
@@ -109,9 +112,9 @@ namespace BaseDeDatos
 
         public static List<FacturaEntidadQuery> ConsultarFacturasQueryXUsuario(int id)
         {
-            string query = @"SELECT f.idFactura, f.fecha, f.total, f.idUsuario, ep.descripcion, f.idFacturaMP
+            string query = @"SELECT f.idFactura, f.fecha, f.total, f.idUsuarioCliente, ep.descripcion, f.idFacturaMP, f.idTipoPago
                              FROM Factura f INNER JOIN EstadoPago ep ON (f.idEstadoPago = ep.idEstadoPago)
-                             WHERE f.idUsuario = @id";
+                             WHERE f.idUsuarioCliente = @id";
             SqlCommand cmd = new SqlCommand(query, obtenerBD());
             cmd.Parameters.AddWithValue(@"id", id);
             SqlDataReader dr = cmd.ExecuteReader();
@@ -124,7 +127,8 @@ namespace BaseDeDatos
                 factura.idFactura = int.Parse(dr["idFactura"].ToString());
                 factura.fecha = DateTime.Parse(dr["fecha"].ToString());
                 factura.total = float.Parse(dr["total"].ToString());
-                factura.idUsuario = int.Parse(dr["idUsuario"].ToString());
+                factura.idUsuario = int.Parse(dr["idUsuarioCliente"].ToString());
+                factura.idTipoPago = int.Parse(dr["idTipoPago"].ToString());
                 if (dr["descripcion"] != DBNull.Value)
                     factura.nombreEstadoPago = dr["descripcion"].ToString();
                 if (dr["idFacturaMP"] != DBNull.Value)
@@ -199,6 +203,20 @@ namespace BaseDeDatos
             }
             cmd.Connection.Close();
             return resultado;
+        }
+
+        //ESTE METODO ES PARA CAMBIAR EL ESTADO DE LA FACTURA A "APROBADO" CUANDO
+        public static void CambiarEstadoFacturaAPagado(int id)
+        {
+            string query = @"UPDATE Factura SET idEstadoPago = @nuevoEstado
+                             WHERE idFactura = @id";
+            SqlCommand cmd = new SqlCommand(query, obtenerBD());
+            cmd.Parameters.AddWithValue(@"id", id);
+            cmd.Parameters.AddWithValue(@"nuevoEstado", 1); //1="Aprobado"
+
+            cmd.ExecuteNonQuery();
+           
+            cmd.Connection.Close();
         }
 
 

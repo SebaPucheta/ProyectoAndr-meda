@@ -250,7 +250,7 @@
                                     <tr style="height: 50%;">
                                         <td>
                                             <%--<asp:Image ID="rep_imagen" runat="server" ImageUrl='<%# Eval("idLibro", "imagenes/{0}.jpg") %>' style="width:124px; height:176px;" />--%>
-                                            <asp:Image ID="Image1" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:124px; height:176px;"/>
+                                            <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("idLibro", "imagenes/libro/{0}.jpg") %>' style="width:124px; height:176px;"/>
                                         </td>
                                     </tr>
                                     <tr style="height: 30%;">

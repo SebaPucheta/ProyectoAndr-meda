@@ -15,5 +15,7 @@ namespace ProyectoAndrómeda
         {
             lbl_nombreUsuario.Text = UsuarioDao.ConsultarNombreYApellidoUsuario(HttpContext.Current.User.Identity.Name);
         }
+
+
     }
 }

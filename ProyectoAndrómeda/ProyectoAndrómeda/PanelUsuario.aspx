@@ -116,7 +116,7 @@
 
                 <!--informacion de usuario-->
                 <div class="row">
-                    <asp:Label ID="lbl_misdatos" CssClass="h3 page-header" runat="server" Text="Mis datos" Visible="false"></asp:Label>
+                    <asp:Label ID="lbl_misdatos" CssClass="h3 page-header" runat="server" Text="Mis datos"></asp:Label>
                     <br />
                     <br />
 

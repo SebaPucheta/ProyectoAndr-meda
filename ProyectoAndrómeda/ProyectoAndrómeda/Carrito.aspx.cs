@@ -132,6 +132,7 @@ namespace ProyectoAndrómeda
         //[..] nuevaCantindad
         //[7] subtotal
 
+        //Cargar toda la grilla, TODA
         protected void cargarGrilla()
         {
             List<ProductoCarrito> lista = (List<ProductoCarrito>)Session["carrito"];
@@ -193,6 +194,14 @@ namespace ProyectoAndrómeda
             dgv_carrito.DataKeyNames = new string[] { "idProductoCarrito" };
             dgv_carrito.DataSource = dataView;
             dgv_carrito.DataBind();
+
+            foreach (GridViewRow row in dgv_carrito.Rows)
+            {
+                ((TextBox)row.FindControl("txt_cantidad")).Text = row.Cells[6].Text;
+            }
+
+            cargarPortadas();
+
         }
 
 
@@ -269,7 +278,7 @@ namespace ProyectoAndrómeda
             foreach (GridViewRow fila in dgv_carrito.Rows)
             {
                 //Replace("$", "")
-                string prueba = fila.Cells[8].Text.Replace("$", "").Replace(",", ".").Trim();
+                string prueba = fila.Cells[8].Text.Replace("$", "").Replace("€", "").Replace(",", ".").Trim();
                 total += float.Parse(prueba);
                 if (fila.Cells[4].Text.Equals("Apunte"))
                 {
@@ -345,7 +354,7 @@ namespace ProyectoAndrómeda
             //Creo la preferencia de la boleta como si fuera un objeto json, en un string
             string preferenceData = "{\"items\":" +
                                         "[{" +
-                                            "\"title\":\"EDUCOM\"," +
+                                            "\"title\":\"" + generarStringProductos() + "\"," +
                                             "\"quantity\":1," +
                                             "\"currency_id\":\"ARS\"," +
                                             "\"unit_price\":" + total +
@@ -360,6 +369,52 @@ namespace ProyectoAndrómeda
 
             return idMP;
         }
+
+        protected string generarStringProductos()
+        {
+            string cadena = "";
+            List<ProductoCarrito> lista = (List<ProductoCarrito>)Session["carrito"];
+            foreach (ProductoCarrito dato in lista)
+            {
+                cadena = cadena + "|";
+                if (dato.tipoItem == "Apunte")
+                {
+                    cadena = cadena + ((ApunteEntidad)dato.item).nombreApunte + " x" + dato.cantidad + " ";
+                }
+
+                if (dato.tipoItem == "Libro")
+                {
+                    cadena = cadena + ((LibroEntidad)dato.item).nombreLibro + " x" + dato.cantidad + " ";
+                }
+            }
+            return cadena;
+        }
+
+        //Cargar las portadas en el carrito de compras a la izquierda
+        protected void cargarPortadas()
+        {
+            foreach (GridViewRow fila in dgv_carrito.Rows)
+            {
+                if (fila.Cells[4].Text.Equals("Apunte"))
+                {
+                    ApunteEntidad apunte = ApunteDao.ConsultarApunte(int.Parse(fila.Cells[2].Text));
+                    if (apunte.imagenApunte == "")
+                        ((Image)fila.FindControl("img")).ImageUrl = "~/imagenes/PortadaApunte.png";
+                    else
+                        ((Image)fila.FindControl("img")).ImageUrl = apunte.imagenApunte;
+                }
+                else
+                {
+                    LibroEntidad libro = LibroDao.ConsultarLibro(int.Parse(fila.Cells[2].Text));
+                    if (libro.imagenLibro == "")
+                        ((Image)fila.FindControl("img")).ImageUrl = "~/imagenes/PortadaApunte.png";
+                    else
+                        ((Image)fila.FindControl("img")).ImageUrl = libro.imagenLibro;
+                }
+            }
+        }
+
+
 
 
         //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -377,6 +432,14 @@ namespace ProyectoAndrómeda
 
                 //Si le ingresaron una nueva cantidad, procedo
                 int nuevaCantidad = int.Parse(((TextBox)row.Cells[7].FindControl("txt_cantidad")).Text);
+
+                //Verifico si la cantidad es mayor a 0
+                if (nuevaCantidad < 1)
+                {
+                    Response.Write("<script>window.alert('Se ha ingresado una cantidad incorrecta')</script>");
+                    continue;
+                }
+
                 int idActual = int.Parse(dgv_carrito.DataKeys[row.RowIndex].Value.ToString());
 
                 foreach (ProductoCarrito dato in lista)
@@ -410,6 +473,7 @@ namespace ProyectoAndrómeda
         {
             ((List<ProductoCarrito>)Session["carrito"]).RemoveAt(e.RowIndex);
             cargarGrilla();
+            calcularTotal();
         }
 
 

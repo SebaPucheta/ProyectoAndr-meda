@@ -62,23 +62,27 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-menubuilder" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
+
                         <li><a class="page-scroll" href="Home.aspx">Home</a>
                         </li>
-                        <%--<li><a class="page-scroll" href="#galeria">Galeria</a>
-                        </li>--%>
+
                         <li><a class="btn" href="Catalogo.aspx">Catálogo</a>
                         </li>
-                        <li><a class="page-scroll" href="#contact">Contacto</a>
-                        </li>
+
                         <li><a class="page-scroll" href="Carrito.aspx">Carrito</a>
                         </li>
-                         <li class="active"><a class="page-scroll" href="PanelUsuario.aspx">
+
+                        <%--<li><a class="page-scroll" href="#contact">Contacto</a>
+                        </li>--%>
+
+                        <li class="active"><a class="page-scroll" href="PanelUsuario.aspx">
                             <asp:Label class="page-scroll" ID="lbl_nombreUsuario" runat="server"></asp:Label></a>
                         </li>
+
                         <li>
                             <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutText="Log out" LoginText="Log in" LogoutPageUrl="Home.aspx" />
                         </li>
-                       
+
 
                     </ul>
                 </div>
@@ -177,27 +181,27 @@
 
 
 
-     <!--------Login------------>
-       <script src='http://codepen.io/andytran/pen/vLmRVp.js'></script>
-       <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-       <script type="text/javascript">
-           $(document).ready(function () {
-                // Toggle Function
-               $('.toggle').click(function () {
-                   // Switches the Icon
-                   $(this).children('i').toggleClass('fa-pencil');
-                   // Switches the forms  
-                   $('.form').animate({
-                       height: "toggle",
-                       'padding-top': 'toggle',
-                       'padding-bottom': 'toggle',
-                       opacity: "toggle"
-                   }, "slow");
-               });
-           });
+    <!--------Login------------>
+    <script src='http://codepen.io/andytran/pen/vLmRVp.js'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Toggle Function
+            $('.toggle').click(function () {
+                // Switches the Icon
+                $(this).children('i').toggleClass('fa-pencil');
+                // Switches the forms  
+                $('.form').animate({
+                    height: "toggle",
+                    'padding-top': 'toggle',
+                    'padding-bottom': 'toggle',
+                    opacity: "toggle"
+                }, "slow");
+            });
+        });
 
-        </script>
-    
+    </script>
+
 
 </body>
 </html>

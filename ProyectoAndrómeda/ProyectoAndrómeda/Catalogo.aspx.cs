@@ -330,8 +330,22 @@ namespace ProyectoAndrómeda
 
                 case "carrito":
                     int idCarrito = int.Parse(((TextBox)e.Item.FindControl("txt_id")).Text);
-                    string dirCarrito = "Carrito.aspx?idLibro=0&idApunte=" + idCarrito.ToString();
-                    Response.Redirect(dirCarrito);
+                    try
+                    {
+                        setNumeroSeleccionado(idCarrito, 1);
+                        Response.Write("<script>window.alert('Agregado al carrito exiosamente')</script>");
+                    }
+                    catch(Exception ex)
+                    {
+                        Response.Write("<script>window.alert('Hubo un error, no se ha agregado al carrito')</script>");
+                    }
+                    finally
+                    {
+                        Response.Redirect("Catalogo.aspx");
+                    }
+
+                    //string dirCarrito = "Carrito.aspx?idLibro=0&idApunte=" + idCarrito.ToString();
+                    //Response.Redirect(dirCarrito);
                     break;
             }
         }
@@ -353,11 +367,115 @@ namespace ProyectoAndrómeda
 
                 case "carrito":
                     int idCarrito = int.Parse(((TextBox)e.Item.FindControl("txt_id")).Text);
-                    string dirCarrito = "Carrito.aspx?idApunte=0&idLibro=" + idCarrito.ToString();
-                    Response.Redirect(dirCarrito);
+                    try
+                    {
+                        setNumeroSeleccionado(idCarrito, 2);
+                        Response.Write("<script>window.alert('Agregado al carrito exiosamente')</script>");
+                    }
+                    catch (Exception ex)
+                    {
+                        Response.Write("<script>window.alert('Hubo un error, no se ha agregado al carrito')</script>");
+                    }
+                    finally
+                    {
+                        Response.Redirect("Catalogo.aspx");
+                    }
+
+                    //ESTO ES DE CUANDO REDIRECCIONA AL CARRITO
+                    //string dirCarrito = "Carrito.aspx?idApunte=0&idLibro=" + idCarrito.ToString();
+                    //Response.Redirect(dirCarrito);
                     break;
             }
         }
+
+        ///////////////////////////////////////////////////////////////////////////////////// ^
+        ///////////////////////////CARRITO/////////////////////////////////////////////////// |
+        ///////////////////////////////////////////////////////////////////////////////////// |
+        protected void setNumeroSeleccionado(int id, int tipo) //1=apunte;2=libro
+        {
+                if (tipo == 1)
+                {
+                    cargarApunte(id);
+                }
+                if (tipo == 2)
+                {
+                    cargarLibro(id);
+                }
+        }
+
+        //Carga un apunte en la variable de sesion
+        protected void cargarApunte(int id)
+        {
+            ApunteEntidad apunte = new ApunteEntidad();
+            apunte = ApunteDao.ConsultarApunte(id);
+            List<ProductoCarrito> lista = (List<ProductoCarrito>)Session["carrito"];
+
+            //Verifico cada producto del carrito para no agregar el mismo dos veces
+            foreach (ProductoCarrito dato in lista)
+            {
+                //Como aca es solo cargar apunte, verifico de apuntes solo
+                if (dato.tipoItem == "Apunte")
+                {
+                    //Creo el objeto Apunte de la lista para verificar y lo comparo con el que cree afuera
+                    ApunteEntidad apunteVerificacion = new ApunteEntidad();
+                    apunteVerificacion = (ApunteEntidad)dato.item;
+
+                    //Si son iguales, salgo del metodo
+                    if (apunte.idApunte == apunteVerificacion.idApunte)
+                    {
+                        return;
+                    }
+                }
+            }
+
+            //Paso la verificación, no hay nada igual
+            ProductoCarrito nuevoProducto = new ProductoCarrito();
+            nuevoProducto.idProductoCarrito = lista.Count + 1;
+            nuevoProducto.item = apunte;
+            nuevoProducto.tipoItem = "Apunte";
+            nuevoProducto.cantidad = 1;
+            nuevoProducto.subtotal = nuevoProducto.cantidad * apunte.precioApunte;
+            lista.Add(nuevoProducto);
+            Session["carrito"] = lista;
+        }
+
+
+        //Carga el libro en la variable de sesion
+        protected void cargarLibro(int id)
+        {
+            LibroEntidad libro = new LibroEntidad();
+            libro = LibroDao.ConsultarLibro(id);
+            List<ProductoCarrito> lista = (List<ProductoCarrito>)Session["carrito"];
+
+            //Verifico cada producto del carrito para no agregar el mismo dos veces
+            foreach (ProductoCarrito dato in lista)
+            {
+                //Como aca es solo cargar libros, verifico libros solo
+                if (dato.tipoItem == "Libro")
+                {
+                    //Creo el objeto Apunte de la lista para verificar y lo comparo con el que cree afuera
+                    LibroEntidad libroVerificacion = new LibroEntidad();
+                    libroVerificacion = (LibroEntidad)dato.item;
+
+                    //Si son iguales, salgo del metodo
+                    if (libro.idLibro == libroVerificacion.idLibro)
+                    {
+                        return;
+                    }
+                }
+            }
+
+            //Paso la verificación, no hay nada igual
+            ProductoCarrito nuevoProducto = new ProductoCarrito();
+            nuevoProducto.idProductoCarrito = lista.Count + 1;
+            nuevoProducto.item = libro;
+            nuevoProducto.tipoItem = "Libro";
+            nuevoProducto.cantidad = 1;
+            nuevoProducto.subtotal = nuevoProducto.cantidad * libro.precioLibro;
+            lista.Add(nuevoProducto);
+            Session["carrito"] = lista;
+        }
+
 
 
 

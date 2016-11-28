@@ -14,6 +14,7 @@ namespace Entidades
         public int idUsuario { get; set; }
         public int idEstadoPago { get; set; }
         public string idFacturaMP { get; set; }
+        public int idTipoPago { get; set; }
         public List<ProductoCarrito> listaProductoCarrito { get; set; }
     }
 }

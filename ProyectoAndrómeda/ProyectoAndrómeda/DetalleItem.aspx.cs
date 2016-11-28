@@ -54,8 +54,11 @@ namespace ProyectoAndrómeda
             lbl_stock.Text = libro.stock.ToString();
             lbl_codigo.Text = libro.codigoBarraLibro.ToString();
             lbl_descripcion.Text = libro.descripcionLibro;
+
             img_portada.ImageUrl = "imagenes/libro/" + libro.idLibro.ToString() + ".jpg";
         }
+
+
 
         protected void btn_carrito_Click(object sender, EventArgs e)
         {

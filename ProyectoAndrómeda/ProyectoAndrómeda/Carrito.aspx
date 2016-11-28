@@ -22,32 +22,43 @@
 
                     <asp:GridView ID="dgv_carrito" runat="server" CssClass="table table-responsive" AutoGenerateColumns="False" OnRowDeleting="dgv_carrito_RowDeleting" OnSelectedIndexChanged="dgv_carrito_SelectedIndexChanged">
                         <EmptyDataRowStyle ForeColor="Red" CssClass="table table-bordered" />
+                        <HeaderStyle BackColor="#CB0014" Font-Bold="True" ForeColor="White" />
+                        <EmptyDataRowStyle ForeColor="Red" />
+
                         <Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>
-                                    <%--<asp:Image ID="img" ImageUrl='<%# Eval("idProducto", "imagenes/{0}.jpg") %>'  style="width:74px; height:126px;" runat="server" />--%>
+                                    <asp:Image ID="img" style="width:94px; height:126px;" runat="server" />
                                 </ItemTemplate>
                                 <ControlStyle Width="40px" />
                                 <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
                             </asp:TemplateField>
-                            <asp:BoundField DataField="idProductoCarrito" Visible="true" />
-                            <asp:BoundField DataField="idProducto" Visible="true" />
-                            <asp:BoundField DataField="nombreProducto" HeaderText="Nombre" />
-                            <asp:BoundField DataField="tipoProducto" HeaderText="Tipo producto" />
-                            <asp:BoundField DataField="precioUnitario" HeaderText="Precio unitario" DataFormatString="{0:c}" />
-                            <asp:BoundField DataField="cantidad" HeaderText="Cantidad" />
+                            <asp:BoundField DataField="idProductoCarrito" Visible="true">
+                                <ItemStyle CssClass="hidden" />
+                                <HeaderStyle CssClass="hidden" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="idProducto" Visible="true">
+                                <ItemStyle CssClass="hidden" />
+                                <HeaderStyle CssClass="hidden" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="nombreProducto" HeaderText="Nombre" ItemStyle-VerticalAlign="Middle" ItemStyle-HorizontalAlign="Center" />
+                            <asp:BoundField DataField="tipoProducto" HeaderText="Tipo producto" ItemStyle-VerticalAlign="Middle" ItemStyle-HorizontalAlign="Center" />
+                            <asp:BoundField DataField="precioUnitario" HeaderText="Precio unitario" DataFormatString="{0:c}" ItemStyle-VerticalAlign="Middle" ItemStyle-HorizontalAlign="Right" />
+                            <asp:BoundField DataField="cantidad" HeaderText="Cantidad">
+                                <ItemStyle CssClass="hidden" />
+                                <HeaderStyle CssClass="hidden" />
+                            </asp:BoundField>
                             <%--Cantidad con textbox--%>
-                            <asp:TemplateField>
+                            <asp:TemplateField HeaderText="Cantidad">
                                 <ItemTemplate>
-                                    <asp:TextBox ID="txt_cantidad" AutoPostBack="false" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txt_cantidad" AutoPostBack="false" runat="server" class="form-control" style="width:60px; text-align:right;" ></asp:TextBox>
                                 </ItemTemplate>
                                 <ControlStyle Width="40px" />
                                 <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
                             </asp:TemplateField>
 
-                            <asp:BoundField DataField="subtotal" HeaderText="Subtotal" ApplyFormatInEditMode="False" DataFormatString="{0:C}" />
-                            <asp:ImageField>
-                            </asp:ImageField>
+                            <asp:BoundField DataField="subtotal" HeaderText="Subtotal" ApplyFormatInEditMode="False" DataFormatString="{0:C}" ItemStyle-VerticalAlign="Middle" ItemStyle-HorizontalAlign="Right" />
+
                             <asp:TemplateField>
                                 <ItemTemplate>
                                     <asp:LinkButton ID="btn_consultarApunte" CommandName="select" runat="server"><span class="glyphicon glyphicon-eye-open" style="color:black" aria-hidden="true"></span></asp:LinkButton>
@@ -66,11 +77,11 @@
                     </asp:GridView>
 
                     <!--total-->
-                    <label class="control-label col-md-2">Total: </label>
-                    <div class="col-md-2">
+                    <label class="control-label col-md-offset-9 col-md-1">Total: </label>
+                    <div >
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></div>
-                            <asp:Label runat="server" CssClass="form-control" ID="lbl_total"  />
+                            <asp:Label runat="server" CssClass="form-control" ID="lbl_total" />
                         </div>
                     </div>
                     <br />
@@ -80,7 +91,7 @@
                     <!--botones-->
                     <br />
                     <div style="height: 1px; background-color: black; text-align: center">
-                        <span style="background-color: white; position: relative; top: -0.5em;"> </span>
+                        <span style="background-color: white; position: relative; top: -0.5em;"></span>
                     </div>
                     <br />
                     <asp:Button runat="server" ID="btn_confirmar" Text="Confirmar" CssClass="btn btn-lg btn-danger" OnClick="btn_confirmar_Click" OnClientClick="return confirm('Una vez confirmado se registra la transacción. ¿Desea continuar?');" />

@@ -30,6 +30,8 @@ namespace ProyectoAndrómeda
             cliente.apellidoCliente = apellido.Text;
             cliente.nombreCliente = nombre.Text;
             cliente.email = correo.Text;
+            cliente.idTipoDNI = 1;
+            cliente.nroDni = int.Parse(dni.Text);
             return cliente;
         }
 
@@ -55,6 +57,7 @@ namespace ProyectoAndrómeda
             pass.Text = "";
             pass2.Text = "";
             correo.Text = "";
+            dni.Text = "";
         }
     }
 }

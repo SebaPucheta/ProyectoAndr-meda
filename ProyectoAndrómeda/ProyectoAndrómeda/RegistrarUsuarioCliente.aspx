@@ -17,6 +17,10 @@
 						<asp:TextBox runat="server" CssClass="txt" type="text" id="apellido" name="apellido"/>
 						<label class="label" id="lbl_apellido" for="nombre">Apellido:</label>
 					</div>
+                    <div class="input-group">
+						<asp:TextBox runat="server" CssClass="txt" type="text" id="dni" name="dni"/>
+						<label class="label" id="lbl_dni" for="dni">Número de documento:</label>
+					</div>
 					<div class="input-group">
 						<asp:TextBox runat="server" CssClass="txt" type="email" id="correo" name="correo"/>
 						<label class="label" for="correo">Correo:</label>
@@ -29,6 +33,7 @@
 						<asp:TextBox runat="server" CssClass="txt" type="password" id="pass2" name="pass2"/>
 						<label class="label" for="pass2">Repetir Contraseña:</label>
 					</div>
+                    
 					
 					
 						<asp:Label ID="lbl_info" runat="server" ForeColor="Red"></asp:Label>
@@ -172,6 +177,8 @@
                 document.getElementById("pass").addEventListener("blur", blurInput);
                 document.getElementById("pass2").addEventListener("focus", focusInput);
                 document.getElementById("pass2").addEventListener("blur", blurInput);
+                document.getElementById("dni").addEventListener("focus", focusInput);
+                document.getElementById("dni").addEventListener("blur", blurInput);
             }());
 
         </script>

@@ -122,6 +122,7 @@ namespace ProyectoAndrómeda
         protected void ocultarInformacionDeUsuario()
         {
             lbl_misdatos.Visible = false;
+
             lbl_nombre.Visible = false;
             txt_nombre.Visible = false;
             lbl_apellido.Visible = false;
@@ -144,6 +145,7 @@ namespace ProyectoAndrómeda
         protected void mostrarInformacionDeUsuario()
         {
             lbl_misdatos.Visible = true;
+
             lbl_nombre.Visible = true;
             txt_nombre.Visible = true;
             lbl_apellido.Visible = true;
@@ -281,7 +283,7 @@ namespace ProyectoAndrómeda
                         Response.Write("<script>window.alert('Ha habido un error')</script>");
                         break;
                     }
-                   
+
 
 
             }

@@ -55,11 +55,13 @@ namespace BaseDeDatos
             SqlTransaction trans = cn.BeginTransaction();
             try
             {
-                string consulta = @"INSERT INTO Cliente (nombreCliente, apellidoCliente, email) VALUES (@nom, @ape, @email); SELECT SCOPE_IDENTITY();";
+                string consulta = @"INSERT INTO Cliente (nombreCliente, apellidoCliente, nroDni, idTipoDni, email) VALUES (@nom, @ape, @nro, @idTipo, @email); SELECT SCOPE_IDENTITY();";
                 SqlCommand cmd = new SqlCommand(consulta, cn, trans);
                 cmd.Parameters.AddWithValue(@"nom", cli.nombreCliente);
                 cmd.Parameters.AddWithValue(@"ape", cli.apellidoCliente);
                 cmd.Parameters.AddWithValue(@"email", cli.email);
+                cmd.Parameters.AddWithValue(@"nro", cli.nroDni);
+                cmd.Parameters.AddWithValue(@"idTipo", 1);
                 cli.idCliente = Convert.ToInt32(cmd.ExecuteScalar());
 
                 consulta = @"INSERT INTO Usuario (nombreUsuario, contrasena, idCliente, idRol) VALUES (@usuario, @pass, @idCli, @idRol)";

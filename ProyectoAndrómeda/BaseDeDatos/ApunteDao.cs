@@ -21,7 +21,7 @@ namespace BaseDeDatos
             ApunteEntidad apu = new ApunteEntidad();
             string consulta = @"SELECT idApunte, stock, precioApunte, cantHoja, nombreApunte, descripcionApunte, anoApunte,
                                                 codigoBarraApunte, idPrecioHoja, idCategoria, idTipoApunte, idEditorial, idEstado, 
-                                                idProfesor, idMateria
+                                                idProfesor, idMateria, urlImagenApunte
                                 FROM Apunte WHERE idApunte = @id";
             SqlCommand cmd = new SqlCommand(consulta, obtenerBD());
             cmd.Parameters.AddWithValue(@"id", id);
@@ -47,6 +47,9 @@ namespace BaseDeDatos
                 if (dr["idProfesor"] != DBNull.Value)
                 { apu.idProfesor = int.Parse(dr["idProfesor"].ToString()); }
                 apu.idMateria = (int)dr["idMateria"];
+                if (dr["urlImagenApunte"] != DBNull.Value)
+                { apu.imagenApunte = dr["urlImagenApunte"].ToString(); }
+
             }
             dr.Close();
             cmd.Connection.Close();

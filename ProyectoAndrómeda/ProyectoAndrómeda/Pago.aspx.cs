@@ -11,7 +11,6 @@ using BaseDeDatos;
 using System.Collections;
 using mercadopago;
 using NUnit.Framework;
-using System.Net;
 
 using System.IO;
 using System.Data;
@@ -116,6 +115,10 @@ namespace ProyectoAndrómeda
         //Boton de "Pagar"
         protected void btn_pago_Click(object sender, EventArgs e)
         {
+
+            //TOCO PAGAR Y SE PASA A APROBADO
+            FacturaDao.CambiarEstadoFacturaAPagado(int.Parse(Request.QueryString["fact"]));
+
             ConsultarPago();
         }
 
