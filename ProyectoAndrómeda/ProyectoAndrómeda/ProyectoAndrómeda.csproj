@@ -79,6 +79,7 @@
     <Content Include="button.aspx" />
     <Content Include="Carrito.aspx" />
     <Content Include="Catalogo.aspx" />
+    <Content Include="Comprobante.aspx" />
     <Content Include="css\app.css" />
     <Content Include="DetalleItem.aspx" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -124,6 +125,13 @@
     </Compile>
     <Compile Include="Catalogo.aspx.designer.cs">
       <DependentUpon>Catalogo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Comprobante.aspx.cs">
+      <DependentUpon>Comprobante.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Comprobante.aspx.designer.cs">
+      <DependentUpon>Comprobante.aspx</DependentUpon>
     </Compile>
     <Compile Include="DetalleItem.aspx.cs">
       <DependentUpon>DetalleItem.aspx</DependentUpon>

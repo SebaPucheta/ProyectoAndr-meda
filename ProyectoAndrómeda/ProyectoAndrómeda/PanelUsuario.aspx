@@ -18,9 +18,10 @@
         <div class="row">
             <!--panel izquierdo-->
             <div class="col-md-3">
-                <br /><br />
+                <br />
+                <br />
                 <div class="row">
-                    <asp:Button ID="brn_datos" runat="server" Text="Mis datos" class="btn btn_rojo btn_flat btn_grande"  OnClick="brn_datos_Click"/>
+                    <asp:Button ID="brn_datos" runat="server" Text="Mis datos" class="btn btn_rojo btn_flat btn_grande" OnClick="brn_datos_Click" />
                 </div>
                 <div class="row">
                     <br />
@@ -32,13 +33,67 @@
             <div class="col-md-7 recuadroInfo">
 
                 <!--mis pedidos-->
-                <!--detalle factura-->
+
+                <!--factura-->
                 <div class="row">
-                    <asp:Label ID="hdetalle" CssClass="h3 page-header" runat="server" Text="Detalle de la compra" Visible="false"></asp:Label>
+                    <asp:Label ID="hfactura" CssClass="h3" runat="server" Text="Compras realizadas" Visible="false"></asp:Label>
                 </div>
 
                 <div class="row">
-                    
+                    <asp:Label ID="lbl_noHay" runat="server" Text="No se ha realizado ningún pedido" Visible="false"></asp:Label>
+                </div>
+
+
+                <div class="row">
+
+                    <asp:GridView ID="dgv_factura" runat="server" AutoGenerateColumns="false" class="table table-responsive"
+                        OnRowCommand="dgv_factura_RowCommand">
+                        <HeaderStyle BackColor="#CB0014" Font-Bold="True" ForeColor="White" />
+
+                        <EmptyDataRowStyle ForeColor="Red" />
+                        <Columns>
+                            <asp:BoundField DataField="idFactura" HeaderText="Nro." />
+                            <asp:BoundField DataField="fecha" HeaderText="Fecha" />
+                            <asp:BoundField DataField="total" HeaderText="Total" DataFormatString="{0:c}" />
+                            <asp:BoundField DataField="nombreEstadopago" HeaderText="Estado" ItemStyle-Font-Bold="true" />
+                            <asp:BoundField DataField="idFacturaMP" Visible="false" />
+                            <asp:BoundField DataField="idUsuario" Visible="false" />
+
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="btn_pagar" Visible="false" CommandName="pagar" CommandArgument="<%# Container.DataItemIndex %>" runat="server"><span class="glyphicon glyphicon-usd" style="color:#CB0014" aria-hidden="true"></span></asp:LinkButton>
+                                </ItemTemplate>
+                                <ControlStyle Width="10px" />
+                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                            </asp:TemplateField>
+
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="btn_comprobante" Visible="false" CommandName="comprobante" CommandArgument="<%# Container.DataItemIndex %>" runat="server"><span class="glyphicon glyphicon-file" style="color:#CB0014" aria-hidden="true"></span></asp:LinkButton>
+                                </ItemTemplate>
+                                <ControlStyle Width="10px" />
+                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                            </asp:TemplateField>
+
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="btn_consultarFactura" CommandName="select" CommandArgument="<%# Container.DataItemIndex %>" runat="server"><span class="glyphicon glyphicon-eye-open" style="color:#CB0014" aria-hidden="true"></span></asp:LinkButton>
+                                </ItemTemplate>
+                                <ControlStyle Width="10px" />
+                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                            </asp:TemplateField>
+
+                        </Columns>
+                    </asp:GridView>
+                </div>
+
+                <!--detalle factura-->
+                <div class="row">
+                    <asp:Label ID="hdetalle" CssClass="h3" runat="server" Text="Detalle de la compra" Visible="false"></asp:Label>
+                </div>
+
+                <div class="row">
+
                     <asp:GridView ID="dgv_detalle" runat="server" AutoGenerateColumns="false" class="table table-responsive"
                         OnRowCommand="dgv_detalle_RowCommand">
 
@@ -47,6 +102,15 @@
                         <Columns>
 
                             <asp:BoundField DataField="idProductoCarrito" HeaderText="Nro." />
+
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="img_digital" Visible="false" Enabled="false" runat="server"><span class="glyphicon glyphicon glyphicon-phone glyphicon-user" style="color:#CB0014;" aria-hidden="true"></span></asp:LinkButton>
+                                </ItemTemplate>
+                                <ControlStyle Width="10px" />
+                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                            </asp:TemplateField>
+
                             <asp:BoundField DataField="nombreItem" HeaderText="Nombre" />
                             <asp:BoundField DataField="tipoItem" HeaderText="Tipo producto" />
                             <asp:BoundField DataField="cantidad" HeaderText="Cantidad" />
@@ -75,52 +139,11 @@
                         </Columns>
                     </asp:GridView>
                 </div>
-                
-                <!--factura-->
-                <div class="row">
-                    <asp:Label ID="hfactura" CssClass="h3 page-header" runat="server" Text="Compras realizadas" Visible="false"></asp:Label>
-                </div>
 
-                <div class="row">
-                   
-                    <asp:GridView ID="dgv_factura" runat="server" AutoGenerateColumns="false" class="table table-responsive"
-                        OnRowCommand="dgv_factura_RowCommand">
-                        <HeaderStyle BackColor="#CB0014" Font-Bold="True" ForeColor="White" />
-
-                        <EmptyDataRowStyle ForeColor="Red" />
-                        <Columns>
-                            <asp:BoundField DataField="idFactura" HeaderText="Nro." />
-                            <asp:BoundField DataField="fecha" HeaderText="Fecha" />
-                            <asp:BoundField DataField="total" HeaderText="Total" DataFormatString="{0:c}" />
-                            <asp:BoundField DataField="nombreEstadopago" HeaderText="Estado" ItemStyle-Font-Bold="true" />
-                            <asp:BoundField DataField="idFacturaMP" Visible="false" />
-                            <asp:BoundField DataField="idUsuario" Visible="false" />
-
-                            <asp:TemplateField>
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="btn_pagar" Visible="false" CommandName="pagar" CommandArgument="<%# Container.DataItemIndex %>" runat="server"><span class="glyphicon glyphicon-usd" style="color:#CB0014" aria-hidden="true"></span></asp:LinkButton>
-                                </ItemTemplate>
-                                <ControlStyle Width="10px" />
-                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
-                            </asp:TemplateField>
-
-                            <asp:TemplateField>
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="btn_consultarFactura" CommandName="select" CommandArgument="<%# Container.DataItemIndex %>" runat="server"><span class="glyphicon glyphicon-eye-open" style="color:#CB0014" aria-hidden="true"></span></asp:LinkButton>
-                                </ItemTemplate>
-                                <ControlStyle Width="10px" />
-                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
-                            </asp:TemplateField>
-
-                        </Columns>
-                    </asp:GridView>
-                </div>
 
                 <!--informacion de usuario-->
                 <div class="row">
-                    <asp:Label ID="lbl_misdatos" CssClass="h3 page-header" runat="server" Text="Mis datos"></asp:Label>
-                    <br />
-                    <br />
+                    <asp:Label ID="lbl_misdatos" CssClass="h3" runat="server" Text="Mis datos"></asp:Label>
 
                 </div>
                 <div class="row">
@@ -169,6 +192,6 @@
         <!--termina container-->
 
     </div>
-    
-    
+
+
 </asp:Content>

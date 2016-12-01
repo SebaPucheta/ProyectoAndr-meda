@@ -33,14 +33,28 @@ namespace ProyectoAndrómeda
             dgv_factura.DataKeyNames = new string[] { "idFactura" };
             dgv_factura.DataBind();
 
+            //Boton de "pagar"
             foreach (GridViewRow row in dgv_factura.Rows)
             {
                 if (row.Cells[3].Text == "Pendiente")
-                {
                     row.FindControl("btn_pagar").Visible = true;
-                }
-
             }
+
+            //Boton de "comprobante"
+            foreach (GridViewRow row in dgv_factura.Rows)
+            {
+                if (row.Cells[3].Text == "Aprobado")
+                    row.FindControl("btn_comprobante").Visible = true;
+            }
+
+            //Verificar si hay algo apra mostrar mensaje de que no hay nada
+            if (HayCompras())
+                lbl_noHay.Visible = false;
+            else
+                lbl_noHay.Visible = true;
+
+            hdetalle.Visible = false;
+
 
         }
 
@@ -48,6 +62,8 @@ namespace ProyectoAndrómeda
 
         protected void cargarGrillaDetalleFactura(int idFactura)
         {
+            hdetalle.Visible = true;
+            dgv_detalle.Visible = true;
             List<ProductoCarritoQuery> lista = FacturaDao.ConsultarDetalleDeFactura(idFactura);
 
             DataTable tabla = new DataTable();
@@ -105,11 +121,14 @@ namespace ProyectoAndrómeda
 
             foreach (GridViewRow row in dgv_detalle.Rows)
             {
-                if (row.Cells[2].Text == "Apunte")
+                if (row.Cells[3].Text == "Apunte")
                 {
                     //Si no lo hago visible no funciona nose por que
-                    if (ApunteDao.ConsultarTipoApunte(int.Parse(row.Cells[5].Text)) == "Digital")
+                    if (ApunteDao.ConsultarTipoApunte(int.Parse(row.Cells[6].Text)) == "Digital")
+                    {
+                        row.FindControl("img_digital").Visible = true;
                         row.FindControl("btn_descargar").Visible = true;
+                    }
                 }
 
             }
@@ -137,7 +156,8 @@ namespace ProyectoAndrómeda
             hdetalle.Visible = true;
             hfactura.Visible = true;
             dgv_factura.Visible = true;
-            dgv_detalle.Visible = true;
+            dgv_detalle.Visible = false;
+            lbl_noHay.Visible = false;
 
             Session["idFacturaPanel"] = null;
         }
@@ -154,13 +174,16 @@ namespace ProyectoAndrómeda
             txt_usuario.Visible = true;
             lbl_email.Visible = true;
             txt_email.Visible = true;
-            lbl_dni.Visible = true;
-            txt_dni.Visible = true;
+
+            //Deberia ser TRUE pero no se carga nunca en el registro
+            lbl_dni.Visible = false;
+            txt_dni.Visible = false;
 
             hdetalle.Visible = false;
             hfactura.Visible = false;
             dgv_detalle.Visible = false;
             dgv_factura.Visible = false;
+            lbl_noHay.Visible = false;
 
             Session["idFacturaPanel"] = null;
         }
@@ -195,6 +218,16 @@ namespace ProyectoAndrómeda
         }
 
 
+        protected bool HayCompras()
+        {
+            bool bandera = true;
+            if(dgv_factura.Rows.Count.ToString() == "0")
+            {
+                bandera = false;
+            }
+            return bandera;
+        }
+
 
         ///////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////EVENTOS//////////////////////////////////////////
@@ -225,6 +258,13 @@ namespace ProyectoAndrómeda
                     GridViewRow rowDownload = dgv_factura.Rows[indexDownload];
                     int idFacturaSeleccionada = int.Parse(rowDownload.Cells[0].Text);
                     Response.Redirect("Pago.aspx?fact=" + idFacturaSeleccionada.ToString());
+                    break;
+
+                case "comprobante":
+                    int indexComprobante = Convert.ToInt32(e.CommandArgument);
+                    GridViewRow rowComprabnte = dgv_factura.Rows[indexComprobante];
+                    int idFacturaComprobante = int.Parse(rowComprabnte.Cells[0].Text);
+                    Response.Redirect("Comprobante.aspx?id=" + idFacturaComprobante.ToString());
                     break;
             }
         }
