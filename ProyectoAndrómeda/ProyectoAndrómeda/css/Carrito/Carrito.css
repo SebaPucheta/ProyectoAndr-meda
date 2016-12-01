@@ -1,0 +1,14 @@
+body{
+	background-color: #F8F8F8;
+
+}
+.recuadroGrande{
+	background-color: #FFFFFF;
+	margin-top: 35px;
+	padding-bottom:  20px;
+	margin-bottom: 300px;
+}
+
+.btnEspecial{
+	height: 45px;
+}

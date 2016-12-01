@@ -1,5 +1,12 @@
 
 /* Pen Title */
+body{
+  background-image: url("Imagenes/book3.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size:cover;
+  
+}
 .pen-title {
   padding: 50px 0;
   text-align: center;
@@ -28,7 +35,7 @@
   background: #ffffff;
   max-width: 320px;
   width: 100%;
-  border-top: 5px solid #33b5e5;
+  border-top: 5px solid #E53333;
   box-shadow: 2px 2px 10px 2px #4f4f4f;
   margin: 0 auto;
 }
@@ -37,7 +44,7 @@
   position: absolute;
   top: -0;
   right: -0;
-  background: #33b5e5;
+  background: #E53333;
   width: 30px;
   height: 30px;
   margin: -5px 0 0;
@@ -101,7 +108,7 @@ display: none;
 }
 .form-module .btnlogin {
   cursor: pointer;
-  background: #33b5e5;
+  background: #E53333;
   width: 100%;
   border: 0;
   padding: 10px 15px;
@@ -110,7 +117,7 @@ display: none;
   transition: 0.3s ease;
 }
 .form-module .btnlogin:hover {
-  background: #178ab4;
+  background: #ED3E3E;
 }
 .form-module .cta {
   background: #f2f2f2;

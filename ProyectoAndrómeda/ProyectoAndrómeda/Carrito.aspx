@@ -1,12 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Carrito.aspx.cs" Inherits="ProyectoAndrómeda.Carrito" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+    <link href="css/Carrito/Carrito.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Body" runat="server">
 
 
-    <div class="container">
+    <div class="container recuadroGrande">
         <!--primera fila (titulo)-->
         <div class="row">
             <div class="col-md-12">
@@ -18,7 +19,7 @@
         <div class="row">
             <!--tabla del carrito-->
             <div class="col-md-12">
-                <div style="background-color: #E9E9E9; padding: 25px; margin: 25px; box-shadow: 2px 2px 10px 2px #000000;">
+                <div >
 
                     <asp:GridView ID="dgv_carrito" runat="server" CssClass="table table-responsive" AutoGenerateColumns="False" OnRowDeleting="dgv_carrito_RowDeleting" OnSelectedIndexChanged="dgv_carrito_SelectedIndexChanged">
                         <EmptyDataRowStyle ForeColor="Red" CssClass="table table-bordered" />
@@ -94,9 +95,9 @@
                         <span style="background-color: white; position: relative; top: -0.5em;"></span>
                     </div>
                     <br />
-                    <asp:Button runat="server" ID="btn_confirmar" Text="Confirmar" CssClass="btn btn-lg btn-danger" OnClick="btn_confirmar_Click" OnClientClick="return confirm('Una vez confirmado se registra la transacción. ¿Desea continuar?');" />
-                    <asp:Button runat="server" ID="btn_actualizar" Text="Actualizar carrito" CssClass="btn btn-lg btn-danger" OnClick="btn_actualizar_Click" />
-                    <asp:Button runat="server" ID="btn_cancelar" Text="Cancelar" CssClass="btn btn-lg btn-danger" OnClick="btn_cancelar_Click" />
+                    <asp:Button runat="server" ID="btn_confirmar" Text="Confirmar" CssClass="btn btn_flat btn_rojo btn_mediano" OnClick="btn_confirmar_Click" OnClientClick="return confirm('Una vez confirmado se registra la transacción. ¿Desea continuar?');" />
+                    <asp:Button runat="server" ID="btn_actualizar" Text="Actualizar carrito" CssClass="btn btn_flat btn_rojo btn_mediano" OnClick="btn_actualizar_Click" />
+                    <asp:Button runat="server" ID="btn_cancelar" Text="Cancelar" CssClass="btn btn_flat btn_azul btn_mediano" OnClick="btn_cancelar_Click" />
 
                 </div>
             </div>

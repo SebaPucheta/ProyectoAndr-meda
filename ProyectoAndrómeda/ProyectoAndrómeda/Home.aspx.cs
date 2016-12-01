@@ -69,7 +69,7 @@ namespace ProyectoAndrómeda
             lblTipo.Text = "Apunte";
             lblNombre.Text = apunte.nombreApunte;
             lblDescripcion.Text = apunte.descripcionApunte;
-            lblPrecio.Text = "Precio: $" + apunte.precioApunte.ToString();
+            lblPrecio.Text = "Precio: AR$" + apunte.precioApunte.ToString();
         }
 
         protected void CargarLibro(LibroEntidad libro, Image img, Label lblId,Label lblTipo, Label lblNombre, Label lblDescripcion, Label lblPrecio)
@@ -86,7 +86,7 @@ namespace ProyectoAndrómeda
             lblTipo.Text = "Libro";
             lblNombre.Text = libro.nombreLibro;
             lblDescripcion.Text = libro.descripcionLibro;
-            lblPrecio.Text = "Precio: $" + libro.precioLibro.ToString();
+            lblPrecio.Text = "Precio: AR$" + libro.precioLibro.ToString();
         }
 
         //Metodos para buscar los label y los image
@@ -116,7 +116,7 @@ namespace ProyectoAndrómeda
             foreach (Control c in DevolverBody().Controls)
             {
                 tipo = c.GetType().ToString();
-                if (c.GetType().ToString().Equals("System.Web.UI.WebControls.Image") || c.GetType().ToString().Equals("System.Web.UI.WebControls.Label"))
+                if (c.GetType().ToString().Equals("System.Web.UI.WebControls.ImageButton") || c.GetType().ToString().Equals("System.Web.UI.WebControls.Label"))
                 {
                     if (c.ID.Equals(idControl))
                     {

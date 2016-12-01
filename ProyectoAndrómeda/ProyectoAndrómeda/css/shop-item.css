@@ -30,7 +30,7 @@ body {
 }
 
 .liCustom:hover{
-  background: #0066CC;
+  background: #CB0014;
   padding-left: 15px;
   color: #FFFFFF;
 }
@@ -674,7 +674,7 @@ Slider
 }
 .nav-tabs li a:hover {
 	background:#ffffff !important;
-	border:1px solid #e5e5e5;
+	border:1px solid #E5E5E5;
 }
 .nav-tabs i {
 	padding-right:10px;
@@ -700,7 +700,7 @@ Slider
 	border-color:#e5e5e5 #e5e5e5 transparent;
 	border-style:solid;
 	border-right:1px !important;
-	color: #0066CC !important;
+	color: #CB0014 !important;
 }
 /*--------------------------------------------------FOOTER---------------------------------------------------*/
 .footerarr {
@@ -846,7 +846,8 @@ ul.footermenu li a:hover {
 	transition:border linear 0.2s,box-shadow linear 0.2s;
 }
 /*--------------------------------------------------	intro-note---------------------------------------------------*/
-
+
+
 .intro-note h1
 {
     text-transform: uppercase;

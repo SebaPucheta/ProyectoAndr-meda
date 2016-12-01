@@ -24,6 +24,7 @@ h1{
 .titulo-marcas{
 
 }
+
 /*Los mas vendidos*/
 .contenidoRecuadro{
   margin:  25px;
@@ -40,7 +41,7 @@ h1{
   }
 
 .recuadro:hover{
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: #FFFFFF;
 }
 
 .contenidoRecuadro .btn-ver{
@@ -52,7 +53,7 @@ h1{
 }
 
 .contenidoRecuadro .btn-ver:hover{
-  background-color:  #dd0919;
+  background-color: #DD0919;
   margin: 0;
 }
 
@@ -109,6 +110,7 @@ h1{
 -webkit-transform 0.5s;
 }
 */
+
 /*Los nuevos*/
 
 .contenedorRecuadroParallax{
@@ -172,4 +174,16 @@ h1{
 .contenedorMarcas .az .img-az{
   margin-left:  150px;
   margin-right: 150px;
+}
+
+/*Informacion Item*/
+.tituloItem{
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.precioItem{
+  font-weight: bold;
+  font-size: 17px;
+  color: #36A18C;
 }

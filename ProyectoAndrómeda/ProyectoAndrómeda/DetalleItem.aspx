@@ -2,12 +2,13 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+    <link href="css/DetalleProducto/DetalleProducto.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Body" runat="server">
 
-    <div class="container">
+    <div class="container recuadroGrande">
         <!--primera fila (titulo)-->
         <div class="row">
             <div class="col-md-12">
@@ -19,13 +20,13 @@
         <div class="row">
             <!--imagen-->
             <div class="col-md-5">
-                <div style="background-color: #E9E9E9; padding: 25px; margin: 25px; box-shadow: 2px 2px 10px 2px #000000; text-align:center;">
+                <div class="recuadroImagenItem">
                     <asp:Image ID="img_portada" runat="server" style="width:215px; height:307px; " />
                 </div>
             </div>
             <!--datos-->
             <div class="col-md-7">
-                <div style="background-color: #E9E9E9; padding: 25px; margin: 25px; box-shadow: 2px 2px 10px 2px #000000;">
+                <div class="recuadroInfo">
 
                     <table class="table table-responsive">
                         <!--nombre-->
@@ -85,6 +86,8 @@
 
 
     </div>
-
+    <br />
+    <br />
+    
 </asp:Content>
 

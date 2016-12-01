@@ -1,0 +1,19 @@
+body{
+	background-color: #F8F8F8;
+	
+}
+
+.recuadroGrande{
+	background-color: #FFFFFF;
+	margin-top: 35px;
+}
+
+.recuadroImagenItem{
+	margin: 20px; 
+	text-align:center;
+}
+
+
+.recuadroInfo{
+	margin: 25px; 
+}

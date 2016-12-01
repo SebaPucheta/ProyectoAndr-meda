@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Catalogo.aspx.cs" Inherits="ProyectoAndrómeda.Catalogo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+    <link href="css/Catalogo/Catalogo.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Body" runat="server">
@@ -8,7 +9,7 @@
     <!--el tamaño de la imagen es el 5% de una A4 (124*176)px - original(3508*2480)px -->
 
 
-    <div class="container">
+    <div class="container recuadroGrande">
         <!--encabezado-->
         <div class="row">
             <div class="col-sm-12">
@@ -20,7 +21,7 @@
         <div class="row">
 
             <!--panel izquierdo (filtros)-->
-            <div class="col-md-3" style="margin-bottom:100%;">
+            <div class="col-md-3 categorias" >
                 <div class="sidebar topspace30">
                     <div class="wowwidget">
 
@@ -157,20 +158,21 @@
 
             <!-- ============= -->
             <!--catálogo apunte-->
+            
             <div class="col-sm-9">
                 <h3 class="page-header">Apuntes</h3>
             </div>
 
             <div class="col-md-9">
-                <asp:Repeater ID="repeater_apuntes" runat="server" EnableTheming="true" OnItemCommand="repeater_apuntes_ItemCommand">
+                <asp:Repeater  ID="repeater_apuntes" runat="server" EnableTheming="true" OnItemCommand="repeater_apuntes_ItemCommand">
                     <ItemTemplate>
                         <div class="col-sm-4 col-xs-6">
 
-                            <div style="background-color: #E9E9E9; text-align: center; margin: 10px; padding: 20px; width: 100%; height: 375px; box-shadow: 2px 2px 10px 2px #000000;">
+                            <div class="recuadros" >
                                 <table class="table table-responsive" style="width: 100%; height: 100%;">
                                     <tr style="height: 50%;">
                                         <td>
-                                            <asp:Image ID="rep_imagen" runat="server" ImageUrl='<%# Eval("idApunte", "imagenes/apunte/{0}.jpg") %>' style="width:124px; height:176px;" />
+                                            <asp:ImageButton CommandName="ver" ID="rep_imagen" runat="server"  ImageUrl='<%# Eval("idApunte", "imagenes/apunte/{0}.jpg") %>' style="width:124px; height:176px;" />
                                         </td>
                                     </tr>
                                     <tr style="height: 30%;">
@@ -187,7 +189,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:LinkButton ID="btn_ver" runat="server" CommandName="ver" CssClass="btn btn-danger">Ver</asp:LinkButton>
+                                            <%--<asp:LinkButton ID="btn_ver" runat="server" CommandName="ver" CssClass="btn btn-danger">Ver</asp:LinkButton>--%>
                                             <asp:LinkButton ID="btn_carrito" CommandName="carrito" runat="server"><span class="glyphicon glyphicon-shopping-cart glyphicon-user" style="color:black" aria-hidden="true"></span></asp:LinkButton>
                                             <asp:LinkButton ID="img_digital" Visible="false" Enabled="false" runat="server"><span class="glyphicon glyphicon glyphicon-phone glyphicon-user" style="color:#CB0014;" aria-hidden="true"></span></asp:LinkButton>
                                         </td>
@@ -232,8 +234,7 @@
                     </tr>
                 </table>
             </div>
-
-
+            
             <!-- ============= -->
             <!--catálogo libro-->
             <div class="col-sm-9">
@@ -245,12 +246,12 @@
                     <ItemTemplate>
                         <div class="col-sm-4 col-xs-6">
 
-                            <div style="background-color: #E9E9E9; text-align: center; margin: 10px; padding: 20px; width: 100%; height: 375px; box-shadow: 2px 2px 10px; color:#000000;">
+                            <div class="recuadros">
                                 <table class="table" style="width: 100%; height: 100%;">
                                     <tr style="height: 50%;">
                                         <td>
                                             <%--<asp:Image ID="rep_imagen" runat="server" ImageUrl='<%# Eval("idLibro", "imagenes/{0}.jpg") %>' style="width:124px; height:176px;" />--%>
-                                            <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("idLibro", "imagenes/libro/{0}.jpg") %>' style="width:124px; height:176px;"/>
+                                            <asp:ImageButton ID="Image1" CommandName="ver" runat="server" ImageUrl='<%# Eval("idLibro", "imagenes/libro/{0}.jpg") %>' style="width:124px; height:176px;"/>
                                         </td>
                                     </tr>
                                     <tr style="height: 30%;">
@@ -267,7 +268,6 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:LinkButton ID="btn_ver" runat="server" CommandName="ver" CssClass="btn btn-danger">Ver</asp:LinkButton>
                                             <asp:LinkButton ID="btn_carrito" CommandName="carrito" runat="server"><span class="glyphicon glyphicon-shopping-cart glyphicon-user" style="color:black" aria-hidden="true"></span></asp:LinkButton>
 
                                         </td>

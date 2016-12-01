@@ -128,39 +128,60 @@
        <div class="col-lg-4">
                 <div class="recuadro">
                     <div class="contenidoRecuadro">
-                        <asp:Image ID="img_itemVendido0" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:206px;height:307px;" CssClass="img"/>
+                        <asp:ImageButton ID="img_itemVendido0" runat="server" OnClick="btn_verItemPopular0_Click" ImageUrl="~/imagenes/PortadaApunte.png" style="width:206px;height:307px;" CssClass="img"/>
                         <asp:Label runat="server" ID="lbl_idItemVendido0" Visible="false" ></asp:Label>
                         <asp:Label runat="server" ID="lbl_tipoItemVendido0" Visible="false" ></asp:Label>
-                        <asp:Label runat="server" ID="lbl_nombreItemVendido0" ></asp:Label>
-                        <asp:Label runat="server" ID="lbl_descripcionItemVendido0" ></asp:Label>
-                        <asp:Label runat="server" ID="lbl_precioItemVendido0" ></asp:Label>
-                        <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemPopular0" OnClick="btn_verItemPopular0_Click" />
+                        <div class:"row">
+                        <asp:Label runat="server" CssClass="tituloItem" ID="lbl_nombreItemVendido0" ></asp:Label>
+                        </div>
+                        <div class:"row">
+                        <asp:Label runat="server" CssClass="descripcionItem" ID="lbl_descripcionItemVendido0" ></asp:Label>
+                        </div>
+                        <div class:"row">
+                        <asp:Label runat="server" CssClass="precioItem" ID="lbl_precioItemVendido0" ></asp:Label>
+                        </div>
+                        <%--<asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemPopular0" OnClick="btn_verItemPopular0_Click" />--%>
                     </div>
                  </div>
             </div>
             <div class="col-lg-4">
                 <div class="recuadro">
                     <div class="contenidoRecuadro">
-                        <asp:Image ID="img_itemVendido1" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:206px;height:307px;" CssClass="img" />
+                        <asp:ImageButton ID="img_itemVendido1" OnClick="btn_verItemPopular1_Click" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:206px;height:307px;" CssClass="img" />
                         <asp:Label runat="server" ID="lbl_idItemVendido1" Visible="false" ></asp:Label>
                         <asp:Label runat="server" ID="lbl_tipoItemVendido1" Visible="false" ></asp:Label>
-                        <asp:Label runat="server" ID="lbl_nombreItemVendido1" ></asp:Label>
-                        <asp:Label runat="server" ID="lbl_descripcionItemVendido1" ></asp:Label>
-                        <asp:Label runat="server" ID="lbl_precioItemVendido1" ></asp:Label>
-                        <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemPopular1" OnClick="btn_verItemPopular1_Click" />
+                        <div class:"row">
+                        <asp:Label runat="server" CssClass="tituloItem" ID="lbl_nombreItemVendido1" ></asp:Label>
+                        </div>
+                        <div class:"row">
+                        <asp:Label runat="server" CssClass="descripcionItem" ID="lbl_descripcionItemVendido1" ></asp:Label>
+                        </div>
+                        <div class:"row">
+                        <asp:Label runat="server" CssClass="precioItem" ID="lbl_precioItemVendido1" ></asp:Label>
+                        </div>
+                        <%--<asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemPopular1" OnClick="btn_verItemPopular1_Click" />--%>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="recuadro">
                     <div class="contenidoRecuadro">
-                        <asp:Image ID="img_itemVendido2" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:206px;height:307px;" CssClass="img" />
-                        <asp:Label runat="server" ID="lbl_idItemVendido2" Visible="false" ></asp:Label>
-                        <asp:Label runat="server" ID="lbl_tipoItemVendido2" Visible="false" ></asp:Label>
-                        <asp:Label runat="server" ID="lbl_nombreItemVendido2" ></asp:Label>
-                        <asp:Label runat="server" ID="lbl_descripcionItemVendido2" ></asp:Label>
-                        <asp:Label runat="server" ID="lbl_precioItemVendido2" ></asp:Label>
-                        <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemPopular2" OnClick="btn_verItemPopular2_Click" />
+                        <asp:ImageButton ID="img_itemVendido2" OnClick="btn_verItemPopular2_Click" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:206px;height:307px;" CssClass="img" />
+                        <div class="row">
+                            <asp:Label runat="server" ID="lbl_idItemVendido2" Visible="false" ></asp:Label>
+                            <asp:Label runat="server" ID="lbl_tipoItemVendido2" Visible="false" ></asp:Label>
+                            <div class:"row">
+                            <asp:Label runat="server" CssClass="tituloItem" ID="lbl_nombreItemVendido2" ></asp:Label>
+                            </div>
+                            <div class:"row">
+                            <asp:Label runat="server" CssClass="descripcionItem" ID="lbl_descripcionItemVendido2" ></asp:Label>
+                            </div>
+                            <div class:"row">
+                            <asp:Label runat="server" CssClass="precioItem" ID="lbl_precioItemVendido2" ></asp:Label>
+                            </div>
+                        </div>
+                        
+                        <%--<asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemPopular2" OnClick="btn_verItemPopular2_Click" />--%>
                     </div>
                 </div>
             </div>
@@ -172,41 +193,61 @@
            <div class="col-lg-4">
                     <div class="recuadroParallax">
                         <div class="contenidoRecuadro">
-                            <asp:Image ID="img_itemNuevo0" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:206px;height:307px;" CssClass="img"/>
+                            <asp:ImageButton OnClick="btn_verItemNuevo0_Click" ID="img_itemNuevo0" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:206px;height:307px;" CssClass="img"/>
                             <asp:Label runat="server" ID="lbl_idItemNuevo0" Visible="false" ></asp:Label>
                             <asp:Label runat="server" ID="lbl_tipoItemNuevo0" Visible="false" ></asp:Label>
-                            <asp:Label runat="server" ID="lbl_nombreItemNuevo0" ></asp:Label>
-                            <asp:Label runat="server" ID="lbl_descripcionItemNuevo0" ></asp:Label>
-                            <asp:Label runat="server" ID="lbl_precioItemNuevo0" ></asp:Label>
-                            <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemNuevo0" OnClick="btn_verItemNuevo0_Click" />
+                            <div class:"row">
+                            <asp:Label runat="server" CssClass="tituloItem" ID="lbl_nombreItemNuevo0" ></asp:Label>
+                            </div>
+                            <div class:"row">
+                            <asp:Label runat="server" CssClass="descripcionItem" ID="lbl_descripcionItemNuevo0" ></asp:Label>
+                            </div>
+                            <div class:"row">
+                            <asp:Label runat="server" CssClass="precioItem" ID="lbl_precioItemNuevo0" ></asp:Label>
+                            </div>
+                            <%--<asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemNuevo0" OnClick="btn_verItemNuevo0_Click" />--%>
                         </div>
                      </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="recuadroParallax">
                         <div class="contenidoRecuadro">
-                            <asp:Image ID="img_itemNuevo1" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:206px;height:307px;" CssClass="img" />
-                            <asp:Label runat="server" ID="lbl_idItemNuevo1" Visible="false" ></asp:Label>
-                            <asp:Label runat="server" ID="lbl_tipoItemNuevo1" Visible="false" ></asp:Label>
-                            <asp:Label runat="server" ID="lbl_nombreItemNuevo1" ></asp:Label>
-                            <asp:Label runat="server" ID="lbl_descripcionItemNuevo1" ></asp:Label>
-                            <asp:Label runat="server" ID="lbl_precioItemNuevo1" ></asp:Label>
-                            <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemNuevo1" OnClick="btn_verItemNuevo1_Click" />
+                            <asp:ImageButton OnClick="btn_verItemNuevo1_Click" ID="img_itemNuevo1" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:206px;height:307px;" CssClass="img" />
+                            <div class="row">
+                                <asp:Label runat="server" ID="lbl_idItemNuevo1" Visible="false" ></asp:Label>
+                                <asp:Label runat="server" ID="lbl_tipoItemNuevo1" Visible="false" ></asp:Label>
+                                <div class:"row">
+                                <asp:Label runat="server" CssClass="tituloItem" ID="lbl_nombreItemNuevo1" ></asp:Label>
+                                </div>
+                                <div class:"row">
+                                <asp:Label runat="server" CssClass="descripcionItem" ID="lbl_descripcionItemNuevo1" ></asp:Label>
+                                </div>
+                                <div class:"row">
+                                <asp:Label runat="server" CssClass="precioItem" ID="lbl_precioItemNuevo1" ></asp:Label>
+                                </div>
+                            </div>
+                            <%--<asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemNuevo1" OnClick="btn_verItemNuevo1_Click" />--%>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="recuadroParallax">
                         <div class="contenidoRecuadro">
-                            <asp:Image ID="img_itemNuevo2" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:206px;height:307px;" CssClass="img" />
+                            <asp:ImageButton OnClick="btn_verItemNuevo2_Click" ID="img_itemNuevo2" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:206px;height:307px;" CssClass="img" />
                             <asp:Label runat="server" ID="lbl_idItemNuevo2" Visible="false" ></asp:Label>
                             <asp:Label runat="server" ID="lbl_tipoItemNuevo2" Visible="false" ></asp:Label>
-                            <asp:Label runat="server" ID="lbl_nombreItemNuevo2" ></asp:Label>
-                            <asp:Label runat="server" ID="lbl_descripcionItemNuevo2" ></asp:Label>
-                            <asp:Label runat="server" ID="lbl_precioItemNuevo2" ></asp:Label>
-                            <asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemNuevo2" OnClick="btn_verItemNuevo2_Click" />
+                            <div class="row">
+                                <asp:Label CssClass="tituloItem" runat="server" ID="lbl_nombreItemNuevo2" ></asp:Label>
+                            </div>
+                            <div class="row">
+                                <asp:Label runat="server" CssClass="descripcionItem" ID="lbl_descripcionItemNuevo2" ></asp:Label>
+                            </div>
+                            <div class="row">
+                                <asp:Label runat="server" CssClass="precioItem" ID="lbl_precioItemNuevo2" ></asp:Label>
+                            </div>
+                            <%--<asp:Button runat="server" CssClass="btn-ver" Text="Ver" ID="btn_verItemNuevo2" OnClick="btn_verItemNuevo2_Click" />--%>
                         </div>
-                    </div>
+                   </div>
                 </div>
             </div>
      <!-- Marcas -->
