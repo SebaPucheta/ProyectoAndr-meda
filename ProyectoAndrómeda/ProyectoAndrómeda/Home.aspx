@@ -128,7 +128,7 @@
        <div class="col-lg-4">
                 <div class="recuadro">
                     <div class="contenidoRecuadro">
-                        <asp:Image ID="img_itemVendido0" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img"/>
+                        <asp:Image ID="img_itemVendido0" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:206px;height:307px;" CssClass="img"/>
                         <asp:Label runat="server" ID="lbl_idItemVendido0" Visible="false" ></asp:Label>
                         <asp:Label runat="server" ID="lbl_tipoItemVendido0" Visible="false" ></asp:Label>
                         <asp:Label runat="server" ID="lbl_nombreItemVendido0" ></asp:Label>
@@ -141,7 +141,7 @@
             <div class="col-lg-4">
                 <div class="recuadro">
                     <div class="contenidoRecuadro">
-                        <asp:Image ID="img_itemVendido1" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img" />
+                        <asp:Image ID="img_itemVendido1" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:206px;height:307px;" CssClass="img" />
                         <asp:Label runat="server" ID="lbl_idItemVendido1" Visible="false" ></asp:Label>
                         <asp:Label runat="server" ID="lbl_tipoItemVendido1" Visible="false" ></asp:Label>
                         <asp:Label runat="server" ID="lbl_nombreItemVendido1" ></asp:Label>
@@ -154,7 +154,7 @@
             <div class="col-lg-4">
                 <div class="recuadro">
                     <div class="contenidoRecuadro">
-                        <asp:Image ID="img_itemVendido2" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img" />
+                        <asp:Image ID="img_itemVendido2" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:206px;height:307px;" CssClass="img" />
                         <asp:Label runat="server" ID="lbl_idItemVendido2" Visible="false" ></asp:Label>
                         <asp:Label runat="server" ID="lbl_tipoItemVendido2" Visible="false" ></asp:Label>
                         <asp:Label runat="server" ID="lbl_nombreItemVendido2" ></asp:Label>
@@ -172,7 +172,7 @@
            <div class="col-lg-4">
                     <div class="recuadroParallax">
                         <div class="contenidoRecuadro">
-                            <asp:Image ID="img_itemNuevo0" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img"/>
+                            <asp:Image ID="img_itemNuevo0" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:206px;height:307px;" CssClass="img"/>
                             <asp:Label runat="server" ID="lbl_idItemNuevo0" Visible="false" ></asp:Label>
                             <asp:Label runat="server" ID="lbl_tipoItemNuevo0" Visible="false" ></asp:Label>
                             <asp:Label runat="server" ID="lbl_nombreItemNuevo0" ></asp:Label>
@@ -185,7 +185,7 @@
                 <div class="col-lg-4">
                     <div class="recuadroParallax">
                         <div class="contenidoRecuadro">
-                            <asp:Image ID="img_itemNuevo1" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img" />
+                            <asp:Image ID="img_itemNuevo1" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:206px;height:307px;" CssClass="img" />
                             <asp:Label runat="server" ID="lbl_idItemNuevo1" Visible="false" ></asp:Label>
                             <asp:Label runat="server" ID="lbl_tipoItemNuevo1" Visible="false" ></asp:Label>
                             <asp:Label runat="server" ID="lbl_nombreItemNuevo1" ></asp:Label>
@@ -198,7 +198,7 @@
                 <div class="col-lg-4">
                     <div class="recuadroParallax">
                         <div class="contenidoRecuadro">
-                            <asp:Image ID="img_itemNuevo2" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" CssClass="img" />
+                            <asp:Image ID="img_itemNuevo2" runat="server" ImageUrl="~/imagenes/PortadaApunte.png" style="width:206px;height:307px;" CssClass="img" />
                             <asp:Label runat="server" ID="lbl_idItemNuevo2" Visible="false" ></asp:Label>
                             <asp:Label runat="server" ID="lbl_tipoItemNuevo2" Visible="false" ></asp:Label>
                             <asp:Label runat="server" ID="lbl_nombreItemNuevo2" ></asp:Label>
