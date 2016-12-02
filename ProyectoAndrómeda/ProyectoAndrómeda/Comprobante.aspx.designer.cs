@@ -10,43 +10,70 @@
 namespace ProyectoAndrómeda {
     
     
-    public partial class PanelUsuario {
+    public partial class Comprobante {
         
         /// <summary>
-        /// Control brn_datos.
+        /// Control form1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button brn_datos;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// Control btn_pedidos.
+        /// Control lbl_titulo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_pedidos;
+        protected global::System.Web.UI.WebControls.Label lbl_titulo;
         
         /// <summary>
-        /// Control hfactura.
+        /// Control lbl_nombreUsuario_titulo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label hfactura;
+        protected global::System.Web.UI.WebControls.Label lbl_nombreUsuario_titulo;
         
         /// <summary>
-        /// Control lbl_noHay.
+        /// Control lbl_nombreUsuario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_noHay;
+        protected global::System.Web.UI.WebControls.Label lbl_nombreUsuario;
+        
+        /// <summary>
+        /// Control lbl_nombreYApellido_titulo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_nombreYApellido_titulo;
+        
+        /// <summary>
+        /// Control lbl_nombreApellido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_nombreApellido;
+        
+        /// <summary>
+        /// Control lbl_factura_titulo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_factura_titulo;
         
         /// <summary>
         /// Control dgv_factura.
@@ -58,13 +85,13 @@ namespace ProyectoAndrómeda {
         protected global::System.Web.UI.WebControls.GridView dgv_factura;
         
         /// <summary>
-        /// Control hdetalle.
+        /// Control lbl_detalle_titulo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label hdetalle;
+        protected global::System.Web.UI.WebControls.Label lbl_detalle_titulo;
         
         /// <summary>
         /// Control dgv_detalle.
@@ -76,102 +103,57 @@ namespace ProyectoAndrómeda {
         protected global::System.Web.UI.WebControls.GridView dgv_detalle;
         
         /// <summary>
-        /// Control lbl_misdatos.
+        /// Control lbl_total.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_misdatos;
+        protected global::System.Web.UI.WebControls.Label lbl_total;
         
         /// <summary>
-        /// Control lbl_usuario.
+        /// Control img_codigoBarra.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_usuario;
+        protected global::System.Web.UI.WebControls.Image img_codigoBarra;
         
         /// <summary>
-        /// Control txt_usuario.
+        /// Control lbl_tec.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_usuario;
+        protected global::System.Web.UI.WebControls.Label lbl_tec;
         
         /// <summary>
-        /// Control lbl_nombre.
+        /// Control lbl_aclaracion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_nombre;
+        protected global::System.Web.UI.WebControls.Label lbl_aclaracion;
         
         /// <summary>
-        /// Control txt_nombre.
+        /// Control lbl_fechaImpresion_titulo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_nombre;
+        protected global::System.Web.UI.WebControls.Label lbl_fechaImpresion_titulo;
         
         /// <summary>
-        /// Control lbl_apellido.
+        /// Control lbl_fechaImpresion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_apellido;
-        
-        /// <summary>
-        /// Control txt_apellido.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_apellido;
-        
-        /// <summary>
-        /// Control lbl_email.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_email;
-        
-        /// <summary>
-        /// Control txt_email.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_email;
-        
-        /// <summary>
-        /// Control lbl_dni.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_dni;
-        
-        /// <summary>
-        /// Control txt_dni.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_dni;
+        protected global::System.Web.UI.WebControls.Label lbl_fechaImpresion;
     }
 }
