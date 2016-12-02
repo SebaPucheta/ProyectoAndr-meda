@@ -5,12 +5,13 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <title>Pago</title>
+    <link href="css/Pago/Pago.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Body" runat="server">
 
-    <div class="container">
+    <div class="container recuadroGrande">
 
         <!--primera fila (titulo)-->
         <div class="row">
@@ -23,7 +24,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                <div style="background-color: #E9E9E9; padding: 25px; margin: 25px; box-shadow: 2px 2px 10px 2px #000000;">
+                <div >
 
                     <!--row de las tablas-->
                     <div class="row">
@@ -73,11 +74,11 @@
                     <!--boton mercadopago-->
                     <div class="row">
                         <div class="col-md-12">
-                            <asp:Button ID="btn_pago" runat="server" Text="Pagar" class="btn btn-danger" OnClick="btn_pago_Click" />
+                            <asp:Button ID="btn_pago" runat="server" Text="Pagar" class="btn btn_flat btn_rojo btn_mediano" OnClick="btn_pago_Click" />
 
 
 
-                            <asp:Button ID="Button1" runat="server" Text="ConsultarPAGO" OnClick="Button1_Click" />
+                            <asp:Button ID="Button1" CssClass="btn btn_flat btn_azul btn_mediano" runat="server" Text="ConsultarPAGO" OnClick="Button1_Click" />
 
                             <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
 

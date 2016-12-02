@@ -20,7 +20,7 @@
                 
                   <asp:TextBox runat="server" type="text"  ID="txt_email" placeholder="Correo"/>
                   <asp:TextBox runat="server" type="password" ID="txt_pass" placeholder="Contraseña"/>
-                  <asp:Button runat="server" id="btn_login" CssClass="btnlogin" text="Login" OnClick="btn_login_onclick" />
+                  <asp:Button runat="server" id="btn_login" CssClass="btnlogin" text="Iniciar" OnClick="btn_login_onclick" />
                 
               </div>
               <div class="form">
@@ -31,7 +31,7 @@
                   <asp:TextBox runat="server" type="email" ID="txt_emailNuevo" placeholder="Correo"/>
                   <asp:TextBox runat="server" type="password" ID="txt_passNuevo" placeholder="Contraseña"/>
                   <asp:TextBox runat="server" type="password" ID="txt_passNuevo2" placeholder="Repetir contraseña"/>
-                  <asp:Button runat="server" text="Register" CssClass="btnlogin" ID="btn_registrar" OnClick="btn_registrar_onclick" />
+                  <asp:Button runat="server" text="Registrarse" CssClass="btnlogin" ID="btn_registrar" OnClick="btn_registrar_onclick" />
                 
               </div>
              <%-- <div class="cta"><a href="http://andytran.me">Forgot your password?</a></div>--%>
