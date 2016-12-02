@@ -309,7 +309,7 @@ namespace ProyectoAndrómeda
                             int index = Convert.ToInt32(e.CommandArgument);
                             GridViewRow row = dgv_detalle.Rows[index];
 
-                            DescargarArchivo(int.Parse(row.Cells[5].Text));
+                            DescargarArchivo(int.Parse(row.Cells[6].Text));
                             break;
                         }
                         else

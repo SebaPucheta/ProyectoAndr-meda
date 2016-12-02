@@ -161,7 +161,8 @@ namespace BaseDeDatos
         {
             LibroEntidad libro = new LibroEntidad();
             string consulta = @"SELECT idLibro, codigoBarraLibro, nombreLibro, autorLibro, descripcionLibro, stock,
-                                cantidadHojasLibro, precioLibro, idEditorial, idEstado, idMateria FROM Libro WHERE idLibro = @id";
+                                cantidadHojasLibro, precioLibro, idEditorial, idEstado, idMateria, urlImagenLibro
+                                FROM Libro WHERE idLibro = @id";
             SqlCommand cmd = new SqlCommand(consulta, obtenerBD());
             cmd.Parameters.AddWithValue(@"id", id);
             SqlDataReader dr = cmd.ExecuteReader();
@@ -179,6 +180,7 @@ namespace BaseDeDatos
                 libro.idMateria = (int)dr["idMateria"];
                 if (dr["idEstado"] != DBNull.Value)
                 { libro.idEstado = (int)dr["idEstado"]; }
+                libro.imagenLibro = dr["urlImagenLibro"].ToString();
 
             }
             dr.Close();

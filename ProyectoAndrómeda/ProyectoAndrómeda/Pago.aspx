@@ -78,9 +78,9 @@
 
 
 
-                            <asp:Button ID="Button1" CssClass="btn btn_flat btn_azul btn_mediano" runat="server" Text="ConsultarPAGO" OnClick="Button1_Click" />
+                           <%-- <asp:Button ID="Button1" CssClass="btn btn_flat btn_azul btn_mediano" runat="server" Text="ConsultarPAGO" OnClick="Button1_Click" />
 
-                            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>--%>
 
                  
                         </div>
