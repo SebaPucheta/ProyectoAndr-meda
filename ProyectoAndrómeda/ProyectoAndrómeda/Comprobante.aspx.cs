@@ -137,7 +137,7 @@ namespace ProyectoAndrómeda
         {
             float sumador = 0;
             foreach (GridViewRow row in dgv_detalle.Rows)
-                sumador = sumador + float.Parse(row.Cells[3].Text.Replace("$", ""));
+                sumador = sumador + float.Parse(row.Cells[4].Text.Replace("$", ""));
             lbl_total.Text = lbl_total.Text + sumador.ToString();
         }
 
