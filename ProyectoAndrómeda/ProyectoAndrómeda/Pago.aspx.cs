@@ -73,17 +73,25 @@ namespace ProyectoAndrómeda
 
         protected void ConsultarPago()
         {
-            MP mp = getMP();
-            string idMP = getNumeroIDMercadoPago();
+            try
+            {
 
-            //Consulto la preferencia del id de Mercado Pago de la factura
-            Hashtable preference = mp.getPreference(idMP);
+                MP mp = getMP();
+                string idMP = getNumeroIDMercadoPago();
 
-            //Para abrir la ventana de la boleta para pagar
-            string url = (((Hashtable)preference["response"])["sandbox_init_point"]).ToString();
+                //Consulto la preferencia del id de Mercado Pago de la factura
+                Hashtable preference = mp.getPreference(idMP);
 
-            //Abrir en una ventana par apagar por Mercado Pago
-            Response.Write("<script>window.open('" + url + "','Popup','width=800,height=500')</script>");
+                //Para abrir la ventana de la boleta para pagar
+                string url = (((Hashtable)preference["response"])["sandbox_init_point"]).ToString();
+
+                //Abrir en una ventana par apagar por Mercado Pago
+                Response.Write("<script>window.open('" + url + "','Popup','width=800,height=500')</script>");
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>window.alert('Hubo un problema con el acceso a internet')</script>");
+            }
         }
 
         

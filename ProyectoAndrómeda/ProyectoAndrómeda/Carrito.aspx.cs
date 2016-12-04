@@ -189,14 +189,10 @@ namespace ProyectoAndrómeda
             foreach (GridViewRow row in dgv_carrito.Rows)
             {
                 //Si es digital no hay cantidad
-                if (row.Cells[5].Text == "Apunte")
-                {
-                    if (ApunteDao.ConsultarTipoApunte(int.Parse(row.Cells[2].Text)) == "Digital")
-                        ((TextBox)row.FindControl("txt_cantidad")).Enabled = false;
-                }else
-                {
+                if (row.Cells[5].Text == "Apunte" && ApunteDao.ConsultarTipoApunte(int.Parse(row.Cells[2].Text)) == "Digital")
+                    ((TextBox)row.FindControl("txt_cantidad")).Enabled = false;
+                else
                     ((TextBox)row.FindControl("txt_cantidad")).Text = row.Cells[7].Text;
-                }
             }
 
             //Cargar imagenes de producto digital
@@ -355,30 +351,39 @@ namespace ProyectoAndrómeda
 
         protected string GenerarPago()
         {
-            //Pongo CLIENT_ID y CLIENT_SECRET -- Aplicacion: 233620557 -- mp-app-233620557
-            MP mp = new MP("4180047074500934", "oTJvHcjBcmbO73LsYTNseZhUmzaNYkx1");
-            mp.sandboxMode(true);
+            string idMP = "";
+            try
+            {
+                //Pongo CLIENT_ID y CLIENT_SECRET -- Aplicacion: 233620557 -- mp-app-233620557
+                MP mp = new MP("4180047074500934", "oTJvHcjBcmbO73LsYTNseZhUmzaNYkx1");
+                mp.sandboxMode(true);
 
-            //Reemplazo comas por puntos
-            string total = (lbl_total.Text).Replace(",", ".").Trim();
+                //Reemplazo comas por puntos
+                string total = (lbl_total.Text).Replace(",", ".").Trim();
 
-            //Creo la preferencia de la boleta como si fuera un objeto json, en un string
-            string preferenceData = "{\"items\":" +
-                                        "[{" +
-                                            "\"title\":\"" + generarStringProductos() + "\"," +
-                                            "\"quantity\":1," +
-                                            "\"currency_id\":\"ARS\"," +
-                                            "\"unit_price\":" + total +
-                                        "}]" +
-                                     "}";
+                //Creo la preferencia de la boleta como si fuera un objeto json, en un string
+                string preferenceData = "{\"items\":" +
+                                            "[{" +
+                                                "\"title\":\"" + generarStringProductos() + "\"," +
+                                                "\"quantity\":1," +
+                                                "\"currency_id\":\"ARS\"," +
+                                                "\"unit_price\":" + total +
+                                            "}]" +
+                                         "}";
 
-            //Creo la preferencia en una hashtable
-            Hashtable preference = mp.createPreference(preferenceData);
+                //Creo la preferencia en una hashtable
+                Hashtable preference = mp.createPreference(preferenceData);
 
-            //Para obtener el ID del pago
-            string idMP = (((Hashtable)preference["response"])["id"]).ToString();
+                //Para obtener el ID del pago
+                idMP = (((Hashtable)preference["response"])["id"]).ToString();
 
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>window.alert('Hubo un problema con el acceso a internet')</script>");
+            }
             return idMP;
+
         }
 
         protected string generarStringProductos()
@@ -547,8 +552,14 @@ namespace ProyectoAndrómeda
             //Generar id factura mercado pago
             string idMP = GenerarPago();
 
-            int idFactura = FacturaDao.RegistrarFactura(crearFacturaEntidad(idMP));
-            Response.Redirect("Pago.aspx?fact=" + idFactura.ToString());
+            if (idMP != "")
+            {
+                int idFactura = FacturaDao.RegistrarFactura(crearFacturaEntidad(idMP));
+                Response.Redirect("Pago.aspx?fact=" + idFactura.ToString());
+            }else
+            {
+                Response.Write("<script>window.alert('No se ha podido generar el pedido')</script>");
+            }
         }
 
 

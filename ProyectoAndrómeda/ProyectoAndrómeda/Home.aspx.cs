@@ -39,6 +39,7 @@ namespace ProyectoAndrómeda
                 Label lblId = (Label)DevolverControlPorID(nombreLblId + i.ToString());
                 Label lblTipo = (Label)DevolverControlPorID(nombreLblTipo + i.ToString());
                 Label lblNombre = (Label)DevolverControlPorID(nombreLblNombre + i.ToString());
+                //Label lblDescripcion = (Label)DevolverControlPorID(nombreLblDescripcion + i.ToString());
                 Label lblDescripcion = (Label)DevolverControlPorID(nombreLblDescripcion + i.ToString());
                 Label lblPrecio = (Label)DevolverControlPorID(nombreLblPrecio + i.ToString());
                 
@@ -68,7 +69,7 @@ namespace ProyectoAndrómeda
             lblId.Text = apunte.idApunte.ToString();
             lblTipo.Text = "Apunte";
             lblNombre.Text = apunte.nombreApunte;
-            lblDescripcion.Text = apunte.descripcionApunte;
+            //lblDescripcion.Text = apunte.descripcionApunte;
             lblPrecio.Text = "Precio: AR$" + apunte.precioApunte.ToString();
         }
 
@@ -85,7 +86,7 @@ namespace ProyectoAndrómeda
             lblId.Text = libro.idLibro.ToString();
             lblTipo.Text = "Libro";
             lblNombre.Text = libro.nombreLibro;
-            lblDescripcion.Text = libro.descripcionLibro;
+            //lblDescripcion.Text = libro.descripcionLibro;
             lblPrecio.Text = "Precio: AR$" + libro.precioLibro.ToString();
         }
 
