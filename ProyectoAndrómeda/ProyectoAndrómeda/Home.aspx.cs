@@ -39,7 +39,6 @@ namespace ProyectoAndrómeda
                 Label lblId = (Label)DevolverControlPorID(nombreLblId + i.ToString());
                 Label lblTipo = (Label)DevolverControlPorID(nombreLblTipo + i.ToString());
                 Label lblNombre = (Label)DevolverControlPorID(nombreLblNombre + i.ToString());
-                //Label lblDescripcion = (Label)DevolverControlPorID(nombreLblDescripcion + i.ToString());
                 Label lblDescripcion = (Label)DevolverControlPorID(nombreLblDescripcion + i.ToString());
                 Label lblPrecio = (Label)DevolverControlPorID(nombreLblPrecio + i.ToString());
                 
