@@ -73,11 +73,8 @@
                         <li><a class="btn" href="Carrito.aspx">Carrito</a>
                         </li>
 
-                        <%--<li><a class="page-scroll" href="#contact">Contacto</a>
-                        </li>--%>
-
                         <li ><a class="btn" href="PanelUsuario.aspx">
-                            <asp:Label class="btn" ID="lbl_nombreUsuario" runat="server"></asp:Label></a>
+                            <asp:label  ID="lbl_nombreUsuario" runat="server"></asp:label></a>
                         </li>
 
                         <li>

@@ -19,7 +19,7 @@
         <div class="row">
             <!--tabla del carrito-->
             <div class="col-md-12">
-                <div >
+                <div>
 
                     <asp:GridView ID="dgv_carrito" runat="server" CssClass="table table-responsive" AutoGenerateColumns="False" OnRowDeleting="dgv_carrito_RowDeleting" OnSelectedIndexChanged="dgv_carrito_SelectedIndexChanged">
                         <EmptyDataRowStyle ForeColor="Red" CssClass="table table-bordered" />
@@ -29,7 +29,7 @@
                         <Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:Image ID="img" style="width:94px; height:126px;" runat="server" />
+                                    <asp:Image ID="img" Style="width: 94px; height: 126px;" runat="server" />
                                 </ItemTemplate>
                                 <ControlStyle Width="40px" />
                                 <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
@@ -42,6 +42,15 @@
                                 <ItemStyle CssClass="hidden" />
                                 <HeaderStyle CssClass="hidden" />
                             </asp:BoundField>
+
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="img_digital" Visible="false" Enabled="false" runat="server"><span class="glyphicon glyphicon glyphicon-phone glyphicon-user" style="color:#CB0014;" aria-hidden="true"></span></asp:LinkButton>
+                                </ItemTemplate>
+                                <ControlStyle Width="10px" />
+                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                            </asp:TemplateField>
+
                             <asp:BoundField DataField="nombreProducto" HeaderText="Nombre" ItemStyle-VerticalAlign="Middle" ItemStyle-HorizontalAlign="Center" />
                             <asp:BoundField DataField="tipoProducto" HeaderText="Tipo producto" ItemStyle-VerticalAlign="Middle" ItemStyle-HorizontalAlign="Center" />
                             <asp:BoundField DataField="precioUnitario" HeaderText="Precio unitario" DataFormatString="{0:c}" ItemStyle-VerticalAlign="Middle" ItemStyle-HorizontalAlign="Right" />
@@ -52,7 +61,7 @@
                             <%--Cantidad con textbox--%>
                             <asp:TemplateField HeaderText="Cantidad">
                                 <ItemTemplate>
-                                    <asp:TextBox ID="txt_cantidad" AutoPostBack="false" runat="server" class="form-control" style="width:60px; text-align:right;" ></asp:TextBox>
+                                    <asp:TextBox ID="txt_cantidad" AutoPostBack="false" runat="server" class="form-control" Style="width: 60px; text-align: right;"></asp:TextBox>
                                 </ItemTemplate>
                                 <ControlStyle Width="40px" />
                                 <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
@@ -79,7 +88,7 @@
 
                     <!--total-->
                     <label class="control-label col-md-offset-9 col-md-1">Total: </label>
-                    <div >
+                    <div>
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></div>
                             <asp:Label runat="server" CssClass="form-control" ID="lbl_total" />

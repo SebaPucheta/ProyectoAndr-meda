@@ -264,8 +264,9 @@ namespace ProyectoAndrómeda
                     int indexComprobante = Convert.ToInt32(e.CommandArgument);
                     GridViewRow rowComprabnte = dgv_factura.Rows[indexComprobante];
                     int idFacturaComprobante = int.Parse(rowComprabnte.Cells[0].Text);
-                    Response.Redirect("Comprobante.aspx?id=" + idFacturaComprobante.ToString());
+                    Response.Write("<script>window.open('" + "Comprobante.aspx?id=" + idFacturaComprobante.ToString() + "','Popup','width=800,height=500')</script>");
                     break;
+
             }
         }
 

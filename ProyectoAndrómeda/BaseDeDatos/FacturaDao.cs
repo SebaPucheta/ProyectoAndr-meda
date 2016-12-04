@@ -198,7 +198,7 @@ namespace BaseDeDatos
             var firstColumn = cmd.ExecuteScalar();
             if (firstColumn != null)
             {
-                if (cmd.ExecuteScalar().ToString() == "Aprobado")
+                if (cmd.ExecuteScalar().ToString() == "Aprobado" || cmd.ExecuteScalar().ToString() == "Entregado")
                     resultado = true;
             }
             cmd.Connection.Close();

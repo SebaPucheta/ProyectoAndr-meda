@@ -122,16 +122,6 @@ namespace ProyectoAndrómeda
             cargarGrilla();
         }
 
-        //[0] img
-        //[1] idProductoCarrito
-        //[2] idProducto
-        //[3] nombreProducto
-        //[4] tipoProducto
-        //[5] precioUnitario
-        //[6] cantidad
-        //[..] nuevaCantindad
-        //[7] subtotal
-
         //Cargar toda la grilla, TODA
         protected void cargarGrilla()
         {
@@ -195,9 +185,28 @@ namespace ProyectoAndrómeda
             dgv_carrito.DataSource = dataView;
             dgv_carrito.DataBind();
 
+            //Actualizar cantidad
             foreach (GridViewRow row in dgv_carrito.Rows)
             {
-                ((TextBox)row.FindControl("txt_cantidad")).Text = row.Cells[6].Text;
+                //Si es digital no hay cantidad
+                if (row.Cells[5].Text == "Apunte")
+                {
+                    if (ApunteDao.ConsultarTipoApunte(int.Parse(row.Cells[2].Text)) == "Digital")
+                        ((TextBox)row.FindControl("txt_cantidad")).Enabled = false;
+                }else
+                {
+                    ((TextBox)row.FindControl("txt_cantidad")).Text = row.Cells[7].Text;
+                }
+            }
+
+            //Cargar imagenes de producto digital
+            foreach (GridViewRow row in dgv_carrito.Rows)
+            {
+                if (row.Cells[5].Text == "Apunte")
+                {
+                    if (ApunteDao.ConsultarTipoApunte(int.Parse(row.Cells[2].Text)) == "Digital")
+                        row.FindControl("img_digital").Visible = true;
+                }
             }
 
             cargarPortadas();
@@ -262,14 +271,16 @@ namespace ProyectoAndrómeda
             return faltaStock;
         }
 
-        ////fila[0] = "~/imagenes/PortadaApunte.png";
-        //fila[1] = dato.idProductoCarrito;
-        //            fila[2] = libro.idLibro;
-        //            fila[3] = libro.nombreLibro;
-        //            fila[4] = dato.tipoItem;
-        //            fila[5] = libro.precioLibro;
-        //            fila[6] = dato.cantidad;
-        //            fila[7] = dato.subtotal;
+        //[0] asp:image
+        //[1] idProdCarrito
+        //[2] idProd
+        //[3] img_digital
+        //[4] nombre
+        //[5] tipoProducto
+        //[6] precio
+        //[7] cantidad
+        //[8] textbox cantidad
+        //[9] subtotal
 
         private string CrearCorreo()
         {
@@ -278,28 +289,28 @@ namespace ProyectoAndrómeda
             foreach (GridViewRow fila in dgv_carrito.Rows)
             {
                 //Replace("$", "")
-                string prueba = fila.Cells[8].Text.Replace("$", "").Replace("€", "").Replace(",", ".").Trim();
+                string prueba = fila.Cells[9].Text.Replace("$", "").Replace("€", "").Replace(",", ".").Trim();
                 total += float.Parse(prueba);
-                if (fila.Cells[4].Text.Equals("Apunte"))
+                if (fila.Cells[5].Text.Equals("Apunte"))
                 {
-                    if (int.Parse(fila.Cells[6].Text) == 1)
+                    if (int.Parse(fila.Cells[7].Text) == 1)
                     {
-                        correo = correo + "\n Se vendio 1 unidad del apunte " + fila.Cells[3].Text + " en formato " + ApunteDao.ConsultarTipoApunte(int.Parse(fila.Cells[2].Text)).ToLower() + " por un total de " + fila.Cells[8].Text;
+                        correo = correo + "\n Se vendio 1 unidad del apunte " + fila.Cells[4].Text + " en formato " + ApunteDao.ConsultarTipoApunte(int.Parse(fila.Cells[2].Text)).ToLower() + " por un total de " + fila.Cells[9].Text;
                     }
                     else
                     {
-                        correo = correo + "\n Se vendio " + fila.Cells[6].Text + " unidades de los apuntes " + fila.Cells[3].Text + " en formato " + ApunteDao.ConsultarTipoApunte(int.Parse(fila.Cells[2].Text)).ToLower() + " por un total de " + fila.Cells[8].Text;
+                        correo = correo + "\n Se vendio " + fila.Cells[7].Text + " unidades de los apuntes " + fila.Cells[4].Text + " en formato " + ApunteDao.ConsultarTipoApunte(int.Parse(fila.Cells[2].Text)).ToLower() + " por un total de " + fila.Cells[9].Text;
                     }
                 }
                 else
                 {
-                    if (int.Parse(fila.Cells[6].Text) == 1)
+                    if (int.Parse(fila.Cells[7].Text) == 1)
                     {
-                        correo = correo + "\n Se vendio 1 unidad del libro " + fila.Cells[3].Text + " por un total de " + fila.Cells[8].Text;
+                        correo = correo + "\n Se vendio 1 unidad del libro " + fila.Cells[4].Text + " por un total de " + fila.Cells[9].Text;
                     }
                     else
                     {
-                        correo = correo + "\n Se vendio " + fila.Cells[6].Text + " unidades de los libros " + fila.Cells[3].Text + " por un total de " + fila.Cells[8].Text;
+                        correo = correo + "\n Se vendio " + fila.Cells[7].Text + " unidades de los libros " + fila.Cells[4].Text + " por un total de " + fila.Cells[9].Text;
                     }
                 }
 
@@ -431,7 +442,7 @@ namespace ProyectoAndrómeda
                     continue;
 
                 //Si le ingresaron una nueva cantidad, procedo
-                int nuevaCantidad = int.Parse(((TextBox)row.Cells[7].FindControl("txt_cantidad")).Text);
+                int nuevaCantidad = int.Parse(((TextBox)row.Cells[8].FindControl("txt_cantidad")).Text);
 
                 //Verifico si la cantidad es mayor a 0
                 if (nuevaCantidad < 1)
@@ -481,7 +492,7 @@ namespace ProyectoAndrómeda
         {
             int idProducto = (int)dgv_carrito.SelectedDataKey.Value;
             int indice = (int)dgv_carrito.SelectedIndex;
-            string tipo = dgv_carrito.Rows[indice].Cells[4].Text;
+            string tipo = dgv_carrito.Rows[indice].Cells[5].Text;
 
             List<ProductoCarrito> lista = ((List<ProductoCarrito>)Session["carrito"]);
             foreach (ProductoCarrito dato in lista)

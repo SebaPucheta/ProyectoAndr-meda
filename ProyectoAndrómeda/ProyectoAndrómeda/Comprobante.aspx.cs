@@ -105,7 +105,6 @@ namespace ProyectoAndrómeda
                     if (ApunteDao.ConsultarTipoApunte(int.Parse(row.Cells[5].Text)) == "Digital")
                         row.FindControl("img_digital").Visible = true;
                 }
-
             }
 
         }
@@ -137,7 +136,7 @@ namespace ProyectoAndrómeda
         {
             float sumador = 0;
             foreach (GridViewRow row in dgv_detalle.Rows)
-                sumador = sumador + float.Parse(row.Cells[4].Text.Replace("$", ""));
+                sumador = sumador + float.Parse(row.Cells[4 ].Text.Replace("$", ""));
             lbl_total.Text = lbl_total.Text + sumador.ToString();
         }
 
