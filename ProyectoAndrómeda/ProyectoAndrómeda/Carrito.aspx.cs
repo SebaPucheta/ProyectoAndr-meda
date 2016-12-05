@@ -411,7 +411,7 @@ namespace ProyectoAndrómeda
         {
             foreach (GridViewRow fila in dgv_carrito.Rows)
             {
-                if (fila.Cells[4].Text.Equals("Apunte"))
+                if (fila.Cells[5].Text.Equals("Apunte"))
                 {
                     ApunteEntidad apunte = ApunteDao.ConsultarApunte(int.Parse(fila.Cells[2].Text));
                     if (apunte.imagenApunte == "")
@@ -436,6 +436,17 @@ namespace ProyectoAndrómeda
         //////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////EVENTOS////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //[0] asp:image
+        //[1] idProdCarrito
+        //[2] idProd
+        //[3] img_digital
+        //[4] nombre
+        //[5] tipoProducto
+        //[6] precio
+        //[7] cantidad
+        //[8] textbox cantidad
+        //[9] subtotal
 
         protected void btn_actualizar_Click(object sender, EventArgs e)
         {
@@ -491,6 +502,7 @@ namespace ProyectoAndrómeda
             cargarGrilla();
             calcularTotal();
         }
+
 
 
         protected void dgv_carrito_SelectedIndexChanged(object sender, EventArgs e)
